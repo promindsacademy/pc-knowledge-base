@@ -11,384 +11,387 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #F4F7FB; font-family: Arial, sans-serif; }
     input:focus { border-color: #1F4E79 !important; }
-    button:hover { opacity: 0.85; }
+    a { color: #1F4E79; text-decoration: none; }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <div id="root"></div>
-
   <script type="text/babel">
-    const KNOWLEDGE_BASE = [
-      {
-        category: "技术操作",
-        icon: "🔧",
-        items: [
-          { q: "Zoom 设置怎么弄？", sop: "Zoom Setup SOP", location: "Internal Master > Zoom Tab", who: "Wenji", tags: ["zoom", "设置", "webinar", "链接", "会议"] },
-          { q: "GHL Landing Page 怎么改？", sop: "GHL LP SOP", location: "Internal Master > GHL Tab", who: "Wenji / Zack", tags: ["ghl", "landing page", "lp", "页面", "修改"] },
-          { q: "Strive WhatsApp 怎么发 Reminder？", sop: "Strive Reminder SOP", location: "Internal Master > Strive Tab", who: "Wenji", tags: ["strive", "whatsapp", "reminder", "提醒", "发送"] },
-          { q: "Payment Link 怎么设置？", sop: "Payment Setup SOP", location: "Internal Master > Payment Tab", who: "Queenie / Mok", tags: ["payment", "付款", "链接", "支付"] },
-          { q: "Zapier 自动化出问题了？", sop: "Zapier Troubleshoot SOP", location: "Internal Master > Zapier Tab", who: "Wenji", tags: ["zapier", "自动化", "故障", "连接", "触发"] },
-        ]
-      },
-      {
-        category: "数据 & 报表",
-        icon: "📊",
-        items: [
-          { q: "怎么算 ROAS / CPL / CPA？", sop: "数据计算公式表", location: "Internal Master > Formula Tab", who: "Louis / Niysha", tags: ["roas", "cpl", "cpa", "计算", "公式", "数据"] },
-          { q: "P&L 表格怎么填？", sop: "P&L 填写 SOP", location: "Internal Master > P&L Tab", who: "Queenie", tags: ["p&l", "pnl", "损益", "填写", "报表", "财务"] },
-          { q: "广告数据在哪里看？", sop: "Agency 数据查看指引", location: "Internal Master > Ads Data Tab", who: "PC 自行后台查看", tags: ["广告", "数据", "后台", "meta", "ads", "投放"] },
-          { q: "Sales Tracking 怎么更新？", sop: "Sales Tracking SOP", location: "Internal Master > Sales Tab", who: "PC 自行更新", tags: ["sales", "tracking", "销售", "追踪", "更新"] },
-          { q: "Weekly Report 怎么写？", sop: "Weekly Report 模板", location: "Internal Master > Report Tab", who: "PC 自行完成", tags: ["weekly", "report", "周报", "汇报"] },
-        ]
-      },
-      {
-        category: "Webinar 执行",
-        icon: "🎯",
-        items: [
-          { q: "Webinar 前一天要检查什么？", sop: "Pre-Zoom Checklist", location: "Internal Master > Checklist Tab", who: "Wenji 协助检查", tags: ["webinar", "前一天", "检查", "checklist", "准备"] },
-          { q: "Webinar 当天操作流程？", sop: "Webinar Day SOP", location: "Internal Master > Webinar Tab", who: "PC 执行", tags: ["webinar", "当天", "操作", "流程", "zoom"] },
-          { q: "怎么准备 Sales Kit？", sop: "Sales Kit SOP", location: "Internal Master > Sales Tab", who: "Louis", tags: ["sales kit", "销售", "素材", "准备", "成交"] },
-          { q: "Follow Up 怎么安排？", sop: "Follow Up Strategy SOP", location: "Internal Master > Follow Up Tab", who: "Louis", tags: ["follow up", "跟单", "跟进", "安排"] },
-          { q: "怎么发 Reminder 给学员？", sop: "Reminder SOP", location: "Internal Master > Reminder Tab", who: "PC 执行", tags: ["reminder", "提醒", "学员", "发送"] },
-        ]
-      },
-      {
-        category: "学生 & 课程",
-        icon: "🎓",
-        items: [
-          { q: "学生 Onboarding 流程？", sop: "Student Onboarding SOP", location: "Internal Master > Onboarding Tab", who: "Bowie / Wenji", tags: ["学生", "onboarding", "入学", "通知", "名单"] },
-          { q: "3天课程执行安排？", sop: "3-Day Course SOP", location: "Internal Master > Course Tab", who: "PC + Wenji(Event)", tags: ["课程", "3天", "安排", "执行", "event"] },
-          { q: "Upsell 怎么安排？", sop: "Upsell Strategy SOP", location: "Internal Master > Upsell Tab", who: "Louis", tags: ["upsell", "追销", "课程", "策略"] },
-          { q: "Closer Interview 怎么安排？", sop: "Closer Interview SOP", location: "Internal Master > Closer Tab", who: "PC 协调", tags: ["closer", "interview", "面试", "安排"] },
-        ]
-      },
-      {
-        category: "讲师 & Agency",
-        icon: "🤝",
-        items: [
-          { q: "讲师临时改时间怎么办？", sop: "Escalation Matrix 第四章", location: "PC Escalation Matrix > Sheet ③", who: "升级给 Mok", tags: ["讲师", "改时间", "临时", "取消", "变动"], escalation: "red" },
-          { q: "讲师问为什么 ROAS 这么低？", sop: "Escalation Matrix 第四章", location: "PC Escalation Matrix > Sheet ③", who: "转 Louis", tags: ["讲师", "roas", "低", "问", "不满意"], escalation: "yellow" },
-          { q: "讲师发脾气 / 抱怨合作？", sop: "Escalation Matrix 第四章", location: "PC Escalation Matrix > Sheet ③", who: "升级给 Mok", tags: ["讲师", "发脾气", "抱怨", "合作", "不开心", "终止"], escalation: "red" },
-          { q: "Agency 不回消息怎么办？", sop: "Escalation Matrix 第二章", location: "PC Escalation Matrix > Sheet ②", who: "先等48小时 → 升级 Wenji", tags: ["agency", "不回", "消息", "没回应", "催"], escalation: "yellow" },
-          { q: "Agency 数据没更新？", sop: "Escalation Matrix 第二章", location: "PC Escalation Matrix > Sheet ②", who: "PC 先自行后台查 → 48h后升级 Wenji", tags: ["agency", "数据", "更新", "没交", "催"], escalation: "yellow" },
-        ]
-      },
-      {
-        category: "数据异常处理",
-        icon: "🚨",
-        items: [
-          { q: "CPL 超过 Target 20% 以上？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "升级 Louis 分析", tags: ["cpl", "超过", "高", "异常", "target"], escalation: "yellow" },
-          { q: "CPL 超过 Target 40% 以上？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "升级 Mok 做 Go/No-Go", tags: ["cpl", "严重", "超标", "40"], escalation: "red" },
-          { q: "Show Up Rate 低于 40%？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "升级 Louis 分析原因", tags: ["show up", "出席", "低", "率", "40"], escalation: "yellow" },
-          { q: "Show Up Rate 低于 30%？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "升级 Mok 沟通讲师", tags: ["show up", "出席", "很低", "30", "严重"], escalation: "red" },
-          { q: "Conversion Rate 低于 15%？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "升级 Louis 优化策略", tags: ["conversion", "转化", "低", "15"], escalation: "yellow" },
-          { q: "Conversion Rate 低于 10%？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "升级 Mok 判断项目方向", tags: ["conversion", "转化", "很低", "10", "严重"], escalation: "red" },
-          { q: "ROAS 低于 3.0？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "升级 Louis 制定优化计划", tags: ["roas", "低", "3", "不好"], escalation: "yellow" },
-          { q: "ROAS 低于 1.5 或连续2场低于 2.0？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "升级 Mok 做止损判断", tags: ["roas", "很低", "1.5", "亏损", "连续"], escalation: "red" },
-          { q: "连续2场 GP 负数？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "升级 Mok 做 Go/No-Go", tags: ["gp", "亏损", "负", "连续", "赔钱"], escalation: "red" },
-        ]
-      },
-      {
-        category: "行政 & HR",
-        icon: "📋",
-        items: [
-          { q: "Event 场地/物流问题？", sop: "Event SOP", location: "Internal Master > Event Tab", who: "Wenji", tags: ["event", "场地", "物流", "活动", "安排"] },
-          { q: "面试候选人流程？", sop: "Recruitment SOP", location: "Internal Master > HR Tab", who: "Wenji 初筛", tags: ["面试", "招聘", "候选人", "hr"] },
-          { q: "公司卡 Swipey 怎么用？", sop: "Swipey SOP", location: "Internal Master > Finance Tab", who: "Queenie / SY", tags: ["swipey", "公司卡", "报销", "付款"] },
-        ]
-      }
-    ];
 
-    const ESCALATION_STEPS = [
-      { step: 1, icon: "🔍", title: "查 SOP", desc: "打开 Internal Master 搜索关键词" },
-      { step: 2, icon: "🤝", title: "问同事", desc: "找同级别 PC 或 Wenji 确认" },
-      { step: 3, icon: "💡", title: "带方案升级", desc: '"我遇到X，查了Y，我建议Z"' },
-    ];
+  const INTERNAL_MASTER = "https://docs.google.com/spreadsheets/d/1Kmw4OWzd-XkQr7CRa4owCVUY8PdhLFwdBYhKOMVYBsw/edit";
 
-    function highlightMatch(text, query) {
-      if (!query || query.length < 2) return text;
-      const idx = text.toLowerCase().indexOf(query.toLowerCase());
-      if (idx === -1) return text;
-      return (
-        <React.Fragment>
-          {text.slice(0, idx)}
-          <span style={{ background: "#FFF3CD", fontWeight: 700, padding: "0 2px", borderRadius: 2 }}>
-            {text.slice(idx, idx + query.length)}
-          </span>
-          {text.slice(idx + query.length)}
-        </React.Fragment>
-      );
-    }
+  const KNOWLEDGE_BASE = [
+    {
+      category: "技术操作", icon: "🔧",
+      items: [
+        { q: "Zoom 怎么设置？账号在哪里？", sop: "Zoom Setup SOP", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["zoom","设置","webinar","链接","会议","账号"], sopLink: "https://worried-gambler-f97.notion.site/Prominds-ZOOM-2d8736afa2e080908439ec3e94c7ee73" },
+        { q: "GHL Landing Page 怎么改？", sop: "GHL LP SOP", location: "Internal Master > Speaker & Course Tab", who: "Wenji / Zack", tags: ["ghl","landing page","lp","页面","修改"] },
+        { q: "Strive WhatsApp 怎么发 Reminder？", sop: "Strive Reminder SOP", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["strive","whatsapp","reminder","提醒","发送"] },
+        { q: "Payment Link 怎么设置？（Senang Pay / Payex）", sop: "Payment Setup SOP", location: "Internal Master > Prominds Tab", who: "SzeYuan / Mok", tags: ["payment","付款","链接","支付","senang pay","payex","ezbeli"] },
+        { q: "Zapier 出问题了？/ GHL → Zapier → Strive 怎么连？", sop: "GHL → Zapier → Strive SOP", location: "Internal Master > Prominds Tab", who: "Wenji / Nicsman", tags: ["zapier","自动化","故障","连接","触发","ghl","strive"], sopLink: "https://worried-gambler-f97.notion.site/sop-of-ghl-zapier-strive" },
+        { q: "WhatsApp Community 怎么建立？", sop: "Create WA Community SOP", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["whatsapp","community","群","建立","wa"] },
+        { q: "GHL 怎么授权 / 给 Access？", sop: "GHL Access SOP", location: "Internal Master > Prominds Tab", who: "Mok / Louis", tags: ["ghl","授权","access","权限"] },
+        { q: "Meta Pixel 怎么 Link？", sop: "Pixel Setup SOP", location: "Internal Master > Prominds Tab", who: "Mok / Wenji", tags: ["pixel","meta","link","设置","facebook"] },
+        { q: "Domain 域名在哪里管理？", sop: "Domain SOP", location: "Internal Master > Prominds Tab", who: "Mok / Louis / Nicsman", tags: ["domain","域名","namecheap","godaddy","网址"] },
+      ]
+    },
+    {
+      category: "数据 & 报表", icon: "📊",
+      items: [
+        { q: "怎么算 ROAS / CPL / CPA？", sop: "数据计算公式表", location: "Internal Master > Speaker & Course Tab", who: "Louis / Niysha", tags: ["roas","cpl","cpa","计算","公式","数据"] },
+        { q: "P&L 表格怎么填？", sop: "P&L 填写 SOP", location: "Internal Master > Speaker & Course Tab", who: "Queenie", tags: ["p&l","pnl","损益","填写","报表","财务"] },
+        { q: "广告数据在哪里看？", sop: "Agency 数据查看指引", location: "Internal Master > Speaker & Course Tab", who: "Louis", tags: ["广告","数据","后台","meta","ads","投放"] },
+        { q: "Sales Tracking 怎么更新？", sop: "Sales Tracking SOP", location: "Internal Master > Speaker & Course Tab", who: "PC 自行更新", tags: ["sales","tracking","销售","追踪","更新"] },
+        { q: "Weekly Report 怎么写？", sop: "Weekly Report 模板", location: "Internal Master > Speaker & Course Tab", who: "PC 自行完成", tags: ["weekly","report","周报","汇报"] },
+        { q: "Ads Tracking 每日怎么更新？（每天12点前）", sop: "Ads Tracking 每日更新 SOP", location: "Internal Master > Speaker & Course Tab", who: "Louis", tags: ["ads","tracking","每日","12点","更新","广告"] },
+      ]
+    },
+    {
+      category: "Webinar 执行", icon: "🎯",
+      items: [
+        { q: "Webinar 前一天要检查什么？", sop: "Pre-Zoom Checklist", location: "Internal Master > Speaker & Course Tab", who: "Wenji 协助检查", tags: ["webinar","前一天","检查","checklist","准备"] },
+        { q: "Webinar 当天操作流程？", sop: "Webinar Day SOP", location: "Internal Master > Speaker & Course Tab", who: "PC 执行", tags: ["webinar","当天","操作","流程","zoom"] },
+        { q: "怎么准备 Sales Kit？", sop: "Sales Kit SOP", location: "Internal Master > Speaker & Course Tab", who: "Louis", tags: ["sales kit","销售","素材","准备","成交"] },
+        { q: "Follow Up 怎么安排？", sop: "Follow Up Strategy SOP", location: "Internal Master > Speaker & Course Tab", who: "Louis", tags: ["follow up","跟单","跟进","安排"] },
+        { q: "怎么发 Reminder 给学员？", sop: "Reminder SOP", location: "Internal Master > Speaker & Course Tab", who: "PC 执行", tags: ["reminder","提醒","学员","发送"] },
+      ]
+    },
+    {
+      category: "学生 & 课程", icon: "🎓",
+      items: [
+        { q: "学生 Onboarding 流程？", sop: "Student Onboarding SOP", location: "Internal Master > Speaker & Course Tab", who: "Bowie / Wenji", tags: ["学生","onboarding","入学","通知","名单"] },
+        { q: "3天课程执行怎么安排？Day 1/2/3 助教重点？", sop: "3天课程执行 SOP", location: "Internal Master > Speaker & Course Tab", who: "Bowie", tags: ["课程","3天","安排","执行","event","助教","破冰","day1","day2","day3"], sopLink: "https://www.notion.so/3-Onboarding-SOP-32c736afa2e080bf94c4e3dd0606c60b" },
+        { q: "3天课程前要发什么信息给学员？信息模板在哪里？", sop: "学员信息发送模板", location: "Internal Master > Speaker & Course Tab", who: "Bowie", tags: ["信息","模板","学员","发送","课前","reminder","whatsapp","wa"], sopLink: "https://www.notion.so/3-Onboarding-SOP-32c736afa2e080bf94c4e3dd0606c60b" },
+        { q: "WA Personal vs WA Community 分别用来做什么？", sop: "WA 使用指引", location: "Internal Master > Speaker & Course Tab", who: "Bowie", tags: ["wa","whatsapp","personal","community","用途","区别"], notes: "WA Personal = 关系（追单 / 关心 / 发笔记）\nWA Community = 氛围（规则 / 自我介绍 / Testimonial）" },
+        { q: "Upsell 怎么安排？", sop: "Upsell Strategy SOP", location: "Internal Master > Speaker & Course Tab", who: "Louis", tags: ["upsell","追销","课程","策略"] },
+        { q: "Closer Interview 怎么安排？", sop: "Closer Interview SOP", location: "Internal Master > Speaker & Course Tab", who: "PC 协调", tags: ["closer","interview","面试","安排"] },
+      ]
+    },
+    {
+      category: "新项目 Onboarding", icon: "🚀",
+      items: [
+        { q: "新项目完整启动流程是什么？（Onboarding Flow）", sop: "Onboarding Flow SOP", location: "Internal Master > Speaker & Course Tab", who: "Mok", tags: ["新项目","启动","onboarding","流程","kick-off"], sopLink: "https://www.notion.so/3-Onboarding-SOP-32c736afa2e080bf94c4e3dd0606c60b" },
+        { q: "阶段 0：项目 Kick-off 要做什么？", sop: "Project Kick-off Checklist", location: "Internal Master > Speaker & Course Tab", who: "Mok / Nicsman", tags: ["kick-off","启动","讲师","合约","nda","agency","创建"], notes: "① 确认讲师合作 Speaker Signed（Nicsman）\n② 在 Tasks 数据库创建项目 + 指定 PIC（Mok）\n③ 签署 Agency NDA（Mok）\n④ 签署 Agency 合约（Mok + Niysha）" },
+        { q: "阶段 1：SOP 1.0 Brain 要收集什么内容？", sop: "SOP 1.0 Brain Checklist", location: "Internal Master > Speaker & Course Tab", who: "Mok / Louis / Wei Yi", tags: ["brain","speaker kit","course kit","brand kit","讲师资料","收集","1.0"], notes: "1.1 讲师资料 Speaker Kit → Mok\n1.2 课程内容 Course Kit → Louis\n1.3 品牌资料 Brand Kit → Wei Yi（有疑问找 Chin Ni）" },
+        { q: "阶段 2：SOP 2.0 Tech 要设置什么？（完整技术清单）", sop: "SOP 2.0 Tech Checklist", location: "Internal Master > Speaker & Course Tab", who: "Mok / SzeYuan", tags: ["tech","setup","技术","facebook","ghl","payment","zoom","pixel","zapier","landing page","2.0"], notes: "FB Page / GHL Access / Payment Link / Swipey / WA号码 / Zoom账号 / WA Community / Domain / BM账户 / 广告账户 / Landing Page / Thank You Page / Pixel / GHL→Zapier / Zapier→Strive / Zapier→Leads Sheet", sopLink: "https://www.notion.so/3-Onboarding-SOP-32c736afa2e080bf94c4e3dd0606c60b" },
+        { q: "阶段 3：SOP 3.0 Performance 上线前要准备什么？", sop: "SOP 3.0 Performance Checklist", location: "Internal Master > Speaker & Course Tab", who: "Mok / Louis", tags: ["performance","sheet","slide","training","上线","准备","ads tracking","3.0"], notes: "3.1.1 Sheet Template（Lead/Weekly/Student/P&L）→ Mok\n3.1.2 Slide Checking → Louis\n3.2.1 Training: Ads & Funnel → Mok\n3.2.2 Training: WA Personal vs API（Strive）→ Mok\n3.2.3 Training: Zoom Operation → Mok\n3.2.4 每日12点 Ads Tracking → Louis\n3.2.5 Training: Student & Payment List → Mok" },
+      ]
+    },
+    {
+      category: "讲师 & Agency", icon: "🤝",
+      items: [
+        { q: "讲师临时改时间怎么办？", sop: "Escalation Matrix 第四章", location: "PC Escalation Matrix > Sheet ③", who: "Mok", tags: ["讲师","改时间","临时","取消","变动"], escalation: "red" },
+        { q: "讲师问为什么 ROAS 这么低？", sop: "Escalation Matrix 第四章", location: "PC Escalation Matrix > Sheet ③", who: "Louis", tags: ["讲师","roas","低","问","不满意"], escalation: "yellow" },
+        { q: "讲师发脾气 / 抱怨合作？", sop: "Escalation Matrix 第四章", location: "PC Escalation Matrix > Sheet ③", who: "Mok", tags: ["讲师","发脾气","抱怨","合作","不开心","终止"], escalation: "red" },
+        { q: "Agency 不回消息怎么办？", sop: "Escalation Matrix 第二章", location: "PC Escalation Matrix > Sheet ②", who: "先等48小时 → Wenji", tags: ["agency","不回","消息","没回应","催"], escalation: "yellow" },
+        { q: "Agency 数据没更新？", sop: "Escalation Matrix 第二章", location: "PC Escalation Matrix > Sheet ②", who: "先自行后台查 → 48h后 Wenji", tags: ["agency","数据","更新","没交","催"], escalation: "yellow" },
+      ]
+    },
+    {
+      category: "数据异常处理", icon: "🚨",
+      items: [
+        { q: "CPL 超过 Target 20% 以上？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "Louis 分析", tags: ["cpl","超过","高","异常","target"], escalation: "yellow" },
+        { q: "CPL 超过 Target 40% 以上？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "Mok 做 Go/No-Go", tags: ["cpl","严重","超标","40"], escalation: "red" },
+        { q: "Show Up Rate 低于 40%？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "Louis 分析原因", tags: ["show up","出席","低","率","40"], escalation: "yellow" },
+        { q: "Show Up Rate 低于 30%？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "Mok 沟通讲师", tags: ["show up","出席","很低","30","严重"], escalation: "red" },
+        { q: "Conversion Rate 低于 15%？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "Louis 优化策略", tags: ["conversion","转化","低","15"], escalation: "yellow" },
+        { q: "Conversion Rate 低于 10%？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "Mok 判断项目方向", tags: ["conversion","转化","很低","10","严重"], escalation: "red" },
+        { q: "ROAS 低于 3.0？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "Louis 制定优化计划", tags: ["roas","低","3","不好"], escalation: "yellow" },
+        { q: "ROAS 低于 1.5 或连续2场低于 2.0？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "Mok 做止损判断", tags: ["roas","很低","1.5","亏损","连续"], escalation: "red" },
+        { q: "连续2场 GP 负数？", sop: "Escalation Matrix 第三章", location: "PC Escalation Matrix > Sheet ②", who: "Mok 做 Go/No-Go", tags: ["gp","亏损","负","连续","赔钱"], escalation: "red" },
+      ]
+    },
+    {
+      category: "行政 & HR", icon: "📋",
+      items: [
+        { q: "Event 场地/物流问题？", sop: "Event SOP", location: "Internal Master > Event Tab", who: "Wenji", tags: ["event","场地","物流","活动","安排"] },
+        { q: "面试候选人流程？", sop: "Recruitment SOP", location: "Internal Master > HR Tab", who: "Wenji 初筛", tags: ["面试","招聘","候选人","hr"] },
+        { q: "公司卡 Swipey 怎么用？", sop: "Swipey SOP", location: "Internal Master > Prominds Tab", who: "Queenie / SzeYuan", tags: ["swipey","公司卡","报销","付款"] },
+        { q: "工作事务要用什么 Email？（不能用个人 Email）", sop: "公司 Email 使用规定", location: "Internal Master > Prominds Tab", who: "Wenji 提醒 / Mok 跟进", tags: ["email","公司邮箱","个人","规定","邮件"], notes: "所有工作事务必须使用公司 Email。\n已用个人 Email 发出的，需通知对方改用公司 Email 重新发送。" },
+        { q: "讲师资料收集模板在哪里？（Speaker Onboarding Prompt）", sop: "Speaker Onboarding One-Shot Prompt", location: "Internal Master > Speaker & Course Tab", who: "Mok", tags: ["讲师","资料","收集","onboarding","prompt","模板","speaker"] },
+      ]
+    },
+    {
+      category: "工具账号", icon: "🔐",
+      items: [
+        { q: "Zoom 账号 ID 是什么？有几个账号？", sop: "Zoom 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["zoom","账号","登录","id"], url: "https://www.zoom.us/signin", loginId: "zoom01@prominds.com.my (Z1)\nzoom02@prominds.com.my (Z2)\nzoom003@prominds.com.my (Z3)\nzoom04@prominds.com.my (Z4)\nsupport@prominds.com.my (ZS)", sopLink: "https://worried-gambler-f97.notion.site/Prominds-ZOOM-2d8736afa2e080908439ec3e94c7ee73" },
+        { q: "GHL (GoHighLevel) 账号怎么登录？", sop: "GHL 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji / Mok", tags: ["ghl","gohighlevel","账号","登录"], url: "https://www.gohighlevel.com/" },
+        { q: "Strive 账号怎么登录？", sop: "Strive 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["strive","whatsapp","api","账号","登录"], url: "https://strive.asia/", loginId: "support@prominds.com.my\n（CX 专用：clinixerocs@gmail.com）" },
+        { q: "Zapier 账号怎么登录？", sop: "Zapier 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji / Nicsman", tags: ["zapier","账号","登录","自动化"], url: "https://zapier.com/", loginId: "nicsman@vceo.com.my", sopLink: "https://worried-gambler-f97.notion.site/sop-of-ghl-zapier-strive" },
+        { q: "Canva 账号怎么登录？", sop: "Canva 账号信息", location: "Internal Master > Prominds Tab", who: "Wei Yi / Wenji", tags: ["canva","账号","登录","设计"], url: "https://www.canva.com/", loginId: "support@prominds.com.my\n（需要 Email Verification Code）" },
+        { q: "CapCut 账号怎么登录？", sop: "CapCut 账号信息", location: "Internal Master > Prominds Tab", who: "Wei Yi", tags: ["capcut","账号","登录","剪辑","视频"], url: "https://www.capcut.com/", loginId: "support@prominds.com.my" },
+        { q: "Senang Pay 账号怎么登录？", sop: "Senang Pay 账号信息", location: "Internal Master > Prominds Tab", who: "SzeYuan", tags: ["senang pay","payment","付款","账号","登录"], url: "https://app.senangpay.my/login", loginId: "nicsman@prominds.com.my" },
+        { q: "Boards 账号怎么登录？", sop: "Boards 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["boards","账号","登录"], url: "https://www.boards.com/", loginId: "support@prominds.com.my" },
+        { q: "LinkC 账号怎么登录？（课程链接总汇）", sop: "LinkC 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["linkc","账号","登录","链接","课程"], url: "https://linkc.co/user/login", loginId: "admin" },
+        { q: "Dropbox 账号怎么登录？", sop: "Dropbox 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["dropbox","账号","登录","存储","文件"], url: "https://www.dropbox.com/", loginId: "support@prominds.com.my" },
+        { q: "Calendly 账号怎么登录？", sop: "Calendly 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["calendly","账号","登录","预约"], url: "https://calendly.com/", loginId: "support@prominds.com.my" },
+        { q: "Vimeo 账号怎么登录？", sop: "Vimeo 账号信息", location: "Internal Master > Prominds Tab", who: "Wei Yi", tags: ["vimeo","账号","登录","视频"], url: "https://vimeo.com/", loginId: "support@prominds.com.my" },
+        { q: "Lark 账号怎么登录？", sop: "Lark 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["lark","账号","登录"], url: "https://psg9zp4ar6vj.sg.larksuite.com/minutes/me", loginId: "nicsman@prominds.com.my" },
+        { q: "VooV 腾讯会议怎么登录？", sop: "VooV 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["voov","腾讯会议","账号","登录","会议"], url: "https://voovmeeting.com", loginId: "support@prominds.com.my\n（需要 Email Verification Code）" },
+        { q: "BUAL Cloud Phone 怎么登录？（公司电话）", sop: "BUAL Cloud Phone 账号信息", location: "Internal Master > Prominds Tab", who: "Mok", tags: ["bual","cloud phone","电话","账号","登录"], url: "https://customer.bual.asia/", loginId: "0386878430" },
+        { q: "e-print 怎么登录？（印刷）", sop: "e-print 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["eprint","e-print","印刷","print","账号"], url: "https://www.e-print.my/", loginId: "Prominds123 / support@prominds.com.my" },
+        { q: "Wordpress beprominds.com 怎么登录？", sop: "Wordpress 账号信息", location: "Internal Master > Prominds Tab", who: "Zack / Wenji", tags: ["wordpress","beprominds","网站","账号","登录"], url: "https://beprominds.com/wp-admin", loginId: "iwp-admin" },
+        { q: "SwipePages 怎么登录？", sop: "SwipePages 账号信息", location: "Internal Master > Prominds Tab", who: "Zack", tags: ["swipepages","landing page","账号","登录"], url: "https://swipepages.com/", loginId: "nicholas@brandsight.co" },
+        { q: "Zaap 怎么登录？", sop: "Zaap 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["zaap","账号","登录","bio"], url: "https://zaap.bio/", loginId: "support@prominds.com.my" },
+        { q: "Dreamina 怎么登录？（AI 图片生成）", sop: "Dreamina 账号信息", location: "Internal Master > Prominds Tab", who: "Wei Yi", tags: ["dreamina","ai","图片","生成","账号","登录"], url: "https://dreamina.capcut.com/", loginId: "support@prominds.com.my" },
+        { q: "AIGC 数字人怎么登录？", sop: "AIGC 数字人账号信息", location: "Internal Master > Prominds Tab", who: "Aggie / Nicsman", tags: ["aigc","数字人","ai","账号","登录"], url: "https://www.aigcmalaysia.com/", loginId: "aigc.promindstrial1@gmail.com\naigc.promindstrial2@gmail.com\naigc.promindstrial3@gmail.com" },
+        { q: "Higgsfield 怎么登录？（AI 视频）", sop: "Higgsfield 账号信息", location: "Internal Master > Prominds Tab", who: "Wei Yi / Raymond", tags: ["higgsfield","ai","视频","账号","登录"], url: "https://higgsfield.ai/", loginId: "support@prominds.com.my" },
+        { q: "Claude AI 怎么登录？", sop: "Claude AI 账号信息", location: "Internal Master > Prominds Tab", who: "Aggie / Mok", tags: ["claude","ai","账号","登录"], url: "https://claude.ai", loginId: "support@prominds.com.my\n（无密码，用 Verification Code 登录）" },
+        { q: "Cloudinary 怎么登录？", sop: "Cloudinary 账号信息", location: "Internal Master > Prominds Tab", who: "Zack", tags: ["cloudinary","账号","登录","图片","存储"], url: "https://cloudinary.com", loginId: "support@prominds.com.my" },
+        { q: "Lalamove 怎么登录？（物流送货）", sop: "Lalamove 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["lalamove","物流","送货","账号","登录"], loginId: "support@prominds.com.my" },
+        { q: "Meitu 怎么登录？（图片美化）", sop: "Meitu 账号信息", location: "Internal Master > Prominds Tab", who: "Wei Yi / Chin Ni", tags: ["meitu","美图","图片","账号","登录"], notes: "用 Meitu App 扫码登录（非密码登录）" },
+        { q: "NameCheap 怎么登录？（域名管理）", sop: "NameCheap 账号信息", location: "Internal Master > Prominds Tab", who: "Mok / Nicsman", tags: ["namecheap","域名","domain","账号","登录"], url: "https://www.namecheap.com/", loginId: "nicsmantay" },
+        { q: "Notion 怎么登录？", sop: "Notion 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["notion","账号","登录","sop"], url: "https://www.notion.so/", loginId: "support@prominds.com.my" },
+        { q: "Beprominds 后台 (ICORE) 怎么登录？", sop: "ICORE 账号信息", location: "Internal Master > Prominds Tab", who: "Zack / Wenji", tags: ["icore","beprominds","后台","账号","登录"], url: "https://billing.icore.com.my/login", loginId: "nicholas@brandsight.co" },
+        { q: "SMS Blasting 备用 (WA 被封时) 怎么登录？", sop: "SMS Blasting 备用账号", location: "Internal Master > Prominds Tab", who: "Wenji / Mok", tags: ["sms","blasting","备用","whatsapp","封号","账号"], url: "https://www.sms123.net/", loginId: "siewchoo@vinjomarketing.com" },
+        { q: "Notta 怎么登录？（会议录音转写）", sop: "Notta 账号信息", location: "Internal Master > Prominds Tab", who: "Wenji", tags: ["notta","录音","转写","账号","登录"], loginId: "nicsman@prominds.com.my" },
+      ]
+    },
+    {
+      category: "项目资料", icon: "📁",
+      items: [
+        { q: "Clinixero (CX) 项目文件在哪里？", sop: "项目文件 - Clinixero (001-CX)", location: "Internal Master > Speaker & Course Tab", who: "Niysha", tags: ["clinixero","cx","dr andrew","项目","001","文件","landing page"], projectLinks: [ { label: "🌐 LP (Main)", url: "https://www.clinixero.co/" }, { label: "🌐 LP (EN)", url: "https://www.clinixero.co/webinar-registration-228216" }, { label: "🌐 LP (CN)", url: "https://www.clinixero.co/cn-webinar2" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/embed?src=c_9684768ce0f8b52f2cee042ef95826eed78b9afda34c6e8ea56173b026becb25%40group.calendar.google.com&ctz=Asia%2FKuala_Lumpur" } ] },
+        { q: "Trisen (CC/LDS) 项目文件在哪里？", sop: "项目文件 - Trisen (002)", location: "Internal Master > Speaker & Course Tab", who: "CY (Phin)", tags: ["trisen","cc","lds","cold closing","leadership","002","项目","文件"], projectLinks: [ { label: "🌐 LP (Leadership)", url: "https://events.prominds.com.my/sales-leadership" }, { label: "🌐 LP (Cold Closing)", url: "https://events.prominds.com.my/cold-closing" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y19kNjczMjM3ZGNlOTYzOWFiZDAxMmVhMzg5MjRkNWE4OWI5OTBjMjIyODc2YmZmMWNmMDQ2ZTVkMGVmYTFkMDRhQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+        { q: "Savwee / Meng Teck (WWC) 项目文件在哪里？", sop: "项目文件 - Savwee/WWC (003)", location: "Internal Master > Speaker & Course Tab", who: "Kayson", tags: ["savwee","meng teck","wwc","003","项目","文件"], projectLinks: [ { label: "🌐 LP (Main)", url: "https://winwithconsistency.com/" }, { label: "🌐 LP (Savwee)", url: "https://savweeclass.com/webinar-registration" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/embed?src=c_ff49274e390ef4f38bd52755fcb70bb86eaa4db6d2756bb120690997e71507b1%40group.calendar.google.com&ctz=Asia%2FKuala_Lumpur" } ] },
+        { q: "Dato Keen (TikTok 企业运营) 项目文件在哪里？", sop: "项目文件 - Dato Keen (004-TT)", location: "Internal Master > Speaker & Course Tab", who: "Kyle", tags: ["dato keen","tiktok","tt","004","项目","文件"], projectLinks: [ { label: "🌐 Landing Page", url: "https://events.prominds.com.my/tiktok-mainpage" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y18wNzBjMmUyYzk1NzBlNjJjMThjMGJhNzM1NzI4ZDc3YmIwZDkxNzY1YTZlMzQ3ZmJiOTBhMDNkMjc5M2RjYmJkQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+        { q: "Nicsman 百万课程经营系统 (PCS) 项目文件在哪里？", sop: "项目文件 - Nicsman PCS (007)", location: "Internal Master > Speaker & Course Tab", who: "KaHung", tags: ["nicsman","百万","pcs","007","项目","文件","课程经营"], projectLinks: [ { label: "🌐 Landing Page", url: "https://procoursesystem.com/registration" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y18yYzlhNDc5NGFjZjVhOGEzYWMxMWE0N2M4Zjc0MzM2NzkxMjNlMzIzNDc0NTExZmZhY2Y1MTBkYTNmMGE2YmYyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+        { q: "Hedki (点金圣手 / Train Your Manager) 项目文件在哪里？", sop: "项目文件 - Hedki (010-MYTHAS)", location: "Internal Master > Speaker & Course Tab", who: "Kyle", tags: ["hedki","点金圣手","train your manager","010","mythas","项目","文件"], projectLinks: [ { label: "🌐 Landing Page", url: "https://events.prominds.com.my/hedki-build-your-manager" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y19kODNlYmYyZDczOTZhZWZiZGIyNmM4MzNjZWNiMGVmYzVjOWZjYThkM2M3NjFhNjRlOTMyNDhkNWY5YmRjNGYwQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+        { q: "Annabel (MTS / 易投黄金) 项目文件在哪里？", sop: "项目文件 - Annabel MTS (027)", location: "Internal Master > Speaker & Course Tab", who: "CY / Aggie", tags: ["annabel","mts","易投黄金","027","项目","文件"], projectLinks: [ { label: "🌐 Landing Page", url: "https://thetradersfx.com/home" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y18wNDAwNDcyODliMjc3NDQ3ODlmMDQ0MzczNzllOTM5NGVmYjJlZDBlNmU5YzY3NjU0NTIzZDllMTcwNWRlYTFkQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+        { q: "Vinjo 左左 (小红书) 项目文件在哪里？", sop: "项目文件 - Vinjo (028-VZZ)", location: "Internal Master > Speaker & Course Tab", who: "Chin Ni", tags: ["vinjo","左左","小红书","028","vzz","项目","文件"], projectLinks: [ { label: "🌐 Landing Page", url: "https://vinjoacademy.com/xhs-mainpage" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y18xYTYzZWZhNDUwYTc3NTMwOTkwMGFkMDA0ODVkOWYyNDViNWMwMTY0NWQ4MDFjZjM4YTZmMmYzYTE5MzMzMDYxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+        { q: "Julio (EOI / 期权现金流) 项目文件在哪里？", sop: "项目文件 - Julio EOI (021)", location: "Internal Master > Speaker & Course Tab", who: "Kayson", tags: ["julio","eoi","期权","021","项目","文件"], projectLinks: [ { label: "🌐 LP (CN)", url: "https://easy-options-income.com/chi-register" }, { label: "🌐 LP (EN)", url: "https://easy-options-income.com/register-page" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y18xZWYyZDMxMGIxZTM1ODM5ODhkNTU1YzY0NTVmNDQwZjIwYmQ4OGRiMjlhMTVjOTcyZTE2ODc5Y2VkODJhNDczQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+        { q: "Nicsman AI Business Growth System (ABGS) 项目文件？", sop: "项目文件 - Nicsman ABGS (029)", location: "Internal Master > Speaker & Course Tab", who: "KaHung", tags: ["nicsman","ai","abgs","029","项目","文件"], projectLinks: [ { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y19jN2Y2M2U3OGYyNTk0ZWQ0MmEwY2VkOWI2NTI1MDE5OWY0ZTQxMTI0YmRiOTBmOWE3Mjk4ZGZjMmNjNzY5MTRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+        { q: "Ariel Lee (Fast English) 项目文件在哪里？", sop: "项目文件 - Ariel FE (016)", location: "Internal Master > Speaker & Course Tab", who: "CG (External)", tags: ["ariel","fast english","fe","016","项目","文件"], projectLinks: [ { label: "🌐 Landing Page", url: "https://www.fast-english-masterclass.com/webinar-registration-page910982" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y18yODQyYTA0MjQxOTA0ZWE2OTUxNTI5M2FmOWVlOGI5ODBkMmExZjUzMTFjMjUyOWNmMjVlMmQzNTU0YTcxYTdlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+        { q: "Nickson (紫微商道) 项目文件在哪里？", sop: "项目文件 - Nickson ZW (015)", location: "Internal Master > Speaker & Course Tab", who: "CG (External)", tags: ["nickson","紫微","zw","015","项目","文件"], projectLinks: [ { label: "🌐 Landing Page", url: "https://ziweibreakthrough.com/nickson" }, { label: "📅 Calendar", url: "https://calendar.google.com/calendar/u/0?cid=Y180N2ZlNmZiYzFlY2UyYTFhOWYwYzQ4ZmMwYTZhNmFjOTQyZTU0ODY0OTFjOTE2OGJjOTM3NWViY2RjMzk4YzFiQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" } ] },
+      ]
+    },
+  ];
 
-    function App() {
-      const [query, setQuery] = React.useState("");
-      const [selectedCategory, setSelectedCategory] = React.useState(null);
-      const [expandedItem, setExpandedItem] = React.useState(null);
+  const ESCALATION_STEPS = [
+    { step: 1, icon: "🔍", title: "查 SOP", desc: "打开 Internal Master 搜索关键词" },
+    { step: 2, icon: "🤝", title: "问同事", desc: "找同级别 PC 或 Wenji 确认" },
+    { step: 3, icon: "💡", title: "带方案升级", desc: '"我遇到X，查了Y，我建议Z"' },
+  ];
 
-      const results = React.useMemo(() => {
-        if (!query && !selectedCategory) return null;
-        const q = query.toLowerCase().trim();
-        let items = [];
-        KNOWLEDGE_BASE.forEach(cat => {
-          if (selectedCategory && cat.category !== selectedCategory) return;
-          cat.items.forEach(item => {
-            let score = 0;
-            if (q) {
-              if (item.q.toLowerCase().includes(q)) score += 10;
-              if (item.tags.some(t => t.includes(q))) score += 5;
-              if (item.who.toLowerCase().includes(q)) score += 3;
-              if (item.sop.toLowerCase().includes(q)) score += 2;
-            } else {
-              score = 1;
-            }
-            if (score > 0) items.push({ ...item, score, category: cat.category, icon: cat.icon });
-          });
+  function highlightMatch(text, query) {
+    if (!query || query.length < 2) return text;
+    const idx = text.toLowerCase().indexOf(query.toLowerCase());
+    if (idx === -1) return text;
+    return (
+      <React.Fragment>
+        {text.slice(0, idx)}
+        <span style={{ background: "#FFF3CD", fontWeight: 700, padding: "0 2px", borderRadius: 2 }}>
+          {text.slice(idx, idx + query.length)}
+        </span>
+        {text.slice(idx + query.length)}
+      </React.Fragment>
+    );
+  }
+
+  function App() {
+    const [query, setQuery] = React.useState("");
+    const [selectedCategory, setSelectedCategory] = React.useState(null);
+    const [expandedItem, setExpandedItem] = React.useState(null);
+
+    const results = React.useMemo(() => {
+      if (!query && !selectedCategory) return null;
+      const q = query.toLowerCase().trim();
+      let items = [];
+      KNOWLEDGE_BASE.forEach(cat => {
+        if (selectedCategory && cat.category !== selectedCategory) return;
+        cat.items.forEach(item => {
+          let score = 0;
+          if (q) {
+            if (item.q.toLowerCase().includes(q)) score += 10;
+            if (item.tags.some(t => t.includes(q))) score += 5;
+            if (item.who.toLowerCase().includes(q)) score += 3;
+            if (item.sop.toLowerCase().includes(q)) score += 2;
+            if (item.loginId && item.loginId.toLowerCase().includes(q)) score += 4;
+          } else { score = 1; }
+          if (score > 0) items.push({ ...item, score, category: cat.category, icon: cat.icon });
         });
-        items.sort((a, b) => b.score - a.score);
-        return items;
-      }, [query, selectedCategory]);
+      });
+      items.sort((a, b) => b.score - a.score);
+      return items;
+    }, [query, selectedCategory]);
 
-      const escColor = { red: "#DC3545", yellow: "#E6A817", green: "#28A745" };
-      const escLabel = { red: "🔴 升级 Mok", yellow: "🟡 升级 Louis/Wenji" };
+    const escColor = { red: "#DC3545", yellow: "#E6A817" };
+    const escLabel = { red: "🔴 升级 Mok", yellow: "🟡 升级 Louis/Wenji" };
 
-      return (
-        <div style={{ minHeight: "100vh", background: "#F4F7FB", padding: "0 0 40px" }}>
-          <div style={{ maxWidth: 520, margin: "0 auto", padding: "0 16px" }}>
+    const LinkBtn = ({ href, children }) => (
+      <a href={href} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+        style={{ display: "inline-block", padding: "4px 10px", borderRadius: 5, background: "#EBF3FB", color: "#1F4E79", fontSize: 12, fontWeight: 600, marginRight: 6, marginBottom: 5, border: "1px solid #C8DFF2" }}>
+        {children} ↗
+      </a>
+    );
 
-            {/* Header */}
-            <div style={{ textAlign: "center", padding: "28px 0 16px" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 2, color: "#1F4E79", textTransform: "uppercase", marginBottom: 6, opacity: 0.6 }}>
-                PROMINDS INTERNAL
-              </div>
-              <div style={{ fontSize: 26, fontWeight: 800, color: "#1F4E79", lineHeight: 1.2 }}>
-                PC 自救知识库
-              </div>
-              <div style={{ fontSize: 13, color: "#888", marginTop: 6 }}>
-                遇到问题？先查这里，再找人。
-              </div>
-            </div>
+    return (
+      <div style={{ minHeight: "100vh", background: "#F4F7FB", padding: "0 0 40px" }}>
+        <div style={{ maxWidth: 520, margin: "0 auto", padding: "0 16px" }}>
+          <div style={{ textAlign: "center", padding: "28px 0 16px" }}>
+            <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: 2, color: "#1F4E79", textTransform: "uppercase", marginBottom: 6, opacity: 0.5 }}>PROMINDS INTERNAL</div>
+            <div style={{ fontSize: 26, fontWeight: 800, color: "#1F4E79" }}>PC 自救知识库</div>
+            <div style={{ fontSize: 13, color: "#888", marginTop: 6 }}>遇到问题？先查这里，再找人。</div>
+          </div>
 
-            {/* Self-help steps */}
-            <div style={{
-              background: "white",
-              border: "1px solid #E0EAF5",
-              borderRadius: 12,
-              padding: "14px 16px",
-              marginBottom: 16,
-              boxShadow: "0 1px 4px rgba(31,78,121,0.06)"
-            }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#1F4E79", marginBottom: 10, textTransform: "uppercase", letterSpacing: 1 }}>
-                ⚡ 自救三步（升级前必须完成）
-              </div>
-              <div style={{ display: "flex", gap: 8 }}>
-                {ESCALATION_STEPS.map(s => (
-                  <div key={s.step} style={{
-                    flex: 1,
-                    background: "#F4F7FB",
-                    borderRadius: 8,
-                    padding: "10px 6px",
-                    textAlign: "center",
-                  }}>
-                    <div style={{ fontSize: 22 }}>{s.icon}</div>
-                    <div style={{ fontSize: 11, fontWeight: 700, color: "#1F4E79", marginTop: 4 }}>{s.title}</div>
-                    <div style={{ fontSize: 10, color: "#888", marginTop: 3, lineHeight: 1.4 }}>{s.desc}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Search */}
-            <div style={{ position: "relative", marginBottom: 12 }}>
-              <input
-                type="text"
-                placeholder="输入问题关键词... 例如：ROAS 低、讲师、Zoom"
-                value={query}
-                onChange={e => { setQuery(e.target.value); setExpandedItem(null); }}
-                style={{
-                  width: "100%",
-                  padding: "13px 16px 13px 42px",
-                  borderRadius: 10,
-                  border: "2px solid #D6E4F0",
-                  fontSize: 14,
-                  outline: "none",
-                  background: "white",
-                  color: "#333",
-                  boxShadow: "0 1px 4px rgba(31,78,121,0.06)"
-                }}
-              />
-              <span style={{ position: "absolute", left: 15, top: 14, fontSize: 16, opacity: 0.35 }}>🔍</span>
-              {query && (
-                <button
-                  onClick={() => { setQuery(""); setExpandedItem(null); }}
-                  style={{
-                    position: "absolute", right: 12, top: 11,
-                    background: "#eee", border: "none", borderRadius: "50%",
-                    width: 24, height: 24, fontSize: 14, cursor: "pointer", color: "#666",
-                    display: "flex", alignItems: "center", justifyContent: "center"
-                  }}
-                >×</button>
-              )}
-            </div>
-
-            {/* Category pills */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 16 }}>
-              {KNOWLEDGE_BASE.map(cat => (
-                <button
-                  key={cat.category}
-                  onClick={() => {
-                    setSelectedCategory(selectedCategory === cat.category ? null : cat.category);
-                    setExpandedItem(null);
-                  }}
-                  style={{
-                    padding: "6px 13px",
-                    borderRadius: 20,
-                    border: selectedCategory === cat.category ? "2px solid #1F4E79" : "1.5px solid #D6E4F0",
-                    background: selectedCategory === cat.category ? "#1F4E79" : "white",
-                    color: selectedCategory === cat.category ? "white" : "#555",
-                    fontSize: 12,
-                    fontWeight: 600,
-                    cursor: "pointer",
-                    transition: "all 0.15s",
-                    boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
-                  }}
-                >
-                  {cat.icon} {cat.category}
-                </button>
+          <div style={{ background: "white", border: "1px solid #E0EAF5", borderRadius: 12, padding: "14px 16px", marginBottom: 16, boxShadow: "0 1px 4px rgba(31,78,121,0.06)" }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#1F4E79", marginBottom: 10, textTransform: "uppercase", letterSpacing: 1 }}>⚡ 自救三步（升级前必须完成）</div>
+            <div style={{ display: "flex", gap: 8 }}>
+              {ESCALATION_STEPS.map(s => (
+                <div key={s.step} style={{ flex: 1, background: "#F4F7FB", borderRadius: 8, padding: "10px 6px", textAlign: "center" }}>
+                  <div style={{ fontSize: 22 }}>{s.icon}</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: "#1F4E79", marginTop: 4 }}>{s.title}</div>
+                  <div style={{ fontSize: 10, color: "#888", marginTop: 3, lineHeight: 1.4 }}>{s.desc}</div>
+                </div>
               ))}
             </div>
+          </div>
 
-            {/* Results */}
-            {results && results.length > 0 && (
-              <div>
-                <div style={{ fontSize: 12, color: "#999", marginBottom: 10, paddingLeft: 2 }}>
-                  找到 <strong style={{ color: "#1F4E79" }}>{results.length}</strong> 个相关结果
-                </div>
-                {results.map((item, idx) => {
-                  const isExpanded = expandedItem === idx;
-                  return (
-                    <div
-                      key={idx}
-                      onClick={() => setExpandedItem(isExpanded ? null : idx)}
-                      style={{
-                        background: "white",
-                        border: item.escalation ? `1.5px solid ${escColor[item.escalation]}50` : "1.5px solid #E8EFF6",
-                        borderRadius: 10,
-                        padding: "13px 14px",
-                        marginBottom: 8,
-                        cursor: "pointer",
-                        borderLeft: item.escalation ? `4px solid ${escColor[item.escalation]}` : "1.5px solid #E8EFF6",
-                        boxShadow: "0 1px 4px rgba(31,78,121,0.05)",
-                        transition: "box-shadow 0.15s"
-                      }}
-                    >
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                        <div style={{ flex: 1 }}>
-                          <div style={{ fontSize: 14, fontWeight: 600, color: "#222", lineHeight: 1.4 }}>
-                            {item.icon} {highlightMatch(item.q, query)}
-                          </div>
-                          {item.escalation && (
-                            <span style={{
-                              display: "inline-block",
-                              marginTop: 5,
-                              padding: "2px 9px",
-                              borderRadius: 4,
-                              fontSize: 11,
-                              fontWeight: 700,
-                              background: `${escColor[item.escalation]}15`,
-                              color: escColor[item.escalation],
-                            }}>
-                              {escLabel[item.escalation]}
-                            </span>
-                          )}
+          <div style={{ position: "relative", marginBottom: 12 }}>
+            <input type="text" placeholder="输入关键词... 例如：Zoom账号、ROAS低、Clinixero、Boards登录"
+              value={query} onChange={e => { setQuery(e.target.value); setExpandedItem(null); }}
+              style={{ width: "100%", padding: "13px 16px 13px 42px", borderRadius: 10, border: "2px solid #D6E4F0", fontSize: 14, outline: "none", background: "white", color: "#333", boxShadow: "0 1px 4px rgba(31,78,121,0.06)" }} />
+            <span style={{ position: "absolute", left: 15, top: 14, fontSize: 16, opacity: 0.35 }}>🔍</span>
+            {query && (
+              <button onClick={() => { setQuery(""); setExpandedItem(null); }}
+                style={{ position: "absolute", right: 12, top: 11, background: "#eee", border: "none", borderRadius: "50%", width: 24, height: 24, fontSize: 14, cursor: "pointer", color: "#666" }}>×</button>
+            )}
+          </div>
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 16 }}>
+            {KNOWLEDGE_BASE.map(cat => (
+              <button key={cat.category}
+                onClick={() => { setSelectedCategory(selectedCategory === cat.category ? null : cat.category); setExpandedItem(null); }}
+                style={{ padding: "6px 13px", borderRadius: 20, border: selectedCategory === cat.category ? "2px solid #1F4E79" : "1.5px solid #D6E4F0", background: selectedCategory === cat.category ? "#1F4E79" : "white", color: selectedCategory === cat.category ? "white" : "#555", fontSize: 12, fontWeight: 600, cursor: "pointer", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}>
+                {cat.icon} {cat.category}
+              </button>
+            ))}
+          </div>
+
+          {results && results.length > 0 && (
+            <div>
+              <div style={{ fontSize: 12, color: "#999", marginBottom: 10, paddingLeft: 2 }}>
+                找到 <strong style={{ color: "#1F4E79" }}>{results.length}</strong> 个相关结果
+              </div>
+              {results.map((item, idx) => {
+                const isExpanded = expandedItem === idx;
+                return (
+                  <div key={idx} onClick={() => setExpandedItem(isExpanded ? null : idx)}
+                    style={{ background: "white", border: item.escalation ? `1.5px solid ${escColor[item.escalation]}50` : "1.5px solid #E8EFF6", borderRadius: 10, padding: "13px 14px", marginBottom: 8, cursor: "pointer", borderLeft: item.escalation ? `4px solid ${escColor[item.escalation]}` : "1.5px solid #E8EFF6", boxShadow: "0 1px 4px rgba(31,78,121,0.05)" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontSize: 14, fontWeight: 600, color: "#222", lineHeight: 1.4 }}>
+                          {item.icon} {highlightMatch(item.q, query)}
                         </div>
-                        <span style={{
-                          fontSize: 14, color: "#BBB",
-                          transform: isExpanded ? "rotate(180deg)" : "none",
-                          transition: "transform 0.2s",
-                          marginLeft: 8, marginTop: 2
-                        }}>▾</span>
+                        {item.escalation && (
+                          <span style={{ display: "inline-block", marginTop: 5, padding: "2px 9px", borderRadius: 4, fontSize: 11, fontWeight: 700, background: `${escColor[item.escalation]}15`, color: escColor[item.escalation] }}>
+                            {escLabel[item.escalation]}
+                          </span>
+                        )}
                       </div>
-
-                      {isExpanded && (
-                        <div style={{
-                          marginTop: 12,
-                          paddingTop: 12,
-                          borderTop: "1px solid #F0F4F8",
-                          fontSize: 13,
-                          lineHeight: 1.7
-                        }}>
-                          <div style={{ display: "grid", gridTemplateColumns: "72px 1fr", gap: "6px 10px" }}>
-                            <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>📄 SOP</span>
-                            <span style={{ color: "#333" }}>{item.sop}</span>
-                            <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>📍 位置</span>
-                            <span style={{ color: "#333" }}>{item.location}</span>
-                            <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>👤 找谁</span>
-                            <span style={{ color: "#111", fontWeight: 700 }}>{item.who}</span>
-                          </div>
-                          {item.escalation && (
-                            <div style={{
-                              marginTop: 10,
-                              padding: "9px 11px",
-                              borderRadius: 7,
-                              background: "#FFFBF0",
-                              border: "1px solid #FFE0A0",
-                              fontSize: 12,
-                              color: "#7A5C00"
-                            }}>
-                              ⚠️ 升级前记得走「自救三步」：查SOP → 问同事 → 带方案升级
-                            </div>
-                          )}
-                        </div>
-                      )}
+                      <span style={{ fontSize: 14, color: "#BBB", transform: isExpanded ? "rotate(180deg)" : "none", transition: "transform 0.2s", marginLeft: 8, marginTop: 2 }}>▾</span>
                     </div>
-                  );
-                })}
-              </div>
-            )}
 
-            {results && results.length === 0 && (
-              <div style={{ textAlign: "center", padding: "48px 20px", color: "#AAA" }}>
-                <div style={{ fontSize: 36, marginBottom: 10 }}>🤔</div>
-                <div style={{ fontSize: 14, fontWeight: 700, color: "#666" }}>没有找到相关结果</div>
-                <div style={{ fontSize: 12, marginTop: 6, lineHeight: 1.7 }}>
-                  试试其他关键词，或直接找 Wenji 确认。<br />
-                  如果这个问题应该在这里，请告知 Wenji 补充。
-                </div>
-              </div>
-            )}
+                    {isExpanded && (
+                      <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #F0F4F8", fontSize: 13, lineHeight: 1.7 }} onClick={e => e.stopPropagation()}>
+                        <div style={{ display: "grid", gridTemplateColumns: "82px 1fr", gap: "7px 10px", alignItems: "start" }}>
+                          <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>📄 SOP</span>
+                          <span style={{ color: "#333" }}>
+                            {item.sop}
+                            {item.sopLink && (
+                              <a href={item.sopLink} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
+                                style={{ marginLeft: 8, padding: "2px 8px", borderRadius: 4, background: "#1F4E79", color: "white", fontSize: 11, fontWeight: 700, textDecoration: "none" }}>
+                                查看 →
+                              </a>
+                            )}
+                          </span>
 
-            {!results && (
-              <div style={{ textAlign: "center", padding: "36px 20px", color: "#BBB" }}>
-                <div style={{ fontSize: 36, marginBottom: 10 }}>👆</div>
-                <div style={{ fontSize: 13, color: "#999" }}>
-                  输入关键词搜索，或点击上方分类浏览
-                </div>
-              </div>
-            )}
+                          {item.url && (
+                            <React.Fragment>
+                              <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>🌐 网址</span>
+                              <a href={item.url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ color: "#1F4E79", wordBreak: "break-all" }}>{item.url}</a>
+                            </React.Fragment>
+                          )}
 
-            {/* Footer */}
-            <div style={{
-              marginTop: 24,
-              padding: "13px 15px",
-              borderRadius: 10,
-              background: "#FFFBF0",
-              border: "1px solid #FFE0A0",
-              fontSize: 12,
-              color: "#7A5C00",
-              lineHeight: 1.6
-            }}>
-              <strong>⚠️ 记住：</strong> 找不到答案 ≠ 直接找 Mok。<br />
-              正确路径：查SOP → 问同事/Wenji → 带方案升级。<br />
-              裸问题（"这个怎么做"）= 退回。
+                          {item.loginId && (
+                            <React.Fragment>
+                              <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>👤 ID</span>
+                              <span style={{ color: "#333", whiteSpace: "pre-line", fontFamily: "monospace", fontSize: 12 }}>{item.loginId}</span>
+                            </React.Fragment>
+                          )}
+
+                          {(item.url || item.loginId) && (
+                            <React.Fragment>
+                              <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>🔑 密码</span>
+                              <a href={INTERNAL_MASTER} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} style={{ color: "#888", fontStyle: "italic", fontSize: 12 }}>
+                                查看 Internal Master &gt; Prominds Tab ↗
+                              </a>
+                            </React.Fragment>
+                          )}
+
+                          <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>📍 位置</span>
+                          <span style={{ color: "#333" }}>{item.location}</span>
+
+                          {item.notes && (
+                            <React.Fragment>
+                              <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>📝 备注</span>
+                              <span style={{ color: "#444", whiteSpace: "pre-line", lineHeight: 1.6 }}>{item.notes}</span>
+                            </React.Fragment>
+                          )}
+
+                          <span style={{ fontWeight: 700, color: "#1F4E79", fontSize: 12 }}>🙋 卡住了找</span>
+                          <span style={{ color: "#111", fontWeight: 700 }}>{item.who}</span>
+                        </div>
+
+                        {item.projectLinks && (
+                          <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid #F0F4F8" }}>
+                            <div style={{ fontSize: 11, fontWeight: 700, color: "#1F4E79", marginBottom: 7, textTransform: "uppercase", letterSpacing: 0.5 }}>直达链接</div>
+                            <div style={{ display: "flex", flexWrap: "wrap" }}>
+                              {item.projectLinks.map((l, i) => <LinkBtn key={i} href={l.url}>{l.label}</LinkBtn>)}
+                            </div>
+                          </div>
+                        )}
+
+                        {item.escalation && (
+                          <div style={{ marginTop: 10, padding: "9px 11px", borderRadius: 7, background: "#FFFBF0", border: "1px solid #FFE0A0", fontSize: 12, color: "#7A5C00" }}>
+                            ⚠️ 升级前记得走「自救三步」：查SOP → 问同事 → 带方案升级
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
+          )}
 
+          {results && results.length === 0 && (
+            <div style={{ textAlign: "center", padding: "48px 20px", color: "#AAA" }}>
+              <div style={{ fontSize: 36, marginBottom: 10 }}>🤔</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#666" }}>没有找到相关结果</div>
+              <div style={{ fontSize: 12, marginTop: 6, lineHeight: 1.7 }}>试试其他关键词，或直接找 Wenji 确认。<br />如果这个问题应该在这里，请告知 Wenji 补充。</div>
+            </div>
+          )}
+
+          {!results && (
+            <div style={{ textAlign: "center", padding: "36px 20px", color: "#BBB" }}>
+              <div style={{ fontSize: 36, marginBottom: 10 }}>👆</div>
+              <div style={{ fontSize: 13, color: "#999" }}>输入关键词搜索，或点击上方分类浏览</div>
+            </div>
+          )}
+
+          <div style={{ marginTop: 24, padding: "13px 15px", borderRadius: 10, background: "#FFFBF0", border: "1px solid #FFE0A0", fontSize: 12, color: "#7A5C00", lineHeight: 1.6 }}>
+            <strong>⚠️ 记住：</strong> 找不到答案 ≠ 直接找 Mok。<br />
+            正确路径：查SOP → 问同事/Wenji → 带方案升级。<br />
+            裸问题（"这个怎么做"）= 退回。
           </div>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<App />);
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(<App />);
   </script>
 </body>
 </html>
