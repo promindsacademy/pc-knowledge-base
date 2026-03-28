@@ -299,7 +299,7 @@ function App(){
                 {item.items&&(
                   <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid #F0F4F8"}}>
                     <div style={{fontSize:11,fontWeight:700,color:"#1F4E79",marginBottom:10,textTransform:"uppercase",letterSpacing:0.5}}>每月需要完成</div>
-                    {item.items.map((s,i)=><StepBtn key={i} href={s.url} note={s.note}>{`${i+1}. ${s.label}`}</StepBtn>)}
+                    {item.items.map((s,i)=>React.createElement(StepBtn,{key:i,href:s.url,note:s.note},(i+1)+". "+s.label))}
                   </div>
                 )}
                 {item.projectLinks&&(<div style={{marginTop:10,paddingTop:10,borderTop:"1px solid #F0F4F8"}}><div style={{fontSize:11,fontWeight:700,color:"#1F4E79",marginBottom:7,textTransform:"uppercase",letterSpacing:0.5}}>直达链接</div><div style={{display:"flex",flexWrap:"wrap"}}>{item.projectLinks.map((l,i)=><Btn key={i} href={l.url}>{l.label}</Btn>)}</div></div>)}
