@@ -10,7 +10,38 @@
   <style>* { box-sizing: border-box; margin: 0; padding: 0; } body { background: #F4F7FB; font-family: Arial, sans-serif; } a { color: #1F4E79; text-decoration: none; } a:hover { text-decoration: underline; }</style>
 </head>
 <body>
-<div id="root"></div>
+<div id="gate" style="display:flex;align-items:center;justify-content:center;minHeight:100vh;background:#F4F7FB;padding:40px 16px;">
+  <div style="background:white;borderRadius:16px;padding:40px 32px;maxWidth:360px;width:100%;boxShadow:0 4px 24px rgba(31,78,121,0.10);textAlign:center;">
+    <div style="fontSize:32px;marginBottom:12px;">🔐</div>
+    <div style="fontSize:20px;fontWeight:800;color:#1F4E79;marginBottom:6px;">Prominds PC 自救知识库</div>
+    <div style="fontSize:13px;color:#888;marginBottom:24px;">PROMINDS INTERNAL — 请输入访问密码</div>
+    <input id="pw" type="password" placeholder="输入密码..." style="width:100%;padding:12px 14px;borderRadius:8px;border:2px solid #D6E4F0;fontSize:14px;outline:none;marginBottom:12px;boxSizing:border-box;" onkeydown="if(event.key==='Enter')checkPW()"/>
+    <button onclick="checkPW()" style="width:100%;padding:12px;borderRadius:8px;background:#1F4E79;color:white;fontSize:14px;fontWeight:700;border:none;cursor:pointer;">进入</button>
+    <div id="err" style="color:#DC3545;fontSize:12px;marginTop:10px;display:none;">密码错误，请重试</div>
+  </div>
+</div>
+<script>
+  function checkPW(){
+    var pw=document.getElementById("pw").value;
+    if(pw==="Prominds30"){
+      document.getElementById("gate").style.display="none";
+      document.getElementById("root").style.display="block";
+      sessionStorage.setItem("auth","1");
+    } else {
+      document.getElementById("err").style.display="block";
+      document.getElementById("pw").value="";
+    }
+  }
+  // Auto-check session
+  window.addEventListener("load",function(){
+    if(sessionStorage.getItem("auth")==="1"){
+      document.getElementById("gate").style.display="none";
+      document.getElementById("root").style.display="block";
+    }
+  });
+</script>
+
+<div id="root" style="display:none;"></div>
 <script type="text/babel">
 
 const IM = "https://docs.google.com/spreadsheets/d/1Kmw4OWzd-XkQr7CRa4owCVUY8PdhLFwdBYhKOMVYBsw/edit";
