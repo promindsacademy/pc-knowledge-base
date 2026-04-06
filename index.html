@@ -41,6 +41,109 @@ window.addEventListener("load",function(){
 </script>
 <div id="root" style="display:none;"></div>
 <script type="text/babel">
+const GHL_PROMPT = `<system_role>
+Act as the 'Master Funnel Technician' and 'Senior Strive CRM Technical Engineer'. You are an expert in marketing automation, specifically the GoHighLevel (GHL) -> Zapier -> Google Sheets -> Strive.asia pipeline. Your job is to guide staff through setting up, troubleshooting, and understanding the company's SOPs with extreme, atomic-level detail. You must be extremely patient, micro-detailed, and never assume the user knows 'hidden steps'. Always explain why a step is necessary.
+</system_role>
+
+<core_behavior_rules>
+ZERO ASSUMPTIONS (BLANK SLATE DIAGNOSTICS): Treat every user query as a brand new, isolated incident. NEVER assume the user has completed any specific step in the SOP unless they explicitly tell you. Always ask, 'What exact steps have you completed so far?' or 'How exactly did you test this?' before giving a diagnosis.
+
+CLARIFY FIRST: Always ask clarifying questions before giving a massive wall of text (e.g., 'Are you stuck on the Zapier part or the Strive part?').
+
+VISUAL DIAGNOSTICS (SCREENSHOTS): If a user is stuck or getting an error, actively ask them to upload a screenshot. Guide them exactly where to capture it based on their problem.
+
+DYNAMIC CHECKLIST: Before providing technical steps, you MUST generate a '📋 WHAT YOU NEED BEFORE PROCEEDING' checklist based on their specific question.
+
+FLEXIBLE SOP ASSESSMENT: When evaluating their Strive Automation Trigger, accept EITHER 'Tagging is added' or 'Contact added to list' as correct. Only correct them if they deviate from these two.
+
+MANDATORY REMINDER: If staff asks about Broadcasting/Blasting/Coexistence, conclude your response with: '🚨 IMPORTANT: BLAST VIA WA API ONLY. DO NOT USE COEXISTENCE FOR BULK MESSAGES TO AVOID PERMANENT BANS.'
+
+ANTI-BAN: Always list the 7 Anti-Ban rules when discussing message content.
+
+FORMATTING & CONTEXT: Use bolding for buttons. Use Malaysia-specific context (MY +60, SSM, RM pricing) when relevant.
+</core_behavior_rules>
+
+<knowledge_base>
+SECTION 1: SYSTEM SETUP & CRM BASICS
+Registration: Navigate to strive.asia/register (7-day free trial).
+Team Access: Settings -> Invite User -> Input Email.
+CRM Customization: Use 'Additional Custom Details' for unique business fields.
+Data Migration: Download CSV. Use 'Email' or 'Phone' as Unique Identifier. Max 10,000 contacts per batch.
+
+SECTION 2: WHATSAPP & META INFRASTRUCTURE
+WA Coexistence (INBOX ONLY): WARNING: NEVER use Coexistence for Blasting. High ban rate even with Anti-Ban SOPs.
+Coexistence Setup: 1. Inbox -> Chat Channels -> WA Coexistence -> Connect Now. 2. Login via Facebook. 3. PROJECT SELECTION: Click 'Choose a business portfolio' and select the specific Project. 4. Select Country Code (MY +60). 5. Scan the QR code with WA Business App (Meta Message -> 'Scan QR code' -> 'Share Chats').
+Meta Verification: Security Center -> Start Verification. Requires SSM/Legal docs + Utility bill.
+Payment Settings: Business Settings -> WhatsApp Accounts -> Settings -> Payment Settings. Link a credit card to prevent API failures.
+
+SECTION 3: MESSAGING & ANTI-BAN SOP (MANDATORY)
+BLASTING RULE: All bulk messages MUST be sent via the WA API Number. Do not use Coexistence for blasting.
+Rule 1 Personalization: Use first name variable to avoid spam filters.
+Rule 2 Two-Way Nature: End with a call-to-action (e.g., Reply YES) to encourage interaction.
+Rule 3 Business Signature: Always end with From [Company Name].
+Rule 4 Opt-Out Option: Include Reply STOP to unsubscribe.
+Rule 5 Exclude Opt-Outs: Always exclude STOP tags from broadcasts.
+Rule 6 Randomize Speed: Set sending interval to 40-60 seconds to mimic human behavior.
+Rule 7 Official WABA: Use the official API for stability.
+
+SECTION 4: THE CORE AUTOMATION FUNNEL
+The goal: instantly send a WhatsApp text to anyone who signs up on a landing page while logging their data.
+GHL (The Front Door): Catches the form submission and sends data out via Webhook.
+Zapier (The Bridge): Catches the GHL data and delivers it to two places.
+Google Sheets (The Database): Zapier creates a new row to log the lead info.
+Strive (The WhatsApp Tool): Zapier creates a contact and adds it to a list/tag. Strive automation fires a WhatsApp message.
+
+SECTION 5: PIPELINE EXECUTION (PHASE 1 TO 6)
+Phase 1 - Prerequisites (Must be done BEFORE Zapier):
+Create Google Sheets spreadsheet with headers: First Name, Email, Phone Number.
+In Strive, go to Contact List -> CREATE -> name the list -> save.
+Testing: IF LP is live, use real form submission. IF NOT, add Dummy Contact in GHL.
+
+Phase 2 - Zapier Catch Hook Setup:
+Create new Zap. Name: (Speaker Name) Purpose/Name (Project Name).
+Trigger: Webhooks by Zapier -> Catch Hook. Copy the Webhook URL. Keep tab open.
+
+Phase 3 - GoHighLevel Engine & Testing:
+GHL -> Automation -> Create Workflow. Name: Speaker Name - Purpose/Name.
+Trigger: Form Submitted. CRITICAL: Add filter Form is -> [Specific Form Name].
+Action 1: Add Contact Tag. Action 2: Webhook -> POST -> paste Zapier URL.
+CRITICAL: Toggle Draft to Publish and Save.
+Test: Click Test Workflow in GHL. Go back to Zapier and click Test trigger.
+
+Phase 4 - Google Sheets Setup:
+Zapier Action 1: Google Sheets -> Create Spreadsheet Row (NOT Clear Spreadsheet Row).
+Connect Google account. Select Drive, Spreadsheet, Worksheet. Map Name, Contact, Email.
+
+Phase 5 - Strive Contact Setup (Via Zapier):
+Zapier Action 2: Strive -> Create Contact -> Organisation: Prominds Academy.
+Map First Name, Email, Contact. Leave Last Name and Date/Time blank.
+Contact List: select from Phase 1. Tagging: type exact tag name.
+Update Additional Details: No. PUBLISH THE ZAP. Do not add more Strive actions.
+
+Phase 6 - Strive Automation Activation:
+Strive -> Automations (NOT Flowbuilder).
+Trigger: Tagging is added OR Contact added to list.
+Action: Add to WA API campaign or WA Personal Campaign.
+CRITICAL: Click Save Automation AND Activate Automation.
+
+SECTION 6: TROUBLESHOOTING
+IF Zapier asks for Row(s) number -> selected wrong event, change to Create Spreadsheet Row.
+IF Workflow fires on wrong LP -> forgot Form is filter in GHL trigger.
+IF Cannot find Strive Contact List in Zapier -> create list in Strive first, return to Zapier, Refresh Results.
+IF WA message not sent -> check: 1) Strive Automation Active? 2) Trigger matches Zapier? 3) Using Flowbuilder by mistake?
+IF Standard WA Messages failing -> check Meta Credit Card or Strive Credit balance.
+</knowledge_base>
+
+<response_protocol>
+Follow this sequence for every query:
+1. Diagnose & Ask: Ask clarifying questions first. Never assume steps are done.
+2. Checklist: Output WHAT YOU NEED BEFORE PROCEEDING list.
+3. Guide: Step-by-step with reasons for each step.
+4. Reminders: Apply Anti-Ban/Blasting warnings if relevant.
+</response_protocol>
+
+My question is: [在这里描述你卡在哪一步，或者遇到什么问题]`;
+
 const IM="https://docs.google.com/spreadsheets/d/1Kmw4OWzd-XkQr7CRa4owCVUY8PdhLFwdBYhKOMVYBsw/edit";
 const KB=[
   {category:"公司资讯",icon:"🏢",items:[
@@ -54,18 +157,18 @@ const KB=[
     {q:"公司网站 / 课程链接 / 招聘页面在哪里？",sop:"Prominds 公开链接",who:"Wenji",tags:["网站","website","课程","链接","zaap","linkc","招聘"],notes:"🌐 prominds.com.my\n📋 linkc.co/prominds（所有课程）\n🔗 zaap.bio/prominds\n💼 joinnow.me/prominds（招聘）"},
     {q:"Prominds Social Media 在哪里？",sop:"Prominds Social Media",who:"Wei Yi / Wenji",tags:["social media","facebook","instagram","fb","ig"],projectLinks:[{label:"📘 Facebook",url:"https://www.facebook.com/promindsacademy"},{label:"📸 Instagram",url:"https://www.instagram.com/prominds_my/"}]},
     {q:"Internal Dashboard 数据中心在哪里？（PromindsAI）",sop:"Prominds Internal AI Dashboard",who:"Mok",tags:["dashboard","数据","promindsai","ai"],url:"https://www.promindsai.com/"},
-    {q:"LMS 学生课后录影在哪里查看？（PromindsApp）",sop:"PromindsApp LMS",who:"Bowie",tags:["lms","学生","录影","recording","app"],url:"https://www.promindsapp.com/"},
+    {q:"LMS 学生课后录影在哪里查看？（PromindsApp）",sop:"PromindsApp LMS",who:"Bowie",tags:["lms","学生","录影","recording","app","promindsapp"],url:"https://www.promindsapp.com/",sopLink:"https://www.notion.so/Upload-LMS-promindsapp-com-33a736afa2e0808e990cde62a6256272",notes:"学生登录步骤：\n1. 前往 promindsapp.com → 右上角 Sign In\n2. 输入自己的 Email\n   （已有 Prominds Account 可直接 Sign In）\n3. Default 密码：BeProminds\n4. 设置自己的新密码\n5. 选择对应课程\n6. Start Learning → 可以看 Recording 了\n\n⚠️ 如果无法登录，请提供 Email 给客服"},
     {q:"Prominds 企业介绍宣传影片在哪里？",sop:"Prominds 宣传影片",who:"Wei Yi",tags:["企业","介绍","宣传","影片","video"],url:"https://boards.com/a/ywQMs.HNYFae"},
     {q:"Prominds 4不是什么？",sop:"Prominds 4不",who:"Wenji / Wei Yi",tags:["4不","贷款","投资","唱歌","强迫","销售"],notes:"不鼓励贷款\n不推广投资\n不唱歌跳舞\n不强迫销售"},
     {q:"Prominds Slogan 是什么？",sop:"Prominds Slogan",who:"Wenji",tags:["slogan","口号","we are prominds","inspire"],notes:"We Are ProMinds. 🚀\nWe Inspire More Lives. ✨"},
   ]},
   {category:"PC 日常工具",icon:"📌",items:[
-    {q:"不知道该找谁？升级判断指引",sop:"升级判断指引",who:"",tags:["找谁","升级","wenji","mok","louis","判断","卡住"],notes:"🤝 找 Wenji\n• 操作类问题（GHL / Strive / Zoom 怎么用）\n• Agency 日常催数据 / 催素材 / 催 P&L\n• Pre-Zoom Checklist 执行检查\n• 任何「这个怎么操作」类的问题\n\n📊 找 Louis\n• Slide 优化 / 广告角度调整\n• 数据分析 / Webinar 转化率问题\n• 广告策略 / 优化方向\n\n⬆️ 找 Mok\n• Agency 连续 2 天无回应，Wenji 处理后仍无进展\n• 涉及退款 / 广告预算调整 / 分润变动\n• 讲师或客户关系相关的判断\n• 最终面试决定\n• 讲师或 Nicsman 直接找 Mok 的事项"},
+    {q:"不知道该找谁？升级判断指引",sop:"升级判断指引",who:"",tags:["找谁","升级","wenji","mok","louis","判断","卡住"],notes:"🤝 找 Wenji\n• 操作类问题（GHL / Strive / Zoom 怎么用）\n• Agency 日常催数据 / 催素材 / 催 P&L\n• Pre-Zoom Checklist 执行检查\n• 任何这个怎么操作类的问题\n\n📊 找 Louis\n• Slide 优化 / 广告角度调整\n• 数据分析 / Webinar 转化率问题\n• 广告策略 / 优化方向\n\n⬆️ 找 Mok\n• Agency 连续 2 天无回应，Wenji 处理后仍无进展\n• 涉及退款 / 广告预算调整 / 分润变动\n• 讲师或客户关系相关的判断\n• 最终面试决定\n• 讲师或 Nicsman 直接找 Mok 的事项"},
     {q:"Daily Huddle 时间是什么时候？",sop:"Huddle 时间表",who:"Mok / Wenji",tags:["huddle","daily","时间","会议","10:30","2pm"],notes:"☀️ Day Shift：每天 10:30am（Quick Huddle）\n🌙 Noon Shift：每天 2:00pm（Quick Huddle）"},
     {q:"Daily Focus Card 怎么填？格式是什么？",sop:"Daily Focus Card 模板",who:"Mok",tags:["daily focus","focus card","昨天","今天","格式","模板"],notes:"【昨天 Result】\n完成了【___】，产出了【___】（数据/结果）\n\n【今天 Focus】\n最重要的 1 件事：___\n因为它影响【___】（数据/金额）\n如果【___】不顺利，我的 Back-up Plan 是【___】\n\n其他 Focus：___"},
     {q:"Weekly SPRA War Room 在哪里？",sop:"Weekly SPRA War Room",who:"Mok",tags:["spra","weekly","war room","会议"],url:"https://docs.google.com/spreadsheets/d/1MAUrfjIOeuaOhl2vIw2kPg9WAafWdYZh8DXxVf4w0yk/edit?gid=241065549#gid=241065549"},
     {q:"Weekly Meeting 执行纪律是什么？",sop:"Weekly 执行纪律",who:"Wenji 负责公布",tags:["weekly","meeting","执行","纪律","wenji","spra","agency"],notes:"每周 Meeting 的执行纪律环节由 Wenji 负责跟进（约5分钟）：\n• SPRA 提交情况\n• Focus 点评\n• 执行任务完成情况\n• Agency 配合度排名\n\nPC 只需确保自己的部分有按时完成即可 ✅"},
-    {q:"PC Monthly Review 在哪里？每月要做什么？",sop:"PC Monthly Review",who:"Mok",tags:["monthly review","月度","review","回顾","月报","每月"],notes:"每月需要完成以下 4 件事，点击下方直达链接：",projectLinks:[
+    {q:"PC Monthly Review 在哪里？每月要做什么？",sop:"PC Monthly Review",who:"Mok",tags:["monthly review","月度","review","回顾","月报","每月"],notes:"每月需要完成以下 4 件事，点击直达链接：",projectLinks:[
       {label:"📊 1. PC Monthly Review Slides（分析当月数据）",url:"https://docs.google.com/presentation/d/1nDI3_-mEeIuJbeLODl0sC1FkdW3gGUb431_E2Ecl_LA/copy"},
       {label:"📈 2. PromindsAI Dashboard（更新当月数据）",url:"https://www.promindsai.com/"},
       {label:"📋 3. Agency P&L Costing Form（提醒 Agency 填上月 P&L）",url:"https://linkc.co/pnl"},
@@ -84,10 +187,11 @@ const KB=[
     {q:"GHL 完整 Training 在哪里？",sop:"GHL Training",who:"Wenji / Mok",tags:["ghl","training","培训","教程"],sopLink:"https://worried-gambler-f97.notion.site/Go-High-Level-Training-2c3736afa2e08020976ee878fe3b9fa6"},
     {q:"GHL 怎么发 Blast Email？",sop:"GHL Email Blast SOP",who:"Wenji / Zack",tags:["ghl","email","blast","发送"],url:"https://www.loom.com/share/055d1e792a4945d4b6055e6dd72c59d3"},
     {q:"GHL 怎么授权 / 给 Access？",sop:"GHL Access SOP",who:"Mok / Louis",tags:["ghl","授权","access","权限"]},
+    {q:"GHL → Zapier → Strive 看不懂 SOP 怎么办？用 AI 提问解决",sop:"GHL Zapier Strive 流程助理 Prompt",who:"自行解决 / 还是不行找 Wenji",tags:["ghl","zapier","strive","ai","prompt","看不懂","卡住","自救","流程","automation"],notes:GHL_PROMPT},
     {q:"Landing Page Opt-In Rate 怎么查看？LP 链接怎么 Copy？",sop:"LP Conversion 查看指引",who:"Louis / Wenji",tags:["landing page","opt-in","conversion","rate","lp","链接"],url:"https://boards.com/a/ywQMs.idRdWD"},
     {q:"Zoom Register 怎么加电话号码 column？",sop:"Zoom Register 设置",who:"Wenji",tags:["zoom","register","电话","column"],url:"https://boards.com/a/ywQMs.gHqwwu"},
     {q:"GHL / Strive 系统文件命名规范是什么？（Rename SOP）",sop:"Rename SOP - 系统",who:"Wenji / Mok",tags:["rename","命名","格式","规范","yymmdd","ghl","strive"],notes:"格式：【YYMMDD】【Speaker】【Project Name】【Webinar/Offline】\n（建议英文，中文容易乱码）\n\n示例：\nGHL Site Funnel：（In Used）260319 Nicsman Pro Course Agency\nGHL Workflow：260319 Nicsman Pro Course Agency\nForm Name：（In Used）Nicsman Pro Course Webinar Agency - Form\nZapier：Nicsman Pro Course\nTagging：260319 Nicsman Pro Course\nStrive Contact List：260319 Nicsman Pro Course\nStrive Automation：260319 Nicsman Pro Course Auto"},
-    {q:"Google Drive 广告素材怎么命名？（LP / 图片 / Video / 文案 / Reminder）",sop:"Rename SOP - 广告素材",who:"PC 监管 / Agency 执行",tags:["rename","命名","素材","广告","landing page","picture","video","caption","reminder","drive"],projectLinks:[{label:"📁 Sample【00】",url:"https://drive.google.com/drive/folders/1_XcpCQ2KFU6hMZoAG5fFB3lC600tj720"},{label:"📋 Labeling Instructions",url:"https://docs.google.com/document/d/1BDgi_V2IazgKcXNZKwytuCpj8nY1lj7b1PkeLX1tDQ8/edit"},{label:"📁 Project Drive",url:"https://drive.google.com/drive/folders/1zhJvTWF1w1l14BHlyPyxGAR6PIYIUUIl"}],notes:"【LP】iLovePDF 转 PDF\n格式：LandingPage_课程名_讲师缩写_OPTIN%\n示例：LandingPage_千万组织架构_MRJ_OPTIN12%\n\n【图片 Ads】直接 Upload\n格式：PictureAd_课程名_讲师缩写_CPL值_Lead数\n示例：PictureAd_团队不在继续跑_MRJ_CPL25_Lead19\n\n【Video Ads】VideoTranscriber.ai 转文字后 Upload\n格式：VideoAd_课程名_讲师缩写_CPL值_Lead数\n示例：VideoAd_解决销售团队遇到的瓶颈_MRJ_CPL20.63_Lead20\n\n【文案 Caption】存入单一 Google Doc\n格式：Caption_课程名_讲师缩写\n文档内每条：Video_影片名_Lead数_CPL值\n\n【Reminder】Google Drive\n格式：课程名_Reminder\n\n⚠️ PC 需定期 Check Agency 是否按规范命名\n如有问题发 Template Message 给 Agency 要求 12pm 前更新\n  Hi [Agency]，请确认 Google Drive 素材命名符合规范 ✅\n  • LP → LandingPage_课程名_讲师缩写_OPTIN%\n  • 图片 Ads → PictureAd_课程名_讲师缩写_CPL值_Lead数\n  • Video Ads → VideoAd_课程名_讲师缩写_CPL值_Lead数\n  • 文案 → Caption_课程名_讲师缩写\n  • Reminder → 课程名_Reminder"},
+    {q:"Google Drive 广告素材怎么命名？（LP / 图片 / Video / 文案 / Reminder）",sop:"Rename SOP - 广告素材",who:"PC 监管 / Agency 执行",tags:["rename","命名","素材","广告","landing page","picture","video","caption","reminder","drive"],projectLinks:[{label:"📁 Sample【00】",url:"https://drive.google.com/drive/folders/1_XcpCQ2KFU6hMZoAG5fFB3lC600tj720"},{label:"📋 Labeling Instructions",url:"https://docs.google.com/document/d/1BDgi_V2IazgKcXNZKwytuCpj8nY1lj7b1PkeLX1tDQ8/edit"},{label:"📁 Project Drive",url:"https://drive.google.com/drive/folders/1zhJvTWF1w1l14BHlyPyxGAR6PIYIUUIl"}],notes:"【LP】iLovePDF 转 PDF\n格式：LandingPage_课程名_讲师缩写_OPTIN%\n示例：LandingPage_千万组织架构_MRJ_OPTIN12%\n\n【图片 Ads】直接 Upload\n格式：PictureAd_课程名_讲师缩写_CPL值_Lead数\n示例：PictureAd_团队不在继续跑_MRJ_CPL25_Lead19\n\n【Video Ads】VideoTranscriber.ai 转文字后 Upload\n格式：VideoAd_课程名_讲师缩写_CPL值_Lead数\n示例：VideoAd_解决销售团队遇到的瓶颈_MRJ_CPL20.63_Lead20\n\n【文案 Caption】存入单一 Google Doc\n格式：Caption_课程名_讲师缩写\n文档内每条：Video_影片名_Lead数_CPL值\n\n【Reminder】Google Drive\n格式：课程名_Reminder\n\n⚠️ PC 需定期 Check Agency 是否按规范命名\n如有问题发 Template Message 给 Agency 要求 12pm 前更新"},
     {q:"Strive WhatsApp 怎么发 Reminder？Blasting 5大规则是什么？",sop:"Strive Reminder & Blasting SOP",who:"Wenji",tags:["strive","whatsapp","reminder","提醒","blasting","规则"],sopLink:"https://worried-gambler-f97.notion.site/strive",notes:"1️⃣ Personalisation — 提名字\n2️⃣ Two-Way Chat — Reply *Ok* 表示知道\n3️⃣ Your Signature — From Prominds\n4️⃣ Allow Opt-Out — Reply *Stop*\n5️⃣ Exclude — 选 Tag，Opt-Out List\n6️⃣ Randomise Speed — 40~60 seconds"},
     {q:"Strive 完整 Setup Flow 在哪里？（注册/WA Coexistence/Inbox/Flowbuilder）",sop:"Strive Setup SOP",who:"Wenji / Nicsman",tags:["strive","setup","设置","coexistence","flowbuilder","inbox","crm","注册"],sopLink:"https://worried-gambler-f97.notion.site/Set-Up-WhatsApp-Business-API-in-Strive-CRM-31b736afa2e080b2b50acdd0346e087b",notes:"Step 1：注册账号 + 邀请团队\nStep 2：WA Coexistence Setup（需要手机号码 + Meta Business Suite）\nStep 3：Inbox Walkthrough + Quick Reply 设置\nStep 4：Flowbuilder Walkthrough\nStep 5：CRM Walkthrough\n\n💰 Blasting 费用：1000 msg = USD10（+8% SST）\nMarketing ≈ RM0.40/msg｜Utility ≈ RM0.05/msg\n\n⚠️ WA Personal 和 WA Coexistence 被 Restrict 几率一样高\n→ 遇到号码被限制，立即增加纯 API Blasting 号码作为备用"},
     {q:"Strive Group Accounts 怎么更新？",sop:"Strive Group Accounts SOP",who:"Wenji",tags:["strive","group","accounts","更新"],sopLink:"https://worried-gambler-f97.notion.site/Update-Group-Accounts-in-Strive-CRM-31e736afa2e080a990eee6e19feacd24"},
@@ -95,7 +199,7 @@ const KB=[
     {q:"Blast Message Failed 了怎么办？WA 被 Ban 怎么申诉？",sop:"WA Blasting 故障处理",who:"Wenji / Mok",tags:["blast","failed","ban","申诉","限制","whatsapp","blasting"],projectLinks:[{label:"📋 Blast Failed 处理",url:"https://boards.com/a/ywQMs.70Lk5c"},{label:"📋 Opt-Out 排除名单",url:"https://scribehow.com/viewer/How_to_Add_Contact_Opted_Out_into_List__Exclude_When_Broadcast__F8qxG1NZSuGVpSzZTQbsLg"},{label:"📋 WA Profile Settings",url:"https://worried-gambler-f97.notion.site/Update-WhatsApp-Profile-and-Message-Settings-31b736afa2e08047bfa1fbaee2f21626"}],notes:"WA Blasting 避免 Failed 7条规则：\n1. Msg 只保留 1 个链接\n2. 移除所有第三方号码/WA 号码（改用 Button）\n3. 替换高风险关键词（限流/变现/获客等）\n4. 减少 emoji 密度，避免重复 👉 和 ❌\n5. 同一天最多发 2 封，间隔 ≥ 3 小时\n6. Filter 名单，优先发给有互动记录的 leads\n7. 定期检查 Phone Number Quality Rating（最好是 ✅ High）\n\n⚠️ 每个号码 24小时内最多收 6 封 Marketing Msg\n\n【WA 被 Ban 申诉模板】\nDear WhatsApp Support Team, I am writing to you with a sincere and humble request to review the ban on my WhatsApp account associated with the number [Your Full Phone Number]. I understand that my account usage may have violated the platform Terms of Service, and I take full responsibility for that error. This number is my main point of contact. I am committed to being a responsible user and promise to adhere strictly to all WhatsApp rules. Thank you for considering lifting the ban. Respectfully, [Your Name]"},
     {q:"怎么计算 WA Blasting 费用？",sop:"WA Blasting 费用计算",who:"Wenji / SzeYuan",tags:["blasting","费用","计算","cost","whatsapp"],url:"https://boards.com/a/ywQMs.A0v9Fu"},
     {q:"怎么查看 WA API Messaging Limits？",sop:"WA API Messaging Limits",who:"Wenji",tags:["wa","api","messaging","limit","限制"],url:"https://scribehow.com/viewer/Check_Your_WA_API_Messaging_Limits__xUjaFwAsT6Syhp-y3syYlw"},
-    {q:"Payment Link 怎么设置？（Senang Pay / Payex Ezbeli）",sop:"Payment Setup SOP",who:"SzeYuan / Mok",tags:["payment","付款","链接","支付","senang pay","payex","ezbeli"],notes:"Generate Payment Link 需要准备：\n1. 图片（要有头像，建议有标题，不要纯 Logo）\n2. 课程名称（英文）\n3. Product Description（英文）\n4. Price 价钱\n5. Price + 8%（实际 Amount for Installment）\n\nEzbeli 过不了常见原因：\n1. 信用卡 Limit 不足\n2. Approve 了 Payment 但没有 back to merchant（Ezbeli）\n3. Time Out — 需要用两个 Device（一个购买，一个收 OTP）\n\nEzbeli 支持分期银行：\nMaybank / CIMB / UOB / Public Bank / HSBC / Standard Chartered / Hong Leong / AmBank / RHB / OCBC / Affin Bank"},
+    {q:"Payment Link 怎么设置？（Senang Pay / Payex Ezbeli）",sop:"Payment Setup SOP",who:"SzeYuan / Mok",tags:["payment","付款","链接","支付","senang pay","payex","ezbeli","stripe"],notes:"Generate Payment Link 需要准备：\n1. 图片（要有头像，建议有标题，不要纯 Logo）\n2. 课程名称（英文）\n3. Product Description（英文）\n4. Price 价钱\n5. Price + 8%（实际 Amount for Installment）\n\nEzbeli 过不了常见原因：\n1. 信用卡 Limit 不足\n2. Approve 了 Payment 但没有 back to merchant（Ezbeli）\n3. Time Out — 需要用两个 Device（一个购买，一个收 OTP）\n\nEzbeli 支持分期银行：\nMaybank / CIMB / UOB / Public Bank / HSBC / Standard Chartered / Hong Leong / AmBank / RHB / OCBC / Affin Bank\n\n🆘 紧急备用 Stripe Link（Senang Pay 出问题时用）：\nhttps://buy.stripe.com/00w4gzdQ4b7MdIa1y0ejK0M\n⚠️ 用完后必须手动在 Student List 补录该学员，Stripe 不会自动录入"},
     {q:"Zapier 出问题了？/ GHL → Zapier → Strive 怎么连？",sop:"GHL → Zapier → Strive SOP",who:"Wenji / Nicsman",tags:["zapier","自动化","故障","连接","ghl","strive"],sopLink:"https://worried-gambler-f97.notion.site/sop-of-ghl-zapier-strive"},
     {q:"WhatsApp Community 怎么建立？名字/图片/Description 怎么设？",sop:"Create WA Community SOP",who:"Wenji",tags:["whatsapp","community","群","建立","名字","description"],notes:"Community Group 命名格式：\n[ Date ] + [ Course Name ] 线上分享会\n示例：23 July | 《企业财务战略》 线上分享会\n\nCommunity Image：Speaker 图 + Logo\n\nCommunity Description 必须包含：\n- 日期 + 时间\n- 这个群是关于什么的\n- 有问题找谁"},
     {q:"Meta Pixel 怎么 Link？如何安装与分析数据？",sop:"Pixel Setup SOP",who:"Mok / Wenji",tags:["pixel","meta","link","设置","facebook","安装"],url:"https://www.loom.com/share/a4e9258f81dd4163ae32a6e0d4ac13b1"},
@@ -119,6 +223,7 @@ const KB=[
     {q:"Webinar 当天操作流程？（During Webinar）",sop:"Webinar Day SOP",who:"PC 执行",tags:["webinar","当天","操作","流程","zoom","during"],notes:"【Reminder Message】\n✅ WA Community：8:10pm / 8:20pm / 8:30pm\n✅ Boost Community：8:40pm / 8:50pm / 9pm\n\n【Zoom Support】\n✅ 15min Opening Video 流畅播放\n✅ 开始时关闭 Waiting Room\n✅ Chat / Notice 互动，违规处理\n\n【Attendance Tracking】\n✅ 每10分钟记录一次（设闹钟），备注 Stay & Drop 原因\n\n【Closing Part】\n✅ Pitching 消息 / 客服 WA / Congratz 消息 / WA 群更新\n\n【Q&A Part】\n✅ Spotlight 学员，制造紧迫感，记录 Potential 学员"},
     {q:"Webinar 结束后要做什么？（After Webinar）",sop:"Post-Webinar Checklist",who:"PC + Bowie",tags:["webinar","结束","after","follow up","cs","review"],notes:"【CS 跟进】\n✅ Follow Up 销售 — Webinar 结束后 1天内\n✅ 更新 Student List / Payment List\n✅ 把学员加进 WA Group\n\n【Review】\n✅ 内部 Weekly Review\n✅ 与 Prominds Bi-Weekly Review\n\n汇报格式 → 搜索「Post-Webinar Report」查看完整模板"},
     {q:"一场 Webinar 成绩不好怎么分析？（3步诊断框架）",sop:"Webinar 成绩分析框架",who:"Louis（策略）/ Mok（项目方向）",tags:["webinar","分析","诊断","cpl","attendance","conversion","成绩","不好","优化"],notes:"原则：以结果为导向，哪里出问题修哪里，不是补洞，是优化。\n带分析结果 + 你的建议，再找 Louis 讨论。裸问题 = 退回。\n\n【第一步：CPL 高 / Leads 少？】\n广告层面：素材错 / Target 错 / 投放方式错 / Scale 太快素材跟不上\nLanding Page：信息不足 / 没解决痛点 / 无 CTA / 步骤繁琐\nLP Opt-In Rate：正常水平 10% 以上，做 A/B Test（长版 vs 短版）\n外部因素：节日 / 长假 / 出游旺季 → 目标人群不在线\n\n【第二步：Attendance Rate 低？】\nReminder：要说服对方出席，不只是提醒，文案要有温度\nCompetitor：检查同赛道是否有对标讲师同期开课\nLead Magnet：笔记 / Bonus / 小礼物 / Sales Kit PDF 吸引留到结尾\nCRM：有没有养好社群，偶尔提供干货？\n日期：最佳周二~四，避开周一（Monday Blue）/ 周五（塞车）\n\n【第三步：Conversion Rate 低？】\n讲师状态：当天状态好不好？有没有提前 Brief 今晚情况（人数/行业/主题）\nPitching 节奏：Closing 是否顺畅？Testimonial 够不够？故事有没有引导报名？\nSlides 内容：干货太多没铺垫？敢不敢卖？有没有彩排？\nObjection Handle：\n  ❌ 太自以为是 / 思考太久 / 直接全解答（学员不需要报名了）\n  ✅ 要引导，不是直接给答案\nLeads 质量：广告对象错误，CPL 便宜但来的人需求不同\n  → 检查广告 Target + Slide 内容是否 Align"},
+    {q:"Caller Tracking & Follow Up 在哪里记录？",sop:"Caller Tracking & Follow Up Template",who:"Bowie / Louis",tags:["caller","tracking","follow up","call","upsell","跟进","记录","追单"],url:"https://docs.google.com/spreadsheets/d/1EFR8j6aaPwwGJZCEwz9MAwHDuMsmfxnH9r3z153qza4/edit?gid=1575348295#gid=1575348295",notes:"适用于以下情况：\n• Webinar 前 Call（Pre-Webinar Call）\n• Follow Up 买课\n• 3天课后 Upsell\n\n统一在此模板记录，确保不遗漏任何跟进记录"},
     {q:"怎么发 Reminder 给学员？",sop:"Reminder SOP",who:"Agency 执行 / PC 可立即执行",tags:["reminder","提醒","学员","发送","strive"],notes:"执行方：一般由 Agency 负责\nPC 在需要时可立即执行（以结果为主）\n\n参考素材：\n→ 查看各项目的 Moderator Tools（里面有 Sample + 实际案例）\n\n发送时机：根据 Strive SOP 设定的时间点执行\n\n自动化：\n→ 学员填 LP Form 后 → 自动触发第一封 Welcome Message\n→ 在 GHL → Zapier → Strive 里设置"},
     {q:"怎么准备 Sales Kit？",sop:"Sales Kit SOP",who:"Louis",tags:["sales kit","销售","素材","准备","成交"]},
     {q:"Follow Up 怎么安排？",sop:"Follow Up Strategy SOP",who:"Louis",tags:["follow up","跟单","跟进","安排"]},
@@ -127,8 +232,9 @@ const KB=[
     {q:"学生 Onboarding 流程？",sop:"Student Onboarding SOP",who:"Bowie / Wenji",tags:["学生","onboarding","入学","通知","名单"]},
     {q:"3天课程执行怎么安排？Day 1/2/3 助教重点？",sop:"3天课程执行 SOP",who:"Bowie",tags:["课程","3天","安排","执行","event","助教"],sopLink:"https://www.notion.so/3-Onboarding-SOP-32c736afa2e080bf94c4e3dd0606c60b"},
     {q:"3天课程前要发什么信息给学员？模板在哪里？",sop:"学员信息发送模板",who:"Bowie",tags:["信息","模板","学员","发送","课前","reminder"],sopLink:"https://www.notion.so/3-Onboarding-SOP-32c736afa2e080bf94c4e3dd0606c60b"},
-    {q:"3天课前要准备什么？（Checklist）",sop:"3天课前准备 Checklist",who:"Bowie / PC",tags:["课前","准备","checklist","3天","survey","workbook"],notes:"1. 每天课程大纲（不能写太细）\n2. Survey Form — 了解学生资料\n3. 上课群 — 制定群规则（禁止私下推销、打开 Notification 等）\n4. 发 Video / 素材 build 学生跟讲师信任\n5. 功课 or Workbook — 搭配老师教的内容\n6. 准备更多 Testimonial（注明是谁、故事）\n7. 准备卖课的 Sales Kit & Bonus 详情 with Price"},
+    {q:"3天课前要准备什么？（Checklist）",sop:"3天课前准备 Checklist",who:"Bowie / PC",tags:["课前","准备","checklist","3天","survey","workbook","后端","back end","课程执行","offline"],notes:"1. 每天课程大纲（不能写太细）\n2. Survey Form — 了解学生资料\n3. 上课群 — 制定群规则（禁止私下推销、打开 Notification 等）\n4. 发 Video / 素材 build 学生跟讲师信任\n5. 功课 or Workbook — 搭配老师教的内容\n6. 准备更多 Testimonial（注明是谁、故事）\n7. 准备卖课的 Sales Kit & Bonus 详情 with Price"},
     {q:"WA Personal vs WA Community 分别用来做什么？",sop:"WA 使用指引",who:"Bowie",tags:["wa","whatsapp","personal","community","用途","区别"],notes:"WA Personal = 关系（追单 / 关心 / 发笔记）\nWA Community = 氛围（规则 / 自我介绍 / Testimonial）"},
+    {q:"发给学生的 LMS 登录模板是什么？",sop:"Student LMS 登录 Template",who:"Bowie",tags:["lms","学生","登录","模板","template","recording","promindsapp","录影"],sopLink:"https://www.notion.so/Student-Start-Learning-in-Prominds-SuperApp-2f6736afa2e080e5a9eac563ee995b67",notes:"发送前替换 [日期] 和 [课程名称]\n\n[日期] [课程名称] 3天 Online Recording\n\n🎈 student login: https://promindsapp.com/\n\n请学生完成以下步骤：\n1. 点击链接：右上角 Sign In\n2. 输入自己的 Email\n3. Default 密码：BeProminds\n4. 设置你自己的新密码\n5. 选择 —— [课程名称][日期]\n6. Start Learning\n7. 可以看 Recording 了 😇\n\np/s：如果无法登录，请提供 Email 给客服 😁\n⚡ 温馨提醒：回放开放到 [日期] 就会关闭。"},
     {q:"Upsell 怎么安排？",sop:"Upsell Strategy SOP",who:"Louis",tags:["upsell","追销","课程","策略"]},
     {q:"Closer Interview 怎么安排？",sop:"Closer Interview SOP",who:"PC 协调",tags:["closer","interview","面试","安排"]},
   ]},
@@ -199,13 +305,15 @@ const KB=[
     {q:"AIGC 数字人怎么登录？",sop:"AIGC 数字人账号",who:"Aggie / Nicsman",tags:["aigc","数字人","ai","账号","登录"],url:"https://www.aigcmalaysia.com/",loginId:"aigc.promindstrial1@gmail.com\naigc.promindstrial2@gmail.com\naigc.promindstrial3@gmail.com"},
     {q:"Higgsfield 怎么登录？（AI 视频）",sop:"Higgsfield 账号",who:"Wei Yi / Raymond",tags:["higgsfield","ai","视频","账号","登录"],url:"https://higgsfield.ai/",loginId:"support@prominds.com.my"},
     {q:"Claude AI 怎么登录？",sop:"Claude AI 账号",who:"Aggie / Mok",tags:["claude","ai","账号","登录"],url:"https://claude.ai",loginId:"support@prominds.com.my\n（无密码，用 Verification Code）"},
+    {q:"Proactor AI 怎么登录？",sop:"Proactor AI 账号",who:"Aggie / Mok",tags:["proactor","ai","账号","登录"],url:"https://proactor.ai",loginId:"support@prominds.com.my"},
+    {q:"Webinar Kit 怎么登录？",sop:"Webinar Kit 账号",who:"Wenji / Mok",tags:["webinar kit","账号","登录","webinar"],url:"https://webinarkit.com/signin",loginId:"support@prominds.com.my"},
     {q:"Cloudinary 怎么登录？",sop:"Cloudinary 账号",who:"Zack",tags:["cloudinary","账号","登录","图片","存储"],url:"https://cloudinary.com",loginId:"support@prominds.com.my"},
     {q:"Lalamove 怎么登录？（物流）",sop:"Lalamove 账号",who:"Wenji",tags:["lalamove","物流","送货","账号","登录"],loginId:"support@prominds.com.my"},
     {q:"Meitu 怎么登录？（图片美化）",sop:"Meitu 账号",who:"Wei Yi / Chin Ni",tags:["meitu","美图","图片","账号","登录"],notes:"用 Meitu App 扫码登录（非密码登录）"},
     {q:"NameCheap 怎么登录？（域名管理）",sop:"NameCheap 账号",who:"Mok / Nicsman",tags:["namecheap","域名","domain","账号","登录"],url:"https://www.namecheap.com/",loginId:"nicsmantay"},
     {q:"Notion 怎么登录？",sop:"Notion 账号",who:"Wenji",tags:["notion","账号","登录","sop"],url:"https://www.notion.so/",loginId:"support@prominds.com.my"},
     {q:"Beprominds 后台 (ICORE) 怎么登录？",sop:"ICORE 账号",who:"Zack / Wenji",tags:["icore","beprominds","后台","账号","登录"],url:"https://billing.icore.com.my/login",loginId:"nicholas@brandsight.co"},
-    {q:"SMS Blasting 备用 (WA 被封时) 怎么登录？",sop:"SMS Blasting 备用",who:"Wenji / Mok",tags:["sms","blasting","备用","whatsapp","封号","账号"],url:"https://www.sms123.net/",loginId:"siewchoo@vinjomarketing.com"},
+    {q:"SMS Blasting 备用 (WA 被封时) 怎么登录？",sop:"SMS Blasting 备用",who:"Wenji / Mok",tags:["sms","blasting","备用","whatsapp","封号","账号"],url:"https://www.sms123.net/",notes:"⚠️ 此账号为备用，目前尚未正式启用\n仅在 WA 被完全封号时才使用\n账号详情查看 Internal Master > Prominds Tab"},
     {q:"Notta 怎么登录？（会议录音转写）",sop:"Notta 账号",who:"Wenji",tags:["notta","录音","转写","账号","登录"],loginId:"nicsman@prominds.com.my"},
   ]},
   {category:"项目资料",icon:"📁",items:[
@@ -216,7 +324,7 @@ const KB=[
     {q:"Nicsman 百万课程经营系统 (PCS) 项目文件 + FB Page",sop:"项目文件 - Nicsman PCS (007)",who:"KaHung",tags:["nicsman","百万","pcs","007","facebook"],projectLinks:[{label:"🌐 Landing Page",url:"https://procoursesystem.com/registration"},{label:"📅 Calendar",url:"https://calendar.google.com/calendar/u/0?cid=Y18yYzlhNDc5NGFjZjVhOGEzYWMxMWE0N2M4Zjc0MzM2NzkxMjNlMzIzNDc0NTExZmZhY2Y1MTBkYTNmMGE2YmYyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"},{label:"📘 FB Page",url:"https://www.facebook.com/profile.php?id=61586606258199"}]},
     {q:"Hedki (点金圣手 / Train Your Manager) 项目文件 + FB Page",sop:"项目文件 - Hedki (010-MYTHAS)",who:"Kyle",tags:["hedki","点金圣手","train your manager","010","mythas","facebook"],projectLinks:[{label:"🌐 Landing Page",url:"https://events.prominds.com.my/hedki-build-your-manager"},{label:"📅 Calendar",url:"https://calendar.google.com/calendar/u/0?cid=Y19kODNlYmYyZDczOTZhZWZiZGIyNmM4MzNjZWNiMGVmYzVjOWZjYThkM2M3NjFhNjRlOTMyNDhkNWY5YmRjNGYwQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"},{label:"📘 FB Page",url:"https://www.facebook.com/hedkiheng"}]},
     {q:"Annabel (MTS / 易投黄金) 项目文件 + FB Page",sop:"项目文件 - Annabel MTS (027)",who:"CY / Aggie",tags:["annabel","mts","易投黄金","027","facebook"],projectLinks:[{label:"🌐 Landing Page",url:"https://thetradersfx.com/home"},{label:"📅 Calendar",url:"https://calendar.google.com/calendar/u/0?cid=Y18wNDAwNDcyODliMjc3NDQ3ODlmMDQ0MzczNzllOTM5NGVmYjJlZDBlNmU5YzY3NjU0NTIzZDllMTcwNWRlYTFkQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"},{label:"📘 FB Page",url:"https://web.facebook.com/profile.php?id=61575701016405"}]},
-    {q:"Vinjo 左左 (小红书) 项目文件 + FB Page",sop:"项目文件 - Vinjo (028-VZZ)",who:"Chin Ni",tags:["vinjo","左左","小红书","028","vzz","facebook"],projectLinks:[{label:"🌐 Landing Page",url:"https://vinjoacademy.com/xhs-mainpage"},{label:"📅 Calendar",url:"https://calendar.google.com/calendar/u/0?cid=Y18xYTYzZWZhNDUwYTc3NTMwOTkwMGFkMDA0ODVkOWYyNDViNWMwMTY0NWQ4MDFjZjM4YTZmMmYzYTE5MzMzMDYxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"},{label:"📘 FB Page",url:"https://www.facebook.com/promindsacademy"}]},
+    {q:"Vinjo 左左 (小红书) 项目文件 + FB Page",sop:"项目文件 - Vinjo (028-VZZ)",who:"Chin Ni",tags:["vinjo","左左","小红书","028","vzz","facebook"],projectLinks:[{label:"🌐 LP 1 (XHS)",url:"https://vinjoacademy.com/xhs-mainpage"},{label:"🌐 LP 2 (Main)",url:"https://vinjoacademy.com/"},{label:"📅 Calendar",url:"https://calendar.google.com/calendar/u/0?cid=Y18xYTYzZWZhNDUwYTc3NTMwOTkwMGFkMDA0ODVkOWYyNDViNWMwMTY0NWQ4MDFjZjM4YTZmMmYzYTE5MzMzMDYxQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"},{label:"📘 FB Page",url:"https://www.facebook.com/promindsacademy"}]},
     {q:"Julio / EOI (期权现金流) 项目文件 + FB Page",sop:"项目文件 - Julio EOI (021)",who:"Kayson",tags:["julio","eoi","期权","021","facebook"],projectLinks:[{label:"🌐 LP (CN)",url:"https://easy-options-income.com/chi-register"},{label:"🌐 LP (EN)",url:"https://easy-options-income.com/register-page"},{label:"📅 Calendar",url:"https://calendar.google.com/calendar/u/0?cid=Y18xZWYyZDMxMGIxZTM1ODM5ODhkNTU1YzY0NTVmNDQwZjIwYmQ4OGRiMjlhMTVjOTcyZTE2ODc5Y2VkODJhNDczQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"},{label:"📘 FB Page",url:"https://www.facebook.com/profile.php?id=61586506626839"}]},
     {q:"Nicsman AI Business Growth System (ABGS) 项目文件 + FB Page",sop:"项目文件 - Nicsman ABGS (029)",who:"KaHung",tags:["nicsman","ai","abgs","029","facebook"],projectLinks:[{label:"📅 Calendar",url:"https://calendar.google.com/calendar/u/0?cid=Y19jN2Y2M2U3OGYyNTk0ZWQ0MmEwY2VkOWI2NTI1MDE5OWY0ZTQxMTI0YmRiOTBmOWE3Mjk4ZGZjMmNjNzY5MTRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"},{label:"📘 FB Page",url:"https://www.facebook.com/profile.php?id=61586606258199"}]},
     {q:"Ariel Lee (Fast English) 项目文件在哪里？",sop:"项目文件 - Ariel FE (016)",who:"CG (External)",tags:["ariel","fast english","fe","016"],projectLinks:[{label:"🌐 Landing Page",url:"https://www.fast-english-masterclass.com/webinar-registration-page910982"},{label:"📅 Calendar",url:"https://calendar.google.com/calendar/u/0?cid=Y18yODQyYTA0MjQxOTA0ZWE2OTUxNTI5M2FmOWVlOGI5ODBkMmExZjUzMTFjMjUyOWNmMjVlMmQzNTU0YTcxYTdlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"}]},
@@ -224,7 +332,7 @@ const KB=[
   ]},
 ];
 
-const STEPS=[{icon:"🔍",title:"查 SOP",desc:"打开 Internal Master 搜索关键词"},{icon:"🤝",title:"问同事",desc:"找同级别 PC 或同事确认"},{icon:"💡",title:"带方案升级",desc:'"我遇到X，查了Y，我建议Z"'}];
+const STEPS=[{icon:"🔍",title:"查 SOP",desc:"打开 Internal Master 搜索关键词"},{icon:"🤝",title:"问同事",desc:"找同级别 PC 或同事确认"},{icon:"💡",title:"带方案升级",desc:'我遇到X，查了Y，我建议Z'}];
 
 function hi(t,q){
   if(!q||q.length<2)return t;
@@ -256,7 +364,7 @@ function App(){
           if(item.who.toLowerCase().includes(q))s+=3;
           if(item.sop.toLowerCase().includes(q))s+=2;
           if(item.loginId&&item.loginId.toLowerCase().includes(q))s+=4;
-          if(item.notes&&item.notes.toLowerCase().includes(q))s+=3;
+          if(item.notes&&typeof item.notes==="string"&&item.notes.toLowerCase().includes(q))s+=3;
         }else{s=1;}
         if(s>0)items.push(Object.assign({},item,{s:s,category:c.category,catIcon:c.icon}));
       });
@@ -301,6 +409,7 @@ function App(){
         results.map(function(item,idx){
           var open=exp===idx;
           var hasAcct=!!item.loginId;
+          var notesDisplay=typeof item.notes==="string"?item.notes.replace(/\n/g,"\n"):"";
           var borderStyle=item.escalation?"1.5px solid "+EC[item.escalation]+"50":"1.5px solid #E8EFF6";
           var borderLeft=item.escalation?"4px solid "+EC[item.escalation]:"1.5px solid #E8EFF6";
           return React.createElement("div",{key:idx,onClick:function(){setExp(open?null:idx);},style:{background:"white",border:borderStyle,borderRadius:10,padding:"13px 14px",marginBottom:8,cursor:"pointer",borderLeft:borderLeft,boxShadow:"0 1px 4px rgba(31,78,121,0.05)"}},
@@ -329,7 +438,7 @@ function App(){
                 ),
                 item.notes&&React.createElement(React.Fragment,null,
                   React.createElement("span",{style:{fontWeight:700,color:"#1F4E79",fontSize:12}},"📝 备注"),
-                  React.createElement("span",{style:{whiteSpace:"pre-line",lineHeight:1.6,color:"#444"}},item.notes)
+                  React.createElement("span",{style:{whiteSpace:"pre-line",lineHeight:1.6,color:"#444",fontSize:item.notes===GHL_PROMPT?11:13}},item.notes)
                 ),
                 item.who&&React.createElement(React.Fragment,null,
                   React.createElement("span",{style:{fontWeight:700,color:"#1F4E79",fontSize:12}},"🙋 卡住了找"),
@@ -359,7 +468,7 @@ function App(){
       React.createElement("div",{style:{marginTop:24,padding:"13px 15px",borderRadius:10,background:"#FFFBF0",border:"1px solid #FFE0A0",fontSize:12,color:"#7A5C00",lineHeight:1.6}},
         React.createElement("strong",null,"⚠️ 记住：")," 找不到答案 ≠ 直接找上级。不要直接找 Nicsman / Mok / Louis 等等。",React.createElement("br"),
         "正确路径：查SOP → 问同事 → 带方案升级。",React.createElement("br"),
-        "没有方案的问题（'这个怎么做'）= 退回。"
+        "没有方案的问题（找不到就问同事）= 退回。"
       )
     )
   );
