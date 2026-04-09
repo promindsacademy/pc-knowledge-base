@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prominds PC 自救知识库</title>
+  <title>Prominds 资料库</title>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -13,7 +13,7 @@
 <div id="gate" style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#F4F7FB;padding:40px 16px;">
   <div style="background:white;border-radius:16px;padding:40px 32px;max-width:360px;width:100%;box-shadow:0 4px 24px rgba(31,78,121,0.10);text-align:center;">
     <div style="font-size:32px;margin-bottom:12px;">🔐</div>
-    <div style="font-size:20px;font-weight:800;color:#1F4E79;margin-bottom:6px;">Prominds PC 自救知识库</div>
+    <div style="font-size:20px;font-weight:800;color:#1F4E79;margin-bottom:6px;">Prominds 资料库</div>
     <div style="font-size:13px;color:#888;margin-bottom:24px;">PROMINDS INTERNAL — 请输入访问密码</div>
     <input id="pw" type="password" placeholder="输入密码..." style="width:100%;padding:12px 14px;border-radius:8px;border:2px solid #D6E4F0;font-size:14px;outline:none;margin-bottom:12px;box-sizing:border-box;" onkeydown="if(event.key==='Enter')checkPW()"/>
     <button onclick="checkPW()" style="width:100%;padding:12px;border-radius:8px;background:#1F4E79;color:white;font-size:14px;font-weight:700;border:none;cursor:pointer;">进入</button>
@@ -157,8 +157,7 @@ const KB=[
     {q:"公司网站 / 课程链接 / 招聘页面在哪里？",sop:"Prominds 公开链接",who:"Wenji",tags:["网站","website","课程","链接","zaap","linkc","招聘"],notes:"🌐 prominds.com.my\n📋 linkc.co/prominds（所有课程）\n🔗 zaap.bio/prominds\n💼 joinnow.me/prominds（招聘）"},
     {q:"Prominds Social Media 在哪里？",sop:"Prominds Social Media",who:"Wei Yi / Wenji",tags:["social media","facebook","instagram","fb","ig"],projectLinks:[{label:"📘 Facebook",url:"https://www.facebook.com/promindsacademy"},{label:"📸 Instagram",url:"https://www.instagram.com/prominds_my/"}]},
     {q:"Internal Dashboard 数据中心在哪里？（PromindsAI）",sop:"Prominds Internal AI Dashboard",who:"Mok",tags:["dashboard","数据","promindsai","ai"],url:"https://www.promindsai.com/"},
-    {q:"LMS 学生课后录影在哪里查看？（PromindsApp）",sop:"PromindsApp LMS",who:"Bowie",tags:["lms","学生","录影","recording","app","promindsapp"],url:"https://www.promindsapp.com/",sopLink:"https://www.notion.so/Upload-LMS-promindsapp-com-33a736afa2e0808e990cde62a6256272",notes:"学生登录步骤：\n1. 前往 promindsapp.com → 右上角 Sign In\n2. 输入自己的 Email\n   （已有 Prominds Account 可直接 Sign In）\n3. Default 密码：BeProminds\n4. 设置自己的新密码\n5. 选择对应课程\n6. Start Learning → 可以看 Recording 了\n\n⚠️ 如果无法登录，请提供 Email 给客服"},
-    {q:"Prominds 企业介绍宣传影片在哪里？",sop:"Prominds 宣传影片",who:"Wei Yi",tags:["企业","介绍","宣传","影片","video"],url:"https://boards.com/a/ywQMs.HNYFae"},
+    {q:"LMS 学生课后录影在哪里查看？（PromindsApp）",sop:"PromindsApp LMS",who:"Bowie",tags:["lms","学生","录影","recording","app","promindsapp"],url:"https://www.promindsapp.com/",sopLink:"https://www.notion.so/Upload-LMS-promindsapp-com-33a736afa2e0808e990cde62a6256272",notes:"内部团队用 — 上传课程录影到 LMS 的步骤，请参考教学链接 👆"url:"https://boards.com/a/ywQMs.HNYFae"},
     {q:"Prominds 4不是什么？",sop:"Prominds 4不",who:"Wenji / Wei Yi",tags:["4不","贷款","投资","唱歌","强迫","销售"],notes:"不鼓励贷款\n不推广投资\n不唱歌跳舞\n不强迫销售"},
     {q:"Prominds Slogan 是什么？",sop:"Prominds Slogan",who:"Wenji",tags:["slogan","口号","we are prominds","inspire"],notes:"We Are ProMinds. 🚀\nWe Inspire More Lives. ✨"},
   ]},
@@ -174,7 +173,7 @@ const KB=[
       {label:"📋 3. Agency P&L Costing Form（提醒 Agency 填上月 P&L）",url:"https://linkc.co/pnl"},
       {label:"💰 4. PC Project P&L Sheet（确认当月 P&L 结算完毕）",url:"https://docs.google.com/spreadsheets/d/1OtWcY00U4s44IGjOdoatA_m65PgtMOgT1S48d3ig8bI/edit?gid=365627006#gid=365627006"},
     ]},
-    {q:"PC Project P&L 每月在哪里填？",sop:"PC Project P&L",who:"Queenie / SzeYuan",tags:["p&l","每月","project","损益","财务"],url:"https://docs.google.com/spreadsheets/d/1OtWcY00U4s44IGjOdoatA_m65PgtMOgT1S48d3ig8bI/edit?gid=365627006#gid=365627006"},
+    {q:"PC Project P&L 每月在哪里填？",sop:"PC Project P&L",who:"SzeYuan / Mok",tags:["p&l","每月","project","损益","财务"],url:"https://docs.google.com/spreadsheets/d/1OtWcY00U4s44IGjOdoatA_m65PgtMOgT1S48d3ig8bI/edit?gid=365627006#gid=365627006"},
     {q:"Agency 每月 P&L Costing 在哪里填？（每月5号前）",sop:"PAP Monthly Costing P&L",who:"SzeYuan / Wenji",tags:["pap","agency","costing","p&l","每月","5号"],projectLinks:[{label:"📋 填写 Form",url:"https://docs.google.com/forms/d/1thBldVvE9wtH0wtkrihyKDCTB6_S2sEvwbM8DUnkDwg/edit"},{label:"🔗 Short Link",url:"https://linkc.co/pnl"},{label:"📊 P&L Sheet",url:"https://docs.google.com/spreadsheets/d/1-eG24nIPcN3QlQVi3bX0CaGEx3QBrAH7DKIOoGFh5vw/edit?gid=1298133709#gid=1298133709"}],notes:"每月 5 号前完成填写"},
     {q:"Prominds WA Community Group 列表在哪里？",sop:"WA Community Group 列表",who:"Wenji",tags:["whatsapp","community","群组","列表"],url:"https://docs.google.com/spreadsheets/d/1xq254hhBDQV1pW2wyDXEoq0KQ95-5pAr9b5srrkjMJ4/edit?gid=0#gid=0"},
     {q:"Zoom 账号使用情况在哪里看？",sop:"Zoom 使用情况",who:"Wenji",tags:["zoom","使用","分配","账号"],url:"https://www.notion.so/Prominds-ZOOM-2d8736afa2e080908439ec3e94c7ee73"},
@@ -209,7 +208,7 @@ const KB=[
   ]},
   {category:"数据 & 报表",icon:"📊",items:[
     {q:"怎么算 ROAS / CPL / CPA？",sop:"数据计算公式表",who:"Louis / Niysha",tags:["roas","cpl","cpa","计算","公式","数据"],notes:"ROAS = 总收入 Sales Collection ÷ 广告总花费（越高越好）\n例：RM5,000 广告费，Collection RM20,000 = ROAS 4.0\n\nCPL = 广告总花费 ÷ 获取到的 Leads 数量（越低越好）\n例：RM10,000 广告费，250 Leads = CPL RM40\n\nCPA = 广告总花费 ÷ Student 总人数（越低越好）\n例：RM5,000 广告费，10人下单 = CPA RM500"},
-    {q:"P&L 表格怎么填？",sop:"P&L 填写 SOP",who:"Queenie / Mok",tags:["p&l","pnl","损益","填写","报表","财务"],notes:"P&L 结构：Front End + Back End\n\n填写步骤：\n1. 【Collection】去各项目 Student & Payment List\n   计算当月总 Collection\n   ⚠️ 有些项目只计算 Full Amount，排除 Deposit\n\n2. 【Transaction Charge】计算总额，记得放负数（-）\n\n3. 【Ads Spend / Blasting / Other Cost】\n   提醒 Agency 填写：linkc.co/pnl\n   到 PAP Monthly Costing P&L (Responses) 检查 Attachment\n   Double confirm WA Blasting 计算\n\n4. 【Other / Closer Comm / Referral Fee】自行先确认\n\n5. 【Speaker / Agency P&L】完成后 double confirm（如有）\n\n6. 【Profit Distribution】⚠️ 最重要\n   必须确认 Percentage 和 +/- 格子 + Formula 正确"},
+    {q:"P&L 表格怎么填？",sop:"P&L 填写 SOP",who:"SzeYuan / Mok",tags:["p&l","pnl","损益","填写","报表","财务"],notes:"P&L 结构：Front End + Back End\n\n填写步骤：\n1. 【Collection】去各项目 Student & Payment List\n   计算当月总 Collection\n   ⚠️ 有些项目只计算 Full Amount，排除 Deposit\n\n2. 【Transaction Charge】计算总额，记得放负数（-）\n\n3. 【Ads Spend / Blasting / Other Cost】\n   提醒 Agency 填写：linkc.co/pnl\n   到 PAP Monthly Costing P&L (Responses) 检查 Attachment\n   Double confirm WA Blasting 计算\n\n4. 【Other / Closer Comm / Referral Fee】自行先确认\n\n5. 【Speaker / Agency P&L】完成后 double confirm（如有）\n\n6. 【Profit Distribution】⚠️ 最重要\n   必须确认 Percentage 和 +/- 格子 + Formula 正确\\n\\nP&L 完成后颜色标记：\\n• 填完当月 → 将该月份标题改成白底黑字（表示已记录完成）\\n• Mok 检查无误后 → lock 该月份，变成蓝底白字，不再修改\\n• 有疑问主动找 Mok 确认 🙏"},
     {q:"广告数据在哪里看？",sop:"Agency 数据查看指引",who:"Louis",tags:["广告","数据","后台","meta","ads"],notes:"每天查看 WA Daily Ads Update Report（Agency 发送）\n完整记录在各项目的 Ads, Sales Tracking Sheet 当中"},
     {q:"Sales Tracking 怎么更新？",sop:"Sales Tracking SOP",who:"PC 监督 / Agency 更新",tags:["sales","tracking","销售","追踪","更新"],notes:"每个项目都有专属的 Ads, Sales Tracking Sheet\nSheet 内分多个 Tab：\n• Performance Report — 整体数据汇总\n• Ads Tracking (Ads) — 每日广告追踪\n• Showup / Showup 2 Days — 出席率追踪\n\nPerformance Report 记录：\nAds Spent / No. of Registers / CPR / Show Up Rate / Max Show Up Pax /\nShow Up Into Closing / Conversion Rate /\nStudent Purchase (OnTheSpot + Follow Up) /\nCPA / ROAS / Course Price / Cash Collection /\nGross Profit Before Tax (GPBT) / Gross Profit After Tax (GPAT)\n\n⚠️ Deposit 不会记录进 Student Pax"},
     {q:"Ads Tracking 每日怎么更新？（每天12点前）",sop:"Ads Tracking SOP",who:"Louis",tags:["ads","tracking","每日","12点","更新","广告"],notes:"⏰ 每天 12:00pm 前必须更新完毕\n\n在各项目 Ads, Sales Tracking Sheet → Ads Tracking (Ads) Tab\n\nAgency 每天 12pm 前填写：\n• FB Ads Spend（当天花费）\n• Total Ad Spent 累计\n• No. of Leads（当天）\n• CPL（当天）\n• Active Ads 数量（X Campaign X Ads）\n• Landing Page Conv. Rate\n\nPC 负责监督 + 协调，确保 12pm 前更新完毕"},
@@ -234,7 +233,7 @@ const KB=[
     {q:"3天课程前要发什么信息给学员？模板在哪里？",sop:"学员信息发送模板",who:"Bowie",tags:["信息","模板","学员","发送","课前","reminder"],sopLink:"https://www.notion.so/3-Onboarding-SOP-32c736afa2e080bf94c4e3dd0606c60b"},
     {q:"3天课前要准备什么？（Checklist）",sop:"3天课前准备 Checklist",who:"Bowie / PC",tags:["课前","准备","checklist","3天","survey","workbook","后端","back end","课程执行","offline"],notes:"1. 每天课程大纲（不能写太细）\n2. Survey Form — 了解学生资料\n3. 上课群 — 制定群规则（禁止私下推销、打开 Notification 等）\n4. 发 Video / 素材 build 学生跟讲师信任\n5. 功课 or Workbook — 搭配老师教的内容\n6. 准备更多 Testimonial（注明是谁、故事）\n7. 准备卖课的 Sales Kit & Bonus 详情 with Price"},
     {q:"WA Personal vs WA Community 分别用来做什么？",sop:"WA 使用指引",who:"Bowie",tags:["wa","whatsapp","personal","community","用途","区别"],notes:"WA Personal = 关系（追单 / 关心 / 发笔记）\nWA Community = 氛围（规则 / 自我介绍 / Testimonial）"},
-    {q:"发给学生的 LMS 登录模板是什么？",sop:"Student LMS 登录 Template",who:"Bowie",tags:["lms","学生","登录","模板","template","recording","promindsapp","录影"],sopLink:"https://www.notion.so/Student-Start-Learning-in-Prominds-SuperApp-2f6736afa2e080e5a9eac563ee995b67",notes:"发送前替换 [日期] 和 [课程名称]\n\n[日期] [课程名称] 3天 Online Recording\n\n🎈 student login: https://promindsapp.com/\n\n请学生完成以下步骤：\n1. 点击链接：右上角 Sign In\n2. 输入自己的 Email\n3. Default 密码：BeProminds\n4. 设置你自己的新密码\n5. 选择 —— [课程名称][日期]\n6. Start Learning\n7. 可以看 Recording 了 😇\n\np/s：如果无法登录，请提供 Email 给客服 😁\n⚡ 温馨提醒：回放开放到 [日期] 就会关闭。"},
+    {q:"发给学生的 LMS 登录模板是什么？",sop:"Student LMS 登录 Template",who:"Bowie",tags:["lms","学生","登录","模板","template","recording","promindsapp","录影"],sopLink:"https://www.notion.so/Student-Start-Learning-in-Prominds-SuperApp-2f6736afa2e080e5a9eac563ee995b67",notes:"发送前替换 [日期] 和 [课程名称]\\n\\n[日期]\\n[课程名称] 3天 Online Recording\\n\\n🎈 student login: https://promindsapp.com/\\n\\n请学生完成以下步骤，就可以复习了。\\n1. 点击链接：右上角 Sign In 🔗\\n2. 输入自己的 Email\\n   【已经有 Prominds Account 的可以直接 Sign In】\\n3. Default 的密码：BeProminds\\n4. 设置你自己的新密码\\n5. 选择 —— [课程名称] [日期]\\n6. Start Learning\\n7. 可以看 Recording 了 😇\\n\\np/s：如果无法登录，请提供你的 Email 给客服哟 😁\\n\\n可以查看教学链接 🔗：\\nhttps://www.notion.so/Student-Start-Learning-in-Prominds-SuperApp-2f6736afa2e080e5a9eac563ee995b67\\n\\n⚡ 温馨提醒：\\n回放日期开放到 [日期]（[星期]）就会关闭。",
     {q:"Upsell 怎么安排？",sop:"Upsell Strategy SOP",who:"Louis",tags:["upsell","追销","课程","策略"]},
     {q:"Closer Interview 怎么安排？",sop:"Closer Interview SOP",who:"PC 协调",tags:["closer","interview","面试","安排"]},
   ]},
@@ -379,7 +378,7 @@ function App(){
     React.createElement("div",{style:{maxWidth:520,margin:"0 auto",padding:"0 16px"}},
       React.createElement("div",{style:{textAlign:"center",padding:"28px 0 16px"}},
         React.createElement("div",{style:{fontSize:11,fontWeight:700,letterSpacing:2,color:"#1F4E79",textTransform:"uppercase",opacity:0.5,marginBottom:6}},"PROMINDS INTERNAL"),
-        React.createElement("div",{style:{fontSize:26,fontWeight:800,color:"#1F4E79"}},"PC 自救知识库"),
+        React.createElement("div",{style:{fontSize:26,fontWeight:800,color:"#1F4E79"}},"Prominds 资料库"),
         React.createElement("div",{style:{fontSize:13,color:"#888",marginTop:6}},"遇到问题？先查这里，再找人。")
       ),
       React.createElement("div",{style:{background:"white",border:"1px solid #E0EAF5",borderRadius:12,padding:"14px 16px",marginBottom:16,boxShadow:"0 1px 4px rgba(31,78,121,0.06)"}},
@@ -476,5 +475,603 @@ function App(){
 
 ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
 </script>
+<!-- ============================================================
+     AI CHAT ASSISTANT — Prominds 内部智能助理
+     ⚠️  API Key 对所有能查看源码的人可见，仅限内部使用
+     ============================================================ -->
+<style>
+/* Chat bubble button */
+#ai-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #1F4E79;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(31,78,121,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#ai-fab:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(31,78,121,0.45); }
+#ai-fab svg { width: 24px; height: 24px; fill: white; }
+#ai-fab .badge {
+  position: absolute;
+  top: -2px; right: -2px;
+  width: 16px; height: 16px;
+  background: #E63946;
+  border-radius: 50%;
+  font-size: 9px;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+/* Chat panel */
+#ai-panel {
+  position: fixed;
+  bottom: 88px;
+  right: 20px;
+  width: min(380px, calc(100vw - 32px));
+  height: min(560px, calc(100vh - 120px));
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(31,78,121,0.18);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9998;
+  border: 1px solid #D6E4F0;
+  animation: slideUp 0.22s ease-out;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+#ai-panel.open { display: flex; }
+
+/* Panel header */
+#ai-header {
+  background: #1F4E79;
+  color: white;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+#ai-header .title { font-size: 14px; font-weight: 700; }
+#ai-header .subtitle { font-size: 11px; opacity: 0.7; margin-top: 2px; }
+#ai-close {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  width: 28px; height: 28px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+#ai-close:hover { background: rgba(255,255,255,0.25); }
+
+/* Messages area */
+#ai-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #F8FAFD;
+}
+.msg-row { display: flex; align-items: flex-end; gap: 8px; }
+.msg-row.user { flex-direction: row-reverse; }
+.msg-bubble {
+  max-width: 82%;
+  padding: 9px 13px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.55;
+  word-break: break-word;
+}
+.msg-bubble.assistant {
+  background: white;
+  border: 1px solid #E0EAF5;
+  color: #222;
+  border-bottom-left-radius: 4px;
+}
+.msg-bubble.user {
+  background: #1F4E79;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+.msg-bubble.thinking {
+  background: white;
+  border: 1px solid #E0EAF5;
+  color: #999;
+  font-style: italic;
+}
+.msg-avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.msg-avatar.ai { background: #1F4E79; color: white; font-size: 11px; }
+.msg-avatar.user { background: #E8F0F8; color: #1F4E79; font-size: 11px; }
+
+/* Typing dots */
+.typing-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #aaa;
+  margin: 0 2px;
+  animation: bounce 1.2s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+  0%,80%,100% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+}
+
+/* Quick prompts */
+#ai-quick {
+  padding: 8px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-top: 1px solid #EDF2F8;
+  background: white;
+  flex-shrink: 0;
+}
+.quick-btn {
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1.5px solid #D6E4F0;
+  background: white;
+  color: #1F4E79;
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+.quick-btn:hover { background: #EBF3FB; border-color: #1F4E79; }
+
+/* Input area */
+#ai-input-area {
+  padding: 10px 12px;
+  border-top: 1px solid #EDF2F8;
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  background: white;
+  flex-shrink: 0;
+}
+#ai-input {
+  flex: 1;
+  border: 1.5px solid #D6E4F0;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 13px;
+  resize: none;
+  outline: none;
+  font-family: Arial, sans-serif;
+  line-height: 1.4;
+  max-height: 100px;
+  min-height: 38px;
+  transition: border-color 0.15s;
+}
+#ai-input:focus { border-color: #1F4E79; }
+#ai-send {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  background: #1F4E79;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+#ai-send:hover { background: #16375a; }
+#ai-send:disabled { background: #ccc; cursor: not-allowed; }
+#ai-send svg { width: 16px; height: 16px; fill: white; }
+
+/* Disclaimer bar */
+#ai-disclaimer {
+  background: #FFFBF0;
+  border-top: 1px solid #FFE0A0;
+  padding: 6px 12px;
+  font-size: 10px;
+  color: #7A5C00;
+  text-align: center;
+  flex-shrink: 0;
+}
+</style>
+
+<!-- Floating button -->
+<button id="ai-fab" onclick="toggleChat()" title="问 AI 助理">
+  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+  <svg id="fab-icon-chat" viewBox="0 0 24 24" style="display:none"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  <div class="badge" id="ai-badge">1</div>
+</button>
+
+<!-- Chat panel -->
+<div id="ai-panel">
+  <div id="ai-header">
+    <div>
+      <div class="title">🤖 Prominds AI 助理</div>
+      <div class="subtitle">基于 Prominds 内部知识库 · 仅限内部使用</div>
+    </div>
+    <button id="ai-close" onclick="toggleChat()">✕</button>
+  </div>
+
+  <div id="ai-messages">
+    <div class="msg-row">
+      <div class="msg-avatar ai">AI</div>
+      <div class="msg-bubble assistant">你好！我是 Prominds AI 助理 👋<br><br>我了解 Prominds 所有的 SOP、工具账号、项目资料和执行流程。<br><br>直接问我任何问题，比如：<br>• "Webinar 前一天要准备什么？"<br>• "Strive 怎么发 Blast？"<br>• "CPL 超标了找谁？"</div>
+    </div>
+  </div>
+
+  <div id="ai-quick">
+    <button class="quick-btn" onclick="quickAsk('Webinar 前一天 Checklist 是什么？')">Webinar Checklist</button>
+    <button class="quick-btn" onclick="quickAsk('CPL 超过 Target 怎么处理？')">CPL 超标</button>
+    <button class="quick-btn" onclick="quickAsk('GHL Zapier Strive 怎么连接？')">GHL 流程</button>
+    <button class="quick-btn" onclick="quickAsk('有问题应该找谁？升级流程是什么？')">找谁升级</button>
+  </div>
+
+  <div id="ai-input-area">
+    <textarea id="ai-input" placeholder="问任何 Prominds 相关问题..." rows="1"
+      onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <button id="ai-send" onclick="sendMsg()" title="发送">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+
+  <div id="ai-disclaimer">⚠️ 回答仅供参考，重要决策请向 Wenji / Louis / Mok 确认</div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────
+const API_KEY = "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";
+const API_URL = "https://api.anthropic.com/v1/messages";
+let chatHistory = [];
+let isOpen = false;
+let isLoading = false;
+
+// ── System Prompt ──────────────────────────────────────────────
+const SYSTEM_PROMPT = `你是 Prominds Academy 的内部 AI 助理，名字叫「Prominds AI 助理」。
+你的任务是帮助 PC（Project Coordinator）和内部团队快速找到答案，解决日常操作问题。
+
+## 公司基本资料
+公司名：Prominds Academy Sdn. Bhd.
+地址：C-22-06, Dataran 32, 2, Jalan 19/1, Seksyen 19, 46300 Petaling Jaya, Selangor
+电话：03-86878430
+业务：IP 孵化 + Webinar 漏斗营销（Meta Ads → LP → WA 社群 → Webinar → 成交 → Upsell）
+
+## 核心团队
+- Nicsman Tay（CEO）：公司战略、讲师关系最终决策
+- Mok（Operation Manager）：运营全盘、HR、讲师/Agency 关系
+- Louis Wong（Performance Strategy）：广告策略、Slide 优化、Webinar 转化
+- Wenji（Mok 参谋长）：Agency 日常、PC SOP coaching、技术操作问题
+- Niysha（Top PC，T2，M1）：管 Clinixero，自主运作
+- ChinNi（PC）：管 Vinjo
+- KaHung（PC）：管 Nicsman 百万/AI
+- Kayson（PC）：管 Savwee
+- CY / Phin（PC，Warning Letter 中）：管 Trisen
+- Kyle（PC，PIP 中）：管 Dato Keen + Hedki
+- Bowie（CS）：私域销售，30k leads 变现
+- SzeYuan（Finance）：P&L 复审、合规
+- Mok（Finance/P&L）：P&L 审核
+- Wei Yi（Design/Video）
+
+## 升级判断指引（遇到问题找谁）
+找 Wenji：操作类问题（GHL/Strive/Zoom怎么用）、Agency 日常催数据/素材/P&L、Pre-Zoom Checklist 执行检查
+找 Louis：Slide 优化/广告角度调整、数据分析/Webinar 转化率问题、广告策略/优化方向
+找 Mok：Agency 连续2天无回应且Wenji处理后仍无进展、涉及退款/广告预算调整/分润变动、讲师或客户关系相关判断、最终面试决定
+
+## 自救三步（升级前必须完成）
+1. 查 SOP（打开 Internal Master 搜索关键词）
+2. 问同事（找同级别PC或同事确认）
+3. 带方案升级（我遇到X，查了Y，我建议Z）
+
+## 核心 SOP 知识
+
+### 数据异常处理（Escalation Matrix）
+- CPL 超 Target 20%以上 → 找 Louis 分析
+- CPL 超 Target 40%以上 → 找 Mok 做 Go/No-Go
+- Show Up Rate 低于 40% → 找 Louis 分析原因
+- Show Up Rate 低于 30% → 找 Mok 沟通讲师
+- Conversion Rate 低于 15% → 找 Louis 优化策略
+- Conversion Rate 低于 10% → 找 Mok 判断项目方向
+- ROAS 低于 3.0 → 找 Louis 制定优化计划
+- ROAS 低于 1.5 或连续2场低于 2.0 → 找 Mok 做止损判断
+- 连续2场 GP 负数 → 找 Mok 做 Go/No-Go
+
+### 数据公式
+- ROAS = 总收入 ÷ 广告总花费（越高越好）
+- CPL = 广告总花费 ÷ Leads 数量（越低越好）
+- CPA = 广告总花费 ÷ Student 总人数（越低越好）
+
+### Webinar 执行流程
+**前一天 Checklist：**
+- Zoom Link：提前1周/1个月设置，名称含课程名+日期
+- Zoom 设置：名称/时间(7:45-10:30pm GMT+8)/Waiting Room+Passcode/Mute participants
+- Pre-Zoom 准备：LOGO更新/关闭Annotation/录影设置/10min Sheet闹钟/Pitching Msg确认
+- Update Speaker：Ads Spend+预计出席人数/Slide修改确认/网络设备确认
+- Reminder 时间：个人Blasting 12pm/2pm/8pm；WA Community 7:30/7:45/8pm
+
+**当天操作：**
+- WA Community：8:10/8:20/8:30pm 推送
+- 每10分钟记录出席人数（设闹钟）
+- Closing Part：Pitching消息/客服WA/Congratz消息/WA群更新
+- Q&A：Spotlight学员，记录Potential学员
+
+**结束后：**
+- CS 跟进 Follow Up（结束后1天内）
+- 更新 Student List / Payment List
+- 把学员加进 WA Group
+- 填写 Post-Webinar Report
+
+### Post-Webinar Report 格式
+Summary / 课程 / Date
+【Report】Ads Spend / Leads / CPL / LP Conv.R / Max Show Up / Attendance Rate / ROAS / Student Sign Up / Collection / GPBT / GPAT
+【Observe/Suggestion】O（观察）S（建议）
+【What's Next】下一步行动
+
+### GHL → Zapier → Strive 流程
+Phase 1：创建 Google Sheets（First Name/Email/Phone）+ Strive Contact List
+Phase 2：Zapier Catch Hook，复制 Webhook URL
+Phase 3：GHL Automation → Form Submitted → Add Tag → Webhook POST → 发布
+Phase 4：Zapier → Google Sheets Create Row（映射Name/Email/Phone）
+Phase 5：Zapier → Strive Create Contact → 选 Contact List → 发布 Zap
+Phase 6：Strive Automations → Trigger(Tagging added/Contact added to list) → Action(WA Campaign) → Save+Activate
+
+**常见故障：**
+- Zapier 要求Row数字 → 选错了，改成 Create Spreadsheet Row
+- WA消息没发出 → 检查 Strive Automation 是否 Active、Trigger 是否匹配、有没有误用 Flowbuilder
+- 找不到 Strive Contact List → 先在 Strive 建好 List，回 Zapier Refresh Results
+
+### Strive WA Blasting 6大规则
+1. 个性化：用名字变量
+2. 双向互动：结尾加 Reply OK 表示收到
+3. 公司署名：From Prominds
+4. 退订选项：Reply Stop
+5. 排除名单：选 Opt-Out Tag
+6. 发送间隔：40~60 秒随机化
+⚠️ 重要：Blasting 必须用 WA API 号码，不能用 Coexistence！
+
+### WA Blasting 避免 Failed 7条规则
+1. 消息只保留 1 个链接
+2. 移除所有第三方号码（改用 Button）
+3. 替换高风险关键词（限流/变现/获客等）
+4. 减少 emoji 密度，避免重复 👉 和 ❌
+5. 同一天最多发 2 封，间隔 ≥ 3 小时
+6. Filter 名单，优先发给有互动记录的 leads
+7. 定期检查 Phone Number Quality Rating（最好 High）
+
+### Reminder & Engagement 消息策略（Vinjo XHS 实测）
+旧版（提醒型）Show Up Rate ~33% → 新版（说服型）Show Up Rate ~52%
+核心差异：
+- 用具体故事数字开头（"18个赞单条笔记变现RM12,000"）而不是"你是否..."
+- 制造现场感（"讲师已在测麦"/"我刚在后台查名单"）
+- 稀缺性具体化（无重播/内部资讯，每封重复）
+- 倒数消息：15分钟前用个人化催场效果最好
+
+### P&L 填写步骤
+1. 从各项目 Student & Payment List 计算当月 Collection
+2. Transaction Charge（放负数）
+3. Ads Spend/Blasting/Other Cost（提醒 Agency 填 linkc.co/pnl）
+4. Other/Closer Comm/Referral Fee
+5. Speaker/Agency P&L double confirm
+6. Profit Distribution（最重要：确认 Percentage 和 Formula 正确）
+P&L 流程：SzeYuan 初审 → Mok 复审（>15%差异才介入）
+
+### Daily Focus Card 格式
+【昨天 Result】完成了___，产出了___（数据/结果）
+【今天 Focus】最重要的1件事：___，因为它影响___（数据/金额），Back-up Plan：___
+其他 Focus：___
+
+### SPRA 格式
+S（Success）：必须有数字，说明为什么成功，是否可复制
+P（Problem）：必须有数字对比（目标 vs 实际）
+R（Reason）：只找内部原因，不怪外部
+A（Action）：必须有负责人 + deadline + 预期产出数字
+
+### 请假格式
+Name: / Date & Time: / Leave: / Reason: / Approved by: / Remarks: (Contactable/Not contactable)
+
+### 系统命名规范
+格式：【YYMMDD】【Speaker】【Project Name】【Webinar/Offline】
+示例：260319 Nicsman Pro Course Agency
+
+### 广告素材命名
+LP：LandingPage_课程名_讲师缩写_OPTIN%
+图片Ads：PictureAd_课程名_讲师缩写_CPL值_Lead数
+Video Ads：VideoAd_课程名_讲师缩写_CPL值_Lead数
+
+### 上线广告前 Final Checklist
+☐ Check Facebook Pixel 正常追踪
+☐ 更新 LP 日期（含 Pop-up Form）
+☐ 更新 Automation & Tags（新日期 Tags，新 Tab）
+☐ 测试 Form（提交 Test Entry 确认 Lead 进 List + 自动发 Welcome Message）
+
+### 一场 Webinar 成绩不好的 3 步诊断
+第一步（CPL高/Leads少）：广告素材/Target/投放方式/LP Opt-in Rate（正常>10%）/外部因素
+第二步（Attendance Rate低）：Reminder文案/竞争对手/Lead Magnet/CRM养群/日期选择（最佳周二~四）
+第三步（Conversion Rate低）：讲师状态/Pitching节奏/Slide内容/Objection Handle/Leads质量
+
+## 工具账号（账号 ID，密码在 Internal Master > Prominds Tab）
+- Zoom：zoom01/02/003/04@prominds.com.my，support@prominds.com.my
+- GHL：gohighlevel.com
+- Strive：strive.asia（support@prominds.com.my；CX专用：clinixerocs@gmail.com）
+- Zapier：zapier.com（nicsman@vceo.com.my）
+- Canva：canva.com（support@prominds.com.my，需 Email Verification Code）
+- Senang Pay：app.senangpay.my（nicsman@prominds.com.my）
+- Notion：notion.so（support@prominds.com.my）
+
+## 活跃项目
+- CX Clinixero（Niysha管）：🟢 印钞机，ROAS 2.6~7.4
+- Annabel MTS（Aggie管）：🟢 高转化，ROAS 7~8
+- Vinjo XHS（ChinNi管）：🟡 观察中，ROAS 从0.6升至1.97
+- Savwee MT（Kayson管）：🟡 有潜力，ROAS 2.16
+- Trisen（CY管，Warning Letter中）：🟡 ROAS 2.12~2.32
+- Dato Keen（Kyle管，PIP中）：🔴 不稳定，ROAS 0.67~1.91
+- Hedki（Kyle管，PIP中）：🔴 需大改，ROAS 0.38~1.10
+- Nicsman 百万（KaHung管）：🟡 启动中
+- Nicsman AI（KaHung/Aggie管）：🟡 新业务
+
+## 公司资料（Bill to）
+Prominds Academy Sdn Bhd | 202001035025 - 1391346U | TIN: C 26502767050
+地址：C-22-06, Dataran 32, 2, Jalan 19/1, Seksyen 19, 46300 PJ
+Maybank：PROMINDS ACADEMY SDN BHD — 512316672123
+
+## 回答规范
+- 语言：中文为主，英文术语（GHL/ROAS/CPL等）保留
+- 格式：清晰分点，重要步骤用编号，不写废话
+- 如果涉及账号密码，引导用户查看 Internal Master > Prominds Tab
+- 如果问题超出你的知识范围，诚实说明并建议找 Wenji/Louis/Mok
+- 每次回答结尾，视情况提醒相关的升级判断（找谁处理）
+- 严禁编造数据或 SOP，不确定的内容要说"建议向 Wenji 确认"`;
+
+// ── UI Functions ───────────────────────────────────────────────
+function toggleChat() {
+  isOpen = !isOpen;
+  const panel = document.getElementById('ai-panel');
+  const badge = document.getElementById('ai-badge');
+  const fabIconDefault = document.querySelector('#ai-fab svg:first-child');
+  const fabIconChat = document.getElementById('fab-icon-chat');
+  if (isOpen) {
+    panel.classList.add('open');
+    badge.style.display = 'none';
+    fabIconDefault.style.display = 'none';
+    fabIconChat.style.display = 'block';
+    setTimeout(() => document.getElementById('ai-input').focus(), 100);
+  } else {
+    panel.classList.remove('open');
+    fabIconDefault.style.display = 'block';
+    fabIconChat.style.display = 'none';
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMsg();
+  }
+}
+
+function quickAsk(text) {
+  document.getElementById('ai-input').value = text;
+  sendMsg();
+}
+
+function scrollToBottom() {
+  const msgs = document.getElementById('ai-messages');
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function appendMsg(role, content) {
+  const msgs = document.getElementById('ai-messages');
+  const row = document.createElement('div');
+  row.className = 'msg-row ' + role;
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar ' + (role === 'assistant' ? 'ai' : 'user');
+  avatar.textContent = role === 'assistant' ? 'AI' : 'PC';
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble ' + role;
+  if (role === 'thinking') {
+    bubble.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+    bubble.className = 'msg-bubble thinking';
+    row.className = 'msg-row assistant';
+  } else {
+    bubble.innerHTML = content.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  }
+  if (role !== 'user') row.appendChild(avatar);
+  row.appendChild(bubble);
+  if (role === 'user') row.appendChild(avatar);
+  msgs.appendChild(row);
+  scrollToBottom();
+  return row;
+}
+
+// ── API Call ───────────────────────────────────────────────────
+async function sendMsg() {
+  if (isLoading) return;
+  const input = document.getElementById('ai-input');
+  const sendBtn = document.getElementById('ai-send');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  appendMsg('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  const thinkingRow = appendMsg('thinking', '');
+  isLoading = true;
+  sendBtn.disabled = true;
+
+  // Hide quick prompts after first use
+  document.getElementById('ai-quick').style.display = 'none';
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1024,
+        system: SYSTEM_PROMPT,
+        messages: chatHistory
+      })
+    });
+
+    const data = await res.json();
+    const reply = data?.content?.[0]?.text || '抱歉，出现了错误，请稍后再试。';
+    chatHistory.push({ role: 'assistant', content: reply });
+    thinkingRow.remove();
+    appendMsg('assistant', reply);
+  } catch (err) {
+    thinkingRow.remove();
+    appendMsg('assistant', '⚠️ 连接出错：' + err.message + '\n\n请检查网络或稍后重试。');
+  } finally {
+    isLoading = false;
+    sendBtn.disabled = false;
+    input.focus();
+  }
+}
+
+// Show badge after 3 seconds if chat not opened
+setTimeout(() => {
+  if (!isOpen) {
+    document.getElementById('ai-badge').style.display = 'flex';
+    document.getElementById('ai-badge').textContent = '✦';
+  }
+}, 3000);
+</script>
+
 </body>
 </html>
