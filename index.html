@@ -26,6 +26,7 @@ function checkPW(){
   if(pw==="Prominds30"){
     document.getElementById("gate").style.display="none";
     document.getElementById("root").style.display="block";
+    document.getElementById("ai-fab").style.display="flex";
     sessionStorage.setItem("auth","1");
   } else {
     document.getElementById("err").style.display="block";
@@ -36,6 +37,7 @@ window.addEventListener("load",function(){
   if(sessionStorage.getItem("auth")==="1"){
     document.getElementById("gate").style.display="none";
     document.getElementById("root").style.display="block";
+    document.getElementById("ai-fab").style.display="flex";
   }
 });
 </script>
@@ -144,7 +146,140 @@ Follow this sequence for every query:
 </response_protocol>
 
 My question is: [在这里描述你卡在哪一步，或者遇到什么问题]`;
-</script>
+
+const REMINDER_PROMPT = `【Webinar Reminder & Engagement Message Generator V2】
+
+【角色设定】
+你是一位精通华人市场 WhatsApp 营销的文案专家，专为知识付费 Webinar 写"不来会后悔"的提醒消息。你深知：消息不是"提醒"，是"说服"。
+
+你同时管理两种受众，逻辑完全不同：
+- A套·新Lead：需要建立信任 → 用具体案例+数字打破怀疑
+- B套·旧学生：已有信任 → 用升级感+不想落后激活行动
+
+【核心写作原则】
+
+通用原则（两套都适用）：
+1. 每条消息只有一个核心理由，不堆砌信息
+2. 禁止用"你是否..."开头，用故事/数字/场景开头
+3. 禁止使用：内容很珍贵、彻底刷新认知、重要分享、不要错过、干货满满
+4. 稀缺性必须具体：不说"很珍贵"，说"无重播/名额剩XX/讲师难得开放"
+5. 每条控制在150字以内（WhatsApp不用滚动）
+6. 配图消息：正文只需1-2句，让图说话
+7. 每条消息用不同故事角度或悬念，不重复同一个理由
+
+A套·新Lead 专属原则：
+- 开头必须有具体案例（行业+数字+结果）
+- 至少一条消息要打破"我的行业/情况不适合"的最大反对意见
+- 催场消息用"关心"口吻，不是催促："我在后台没看到你名字"
+
+B套·旧学生 专属原则：
+- 强调"升级/进化"：老师又出新东西了，上次你学的现在有更强版本
+- 可用接龙机制制造社交证明（看到熟悉名字会跟进）
+- 口吻更亲密，像朋友通知朋友，不是官方通知
+- "不想被同学落后"心理 > 痛点描述
+
+【消息时间线·双套结构】
+输入一份 Project Brief → 自动输出 A套+B套共最多22条消息
+
+--- 前一天 ---
+
+A1 | 12PM | Blasting（仅A套）
+学员案例故事开头，具体数字，打破行业偏见
+
+B1 | 12PM | Community群（仅B套）
+"老师又出新东西" + 接龙机制，降低参与门槛（回复+1即可）
+
+A2/B2 | 2-3PM | Community群
+A套：第二个不同行业案例，pain point角度
+B套：旧学生反应截图或口碑引用
+
+--- 当天 ---
+
+A3 | 12:30PM | Email/Blast（仅A套）
+较长版，拆解今晚核心内容预告 + 悬念
+
+B3 | 1PM | Community群（仅B套）
+配图 + 一句话痛点reframe（如"不是不会带人，是带错人"）
+
+A4/B4 | 4:30PM | Community群
+A套：倒数3小时，3个具体收获（动词开头）
+B套：倒数3小时，"今晚同学们都在来的路上了"
+
+A5/B5 | 7PM | Community群
+A套：倒数1小时，悬念型对比（有人XXX vs 有人XXX，答案今晚揭晓）
+B套：倒数1小时，点名旧学生最有共鸣的进阶内容
+
+A6/B6 | 7:30PM | Community群
+A套：列出今晚3大收获 + "核弹级"升级感
+B套："核弹级"升级感 + AI/新方法配图，制造视觉冲击
+
+A7/B7 | 7:45PM | Blasting
+A套：个人化催场："我在后台没看到你名字" + Zoom链接
+B套：个人化催场："你上次学了XXX，今晚进化版来了"
+
+A8/B8 | 7:45PM | Community群
+A套：@所有人版本，现场感（讲师已就位/已在测麦）
+B套：@所有人，"你们的同学已经在里面了"
+
+A9/B9 | 8PM | Community群
+A套：BTS配图 + 1句话（讲师已在直播）
+B套：BTS配图 + 点出今晚独家内容一句话
+
+--- 第二天（如两天课）---
+
+A10/B10 | 1:30PM | Community群
+A套：昨晚学员反应 + 今晚预告（"昨晚有人问到..."）
+B套：昨晚金句/截图 + 今晚不能缺席的具体理由
+
+A11/B11 | 7:45PM | Blasting
+A套：催场个人化："昨晚来的人都在问今晚..."
+B套："昨晚来的同学都说XXX，你今晚一定要来"
+
+【Project Brief 输入格式】
+
+【基本信息】
+课程名称：
+讲师名字：
+讲师背书（为什么他有资格讲）：
+课程日期/时间：
+Zoom链接+ID+密码：
+发送者名字（例：Bowie · Trisen团队）：
+
+【受众信息】
+目标受众（新lead）：
+目标受众（旧学生）：
+受众核心痛点（每天在烦什么）：
+受众最大反对意见（为什么他们会不来）：
+
+【课程内容】
+课程最大卖点/独特角度：
+今晚3大具体收获（越具体越好）：
+有没有"升级/进化"角度（针对旧学生）：
+
+【案例素材】
+学员案例1（行业+具体数字+结果）：
+学员案例2（不同行业，不同结果）：
+有无昨晚反应/口碑截图可引用：
+
+【稀缺性设定】
+无重播？限额？讲师难得开放？内部资料？：
+
+【输出格式】
+每条消息包含：
+- 标签：套别·时间节点·渠道（例：A套·前一天12PM·Blasting）
+- 正文：可直接复制发送，含emoji，150字以内
+- 策略备注：一行说明这条消息的核心心理机制
+
+输出顺序：先输出所有A套消息 → 再输出所有B套消息
+
+【实测成功基准】
+Vinjo XHS 2026/3：新Lead show up 33%→52%，关键：双行业案例打破"我不适合"偏见
+Trisen AI招聘 2026/4：总出席130+（超100%），新Lead 35%，关键：旧学生接龙+AI配图升级感
+
+【生成指令】
+以下是我的项目资料：[粘贴 Project Brief]
+
+请按上述时间线，分别生成完整的 A套（新Lead）和 B套（旧学生）Reminder消息。`;</script>
 <script type="text/babel">
 const IM="https://docs.google.com/spreadsheets/d/1Kmw4OWzd-XkQr7CRa4owCVUY8PdhLFwdBYhKOMVYBsw/edit";
 const KB=[
@@ -229,6 +364,7 @@ const KB=[
     {q:"怎么发 Reminder 给学员？",sop:"Reminder SOP",who:"Agency 执行 / PC 可立即执行",tags:["reminder","提醒","学员","发送","strive"],notes:"执行方：一般由 Agency 负责\nPC 在需要时可立即执行（以结果为主）\n\n参考素材：\n→ 查看各项目的 Moderator Tools（里面有 Sample + 实际案例）\n\n发送时机：根据 Strive SOP 设定的时间点执行\n\n自动化：\n→ 学员填 LP Form 后 → 自动触发第一封 Welcome Message\n→ 在 GHL → Zapier → Strive 里设置"},
     {q:"怎么准备 Sales Kit？",sop:"Sales Kit SOP",who:"Louis",tags:["sales kit","销售","素材","准备","成交"]},
     {q:"Follow Up 怎么安排？",sop:"Follow Up Strategy SOP",who:"Louis",tags:["follow up","跟单","跟进","安排"]},
+    {q:"怎么生成 Webinar Reminder 消息？（A套新Lead / B套旧学生）",sop:"Webinar Reminder Generator V2",who:"自行生成 / 有问题找 Wenji",tags:["reminder","提醒","engagement","文案","whatsapp","blasting","新lead","旧学生","show up","出席率","generator","生成"],notes:REMINDER_PROMPT},
   ]},
   {category:"学生 & 课程",icon:"🎓",items:[
     {q:"学生 Onboarding 流程？",sop:"Student Onboarding SOP",who:"Bowie / Wenji",tags:["学生","onboarding","入学","通知","名单"]},
@@ -705,7 +841,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(
 </style>
 
 <!-- Floating button -->
-<button id="ai-fab" onclick="toggleChat()" title="问 AI 助理">
+<button id="ai-fab" onclick="toggleChat()" title="问 AI 助理" style="display:none;">
   <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
   <svg id="fab-icon-chat" viewBox="0 0 24 24" style="display:none"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
   <div class="badge" id="ai-badge">1</div>
@@ -724,7 +860,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(
   <div id="ai-messages">
     <div class="msg-row">
       <div class="msg-avatar ai">AI</div>
-      <div class="msg-bubble assistant">你好！我是 Prominds AI 助理 👋<br><br>我了解 Prominds 所有的 SOP、工具账号、项目资料和执行流程。<br><br>直接问我任何问题，比如：<br>• "Webinar 前一天要准备什么？"<br>• "Strive 怎么发 Blast？"<br>• "CPL 超标了找谁？"</div>
+      <div class="msg-bubble assistant">你好！我是 Prominds AI 助理 🤖<br><br>📌 <strong>使用前提醒：</strong><br>请先用<strong>上方搜索栏</strong>查找资料，大部分问题都能直接找到答案。<br><br>搜索不到的问题，才来问我 👇<br><br>例如：<br>• "帮我生成 Webinar Reminder 文案"<br>• "Strive 自动化流程怎么设？"<br>• "CPL 超标了下一步怎么做？"</div>
     </div>
   </div>
 
@@ -947,7 +1083,22 @@ Maybank：PROMINDS ACADEMY SDN BHD — 512316672123
 - 如果涉及账号密码，引导用户查看 Internal Master > Prominds Tab
 - 如果问题超出你的知识范围，诚实说明并建议找 Wenji/Louis/Mok
 - 每次回答结尾，视情况提醒相关的升级判断（找谁处理）
-- 严禁编造数据或 SOP，不确定的内容要说"建议向 Wenji 确认"`;
+- 严禁编造数据或 SOP，不确定的内容要说"建议向 Wenji 确认"
+
+## Webinar Reminder & Engagement Message Generator V2
+你掌握完整的 Reminder 生成框架，可以帮 PC 生成 A套（新Lead）和 B套（旧学生）两套消息。
+
+双套逻辑：
+- A套新Lead：需要建立信任 → 用具体案例+数字打破怀疑，开头必须有行业+数字+结果
+- B套旧学生：已有信任 → 用升级感+不想落后激活行动，口吻亲密，强调进化
+
+时间线：前一天12PM / 2-3PM → 当天12:30PM / 4:30PM / 7PM / 7:30PM / 7:45PM Blast / 7:45PM群 / 8PM → 第二天（如有）1:30PM / 7:45PM
+共最多22条消息（A套+B套）
+
+写作禁忌：禁止"你是否..."开头；禁止"内容很珍贵/干货满满/不要错过"；每条150字以内；稀缺性必须具体
+实测数据：Vinjo XHS show up 33%→52%；Trisen AI招聘 总出席130+
+
+当用户说"帮我生成Reminder"或"Webinar文案"时，先索取 Project Brief（课程名称/讲师/日期/受众/案例/稀缺性），再生成完整A套+B套。`;
 
 // ── UI Functions ───────────────────────────────────────────────
 function toggleChat() {
