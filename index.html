@@ -337,7 +337,7 @@ const KB=[
     {q:"怎么计算 WA Blasting 费用？",sop:"WA Blasting 费用计算",who:"Wenji / SzeYuan",tags:["blasting","费用","计算","cost","whatsapp"],url:"https://boards.com/a/ywQMs.A0v9Fu"},
     {q:"怎么查看 WA API Messaging Limits？",sop:"WA API Messaging Limits",who:"Wenji",tags:["wa","api","messaging","limit","限制"],url:"https://scribehow.com/viewer/Check_Your_WA_API_Messaging_Limits__xUjaFwAsT6Syhp-y3syYlw"},
     {q:"Payment Link 怎么设置？（Senang Pay / Payex Ezbeli）",sop:"Payment Setup SOP",who:"SzeYuan / Mok",tags:["payment","付款","链接","支付","senang pay","payex","ezbeli","stripe"],notes:"Generate Payment Link 需要准备：\n1. 图片（要有头像，建议有标题，不要纯 Logo）\n2. 课程名称（英文）\n3. Product Description（英文）\n4. Price 价钱\n5. Price + 8%（实际 Amount for Installment）\n\nEzbeli 过不了常见原因：\n1. 信用卡 Limit 不足\n2. Approve 了 Payment 但没有 back to merchant（Ezbeli）\n3. Time Out — 需要用两个 Device（一个购买，一个收 OTP）\n\nEzbeli 支持分期银行：\nMaybank / CIMB / UOB / Public Bank / HSBC / Standard Chartered / Hong Leong / AmBank / RHB / OCBC / Affin Bank\n\n🆘 紧急备用 Stripe Link（Senang Pay 出问题时用）：\nhttps://buy.stripe.com/00w4gzdQ4b7MdIa1y0ejK0M\n⚠️ 用完后必须手动在 Student List 补录该学员，Stripe 不会自动录入"},
-    {q:"Zapier 出问题了？/ GHL → Zapier → Strive 怎么连？",sop:"GHL → Zapier → Strive SOP",who:"Wenji / Nicsman",tags:["zapier","自动化","故障","连接","ghl","strive"],sopLink:"https://worried-gambler-f97.notion.site/sop-of-ghl-zapier-strive"},
+    {q:"Zapier 出问题了？/ GHL → Zapier → Strive 怎么连？",sop:"GHL → Zapier → Strive SOP",who:"Wenji / Nicsman",tags:["zapier","自动化","故障","连接","ghl","strive"],sopLink:"https://www.notion.so/SOP-of-GHL-Zapier-Strive-2ab736afa2e080f0bd7ade3fc8797462"},
     {q:"WhatsApp Community 怎么建立？名字/图片/Description 怎么设？",sop:"Create WA Community SOP",who:"Wenji",tags:["whatsapp","community","群","建立","名字","description"],notes:"Community Group 命名格式：\n[ Date ] + [ Course Name ] 线上分享会\n示例：23 July | 《企业财务战略》 线上分享会\n\nCommunity Image：Speaker 图 + Logo\n\nCommunity Description 必须包含：\n- 日期 + 时间\n- 这个群是关于什么的\n- 有问题找谁"},
     {q:"Meta Pixel 怎么 Link？如何安装与分析数据？",sop:"Pixel Setup SOP",who:"Mok / Wenji",tags:["pixel","meta","link","设置","facebook","安装"],url:"https://www.loom.com/share/a4e9258f81dd4163ae32a6e0d4ac13b1"},
     {q:"Facebook Ads Daily Spending Limit 在哪里看？统一设置多少？",sop:"Ads Billing & Payment",who:"Mok / SzeYuan",tags:["ads","billing","payment","daily spending","limit","广告","预算"],notes:"路径：Ads Account → Billing & Payment → Daily Spending Limit\n统一设置：RM800",url:"https://boards.com/a/ywQMs.TG2b26"},
@@ -470,6 +470,7 @@ const KB=[
     {q:"Nickson (紫微商道) 项目文件在哪里？",sop:"项目文件 - Nickson ZW (015)",who:"CG (External)",tags:["nickson","紫微","zw","015"],projectLinks:[{label:"🌐 Landing Page",url:"https://ziweibreakthrough.com/nickson"},{label:"📅 Calendar",url:"https://calendar.google.com/calendar/u/0?cid=Y180N2ZlNmZiYzFlY2UyYTFhOWYwYzQ4ZmMwYTZhNmFjOTQyZTU0ODY0OTFjOTE2OGJjOTM3NWViY2RjMzk4YzFiQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"}]},
   ]},,
   {category:"AI 内容生成",icon:"🤖",items:[
+    {q:"怎么生成 Webinar 广告图？有哪些广告版型 Prompt？",sop:"Webinar Ads Picture Prompt 库",who:"Louis / Mok",tags:["广告图","ads picture","prompt","ai","广告","图片","版型","gemini","webinar","framework","权威","对比","晒单","内容生成"],sopLink:"https://www.notion.so/344736afa2e080028bfdfcae51e7fd4d?v=344736afa2e08006af7c000c15e8bda3",notes:"每个版型附带可直接复制的 Prompt。\n\n使用流程：\n1. 找到想要的版型\n→ 2. 复制 Prompt\n→ 3. 结合 Project Brief md file 调整内容文案（Claude / ChatGPT）\n→ 4. 用 Gemini 生成图片"},
     {q:"如何创建 Project md file？怎么用 Context + Prompt 生成不同 Outcome？",sop:"Project md file 创建与应用",who:"Mok",tags:["project brief","md file","ai","prompt","context","outcome","广告图","文案","landing page","reminder","内容生成","倒推","hero section"],sopLink:"https://www.notion.so/Project-md-file-341736afa2e0803199b7e7122a6f5291",notes:"公式：Context + Prompt = Outcome\n\n每个 Project 都可以做成一个 Project Brief（md file），套入 Prompt 生成不同 Outcome：\n• 广告图\n• 广告文案\n• Landing Page Hero Section\n• Webinar Reminder 消息\n• 其他内容产出\n\n同时收录市面上优质 Outcome 倒推成 Prompt 的方法。\n点击上方教学链接查看完整 SOP。"},
   ]},
 ];
@@ -1102,7 +1103,80 @@ Maybank：PROMINDS ACADEMY SDN BHD — 512316672123
 写作禁忌：禁止"你是否..."开头；禁止"内容很珍贵/干货满满/不要错过"；每条150字以内；稀缺性必须具体
 实测数据：Vinjo XHS show up 33%→52%；Trisen AI招聘 总出席130+
 
-当用户说"帮我生成Reminder"或"Webinar文案"时，先索取 Project Brief（课程名称/讲师/日期/受众/案例/稀缺性），再生成完整A套+B套。`;
+当用户说"帮我生成Reminder"或"Webinar文案"时，如果用户说了项目名称（如Trisen/Nicsman/陈疆同等），直接从下方项目资料库读取对应的Brief，不需要再问用户。如果项目不在列表里，再向用户索取。
+
+## 活跃项目 Project Brief 资料库
+
+### 项目1：TikTok企业全运营班（Dato Keen）
+课程核心：帮助中小企业老板/创业者从0开始做短视频IP，建立内容变现系统
+目标受众：中小企业老板/创业者/自由职业者，1-20人团队，想通过短视频/IP变现
+核心痛点：想做但没开始、缺系统方法、内容做了没结果、不知道如何变现
+最大反对意见：我不适合做内容/我不会拍/我不专业/现在太迟了
+核心承诺：从"想做但没开始"到"有系统、有方向、持续产出并开始变现"
+三大收获：明确IP起步路径 / 立即执行第一步 / 建立稳定内容输出节奏
+机制名称：Rapid Start Content Activation System（内容快速启动系统）
+破认知角度：做内容的核心不是"会不会"，而是"有没有开始并持续做"
+广告成果案例："从0开始 → 7天内发布第一支内容" / "从不敢露脸 → 稳定输出内容"
+
+### 项目2：Train Your Manager（Hedki）
+课程核心：帮助中小企业老板建立经理驱动型运作系统，从老板亲力亲为转为系统化管理
+目标受众：马来西亚中小企业老板/创业者，5-50人团队，传统行业/服务业
+核心痛点：经理层能力不足/老板无法放手/团队执行混乱/决策集中在老板一人
+最大反对意见：等公司再大一点才需要管理体系/重要的事一定要自己做
+核心承诺：让企业从"老板亲力亲为"转变为"经理驱动运作"，可复制的团队执行系统
+三大收获：打造能独立带队的核心经理层 / 老板从日常运营中抽离 / 执行稳定可预测
+机制名称：经理驱动型企业运作系统（Manager-Driven Business System）
+破认知角度：企业成长瓶颈不在市场，而在内部管理系统与经理层能力
+广告成果案例："老板每天忙到死 → 经理能独立带队，公司照样运转"
+
+### 项目3：AI Recruitment System（Trisen - 智能招募增长系统）
+课程核心：帮助保险/金融/直销/销售行业Leader用AI+系统稳定复制招募，建立可扩张团队
+目标受众：保险/金融/直销/高佣金销售行业，有团队或想建立团队的Leader，0-50人团队
+核心痛点：招不到对的人/面试没标准/不会判断candidate/没有系统化招募流程
+最大反对意见：招人靠人脉朋友介绍/面试靠经验无法标准化/好人才太少
+核心承诺：从"不会招人"到"用AI+系统稳定复制招募"，建立可扩张团队
+三大收获：快速判断candidate是否适合 / 面试转化率提升 / 建立稳定名单来源
+机制名称：AI-Powered Recruitment Engine（AI驱动招募引擎）
+破认知角度：招募不是运气，而是一套可以被复制的系统+数据+AI决策
+广告成果案例："不会招人 → 1年招募30+团队成员" / "面试靠感觉 → AI判断+高转化话术"
+实测数据：总出席130+（超100%），旧学生接龙+AI配图升级感是关键
+
+### 项目4：实体企业流量与盈利系统升级计划（陈疆同）
+课程核心：帮助传统实体行业老板重构流量+转化+裂变+系统四个关键环节，实现持续增长
+目标受众：传统实体行业老板（零售/餐饮/服务/工厂/贸易），中小企业主1-50人
+核心痛点：客流减少/收入停滞/成本高利润被压缩/业务依赖老板无法放大
+最大反对意见：生意不好是产品不够好/只要努力就能赚更多
+核心承诺：从"靠人卖货赚钱"升级为"通过系统自动获客与盈利"的商业模式
+三大收获：建立低成本可持续流量来源 / 提升转化率 / 搭建可复制增长模型
+机制名称：实体商业四轮驱动盈利系统
+破认知角度：生意的本质不是卖产品，而是建立"流量+转化+裂变"的系统
+广告成果案例："每天没客流 → 稳定获取精准客户" / "只赚差价 → 多渠道盈利"
+
+### 项目5：AI企业自动化增长系统 TCVR（Nicsman AI）
+课程核心：帮助中小企业从靠感觉经营转变为用AI+数据驱动的自动化增长系统
+目标受众：中小企业老板/创业者，3-30人成长型企业，传统行业/服务业/教育/电商
+核心痛点：靠经验感觉运营/数据有积累但无法利用/流程混乱无标准/老板频繁介入日常
+最大反对意见：数据太复杂不适合中小企业/AI只适合大公司
+核心承诺：从"靠感觉经营"转变为"用AI+数据驱动的自动化增长系统"
+三大收获：建立清晰可复制增长模型 / 关键流程自动化 / 实现20%-300%业务增长潜力
+机制名称：TCVR AI增长自动化系统（Traffic/Conversion/Value/Retention）
+破认知角度：企业增长=数据+系统+自动化，而不是经验
+广告成果案例："靠感觉经营 → 数据驱动增长" / "增长停滞 → 20%-300%增长提升"
+
+### 项目6：Clinixero Diabetes Reversal Education（CX EN - Dr. Andrew）
+课程核心：帮助2型糖尿病患者从终身依赖药物转变为系统性逆转糖尿病、减少药物依赖
+语言：英文（English webinar）
+目标受众：2型糖尿病患者，40-70岁，有慢性病史（糖尿病/高血压/肾病/肥胖），长期服药或接近胰岛素阶段
+核心痛点：终身依赖药物无法脱离/控制血糖但健康持续恶化/医疗费用不断增加/治疗方向互相矛盾
+最大反对意见：糖尿病是终身疾病无法逆转/药物必须一直吃/低GI食物已经有效
+核心承诺：从"终身控制糖尿病"转变为"系统性逆转糖尿病，减少药物依赖"
+三大收获：减少或消除药物/胰岛素 / 血糖正常化（HbA1c改善）/ 降低并发症风险（肾/心血管）
+机制名称：Root Cause Diabetes Reversal System（根本原因糖尿病逆转系统）
+核心逻辑：传统治疗只处理症状（血糖），真正根源是胰岛素抵抗。先安全调整药物，再纠正饮食与代谢，才能真正逆转。
+破认知角度：高血糖只是症状，不是根本原因；低GI不等于有效逆转；控制血糖≠防止并发症
+讲师背景：Dr. Andrew，10+年临床经验（政府+私立），2000+患者，来自10+国家，4.9⭐评分
+广告成果案例："9种药物 → 0种药物" / "eGFR 15 → 82（肾功能改善）" / "洗肾3次/周 → 2次/周"
+稀缺性：讲师难得开放公众分享，无重播`;
 
 // ── UI Functions ───────────────────────────────────────────────
 function toggleChat() {
