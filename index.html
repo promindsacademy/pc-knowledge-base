@@ -477,19 +477,20 @@ const KB=[
   {category:"Org Matrix",icon:"📊",items:[],isOrgMatrix:true},
 ];
 
-const ORG_COLORS={Louis:"#3B82F6","Chin Ni":"#6366F1",Niysha:"#EC4899",Jeremy:"#22C55E",Kayson:"#F59E0B",Kyle:"#F97316",Aggie:"#A855F7",CY:"#EF4444"};
+const ORG_COLORS={Louis:"#3B82F6","Chin Ni":"#6366F1",Niysha:"#EC4899",Jeremy:"#22C55E",Kayson:"#F59E0B",Kyle:"#F97316",Aggie:"#A855F7",CY:"#EF4444","各项目 PIC":"#64748B"};
 const ORG_PERF_MODULES=[
-  {name:"Performance PIC",detail:"P&L + Weekly Data + Agency Mgmt + L3 Data",owners:["Louis"],tasks:["每日 12pm Ads Tracking 监督","Weekly SPRA 数据审核 + P&L 监督","确认广告投放预算","评估整体 ROAS（Front End + Back End）","分析数据判断 Project 业绩导向 + Strategic","可增删/调整 Webinar/课程日期（需 Speaker Mgmt 负责人跟讲师 Align 时间可行性）"]},
-  {name:"Speaker Conversions / Marketing",detail:"Ads / Funnel / GHL / Agency Mgmt",owners:["Louis","Chin Ni"],tasks:["广告素材创意支援 + 审核","管理 Marketing Agency 配合度","Daily Data Monitor（CPL / Leads / LP Conv Rate）","GHL Funnel 流程操作 + 优化","确保 Traffic → Conversion 步骤顺畅","A/B Test 素材 + LP 版本"]},
+  {name:"Performance PIC",detail:"P&L + Weekly Data + Agency Mgmt + L3 Data",owners:["各项目 PIC"],tasks:["每日 12pm Ads Tracking 监督","Weekly SPRA 数据审核 + P&L 监督","确认广告投放预算","评估整体 ROAS（Front End + Back End）","分析数据判断 Project 业绩导向 + Strategic","可增删/调整 Webinar/课程日期（需 Speaker Mgmt 负责人跟讲师 Align 时间可行性）"]},
+  {name:"Speaker Conversions",detail:"Slide / Pitching / Offer / 定价",owners:["Louis"],tasks:["Slide Arrangement（Webinar + 课程）","指导讲师 Pitching 方式","设计 Offer / Package / Bonus","定价策略（价值、优惠、限时等）","建立讲师卖课、说故事、讲痛点的智慧"]},
+  {name:"Marketing",detail:"Ads / Funnel / GHL / Agency Mgmt",owners:["Louis","Chin Ni"],tasks:["广告素材创意支援 + 审核","管理 Marketing Agency 配合度","Daily Data Monitor（CPL / Leads / LP Conv Rate）","GHL Funnel 流程操作 + 优化","确保 Traffic → Conversion 步骤顺畅","A/B Test 素材 + LP 版本"]},
   {name:"Strive Reminder QC",detail:"提醒信息把关",owners:["Chin Ni"],tasks:["审核 Reminder 文案质量（说服力 > 提醒）","检查发送时间 + 确认 Opt-Out 排除","透过学员资讯（行业/年龄/职位）判断最佳说服方式","WA Community 养群：给 Value / Build Trust / Poll 互动","Lead Magnet + 小型干货 + Testimonial 分享","讲师呼吁视频安排","核心目标：Increase Show Up Rate"]},
   {name:"CS Closing",detail:"Sales Record + Upsell Strategy + Sales Materials",owners:["Niysha"],tasks:["所有项目的 Closing 话术设计 + 统一化","把关每个 CS 的销售流程","CS 疑虑培训 / SOP 制作","确保所有项目有统一话术 + 素材","Upsell Strategy 设计 + Sales Kit 准备","不只管 Clinixero，跨项目负责"]},
 ];
 const ORG_OPS_MODULES=[
-  {name:"Coordination",detail:"Webinar Operations / Payments",owners:["Aggie"],tasks:["跟 Performance 组对齐后续安排事项","协调整个 Operation Team 的 Arrangement","Payment Link 设置 + 测试","Zoom 链接设置 + Upgrade Max Pax","Recording / Transcript / Chat File 归档","生成 Follow Up Potential Leads 名单"]},
-  {name:"Student Onboard",detail:"Survey Form + Upsell Operation",owners:["CY","Aggie"],tasks:["发 Onboarding 课程 Welcome Message","发 Survey Form → 加进课程群","3 天课后关闭学生群回复功能","发上课 Workbook","Google Review 安排","Feedback Form 发送 + 收集"]},
-  {name:"Administration",detail:"Transcript + Testimonials + Compilation",owners:["Kayson","Kyle"],tasks:["Transcript 统一归档（按命名规范）","Testimonial 收集 + 整理","所有素材 Compilation 统一管理","确保需要提取时可马上找到","避免碎片散落在各处"]},
-  {name:"Fulfillment / Event",detail:"线上线下活动 / 物流",owners:["CY","Aggie"],tasks:["Event Checklist 完整执行","采购 + 场地安排","Man Power / Crew 协调","Transportation 安排","Material Printing 等一切 Arrangement"]},
-  {name:"Invoice / CS / Refund",detail:"Customer Service + Refund",owners:["Kayson","Kyle"],tasks:["学生 Invoice 需求收集 → SzeYuan 开单","学生 Request / Inquiry 接洽沟通","Refund 申请处理 + 记录","所有跟学生直接沟通的客服事项"]},
+  {name:"Coordination",detail:"Webinar Operations / Payments",owners:["各项目 PIC"],tasks:["跟 Performance 组对齐后续安排事项","协调整个 Operation Team 的 Arrangement","Payment Link 设置 + 测试","Zoom 链接设置 + Upgrade Max Pax","Recording / Transcript / Chat File 归档","生成 Follow Up Potential Leads 名单"]},
+  {name:"Student Onboard",detail:"Survey Form + Upsell Operation",owners:["Aggie"],tasks:["发 Onboarding 课程 Welcome Message","发 Survey Form → 加进课程群","3 天课后关闭学生群回复功能","发上课 Workbook","Google Review 安排","Feedback Form 发送 + 收集"]},
+  {name:"Administration",detail:"Transcript + Testimonials + Compilation",owners:["CY","Aggie"],tasks:["Transcript 统一归档（按命名规范）","Testimonial 收集 + 整理","所有素材 Compilation 统一管理","确保需要提取时可马上找到","避免碎片散落在各处"]},
+  {name:"Fulfillment / Event",detail:"线上线下活动 / 物流",owners:["Kayson","Kyle"],tasks:["Event Checklist 完整执行","采购 + 场地安排","Man Power / Crew 协调","Transportation 安排","Material Printing 等一切 Arrangement"]},
+  {name:"Invoice / CS / Refund",detail:"Customer Service + Refund",owners:["CY","Aggie"],tasks:["学生 Invoice 需求收集 → SzeYuan 开单","学生 Request / Inquiry 接洽沟通","Refund 申请处理 + 记录","所有跟学生直接沟通的客服事项"]},
   {name:"Community / LMS",detail:"Strive for Prominds Leads",owners:["Kayson","Kyle"],tasks:["管理 Prominds 所有 WA Community 列表","CS 发送干货分享 / 节日祝福的群组对接","上传 + 管理 LMS 录影","Assign 学生浏览复课资料","管理 Strive Prominds Leads","特殊活动 invite Prominds Leads 参加 + Blasting"]},
 ];
 const ORG_PROJECTS=[
