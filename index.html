@@ -474,7 +474,153 @@ const KB=[
     {q:"怎么生成 Webinar 广告图？有哪些广告版型 Prompt？",sop:"Webinar Ads Picture Prompt 库",who:"Louis / Mok",tags:["广告图","ads picture","prompt","ai","广告","图片","版型","gemini","webinar","framework","权威","对比","晒单","内容生成"],sopLink:"https://www.notion.so/344736afa2e080028bfdfcae51e7fd4d?v=344736afa2e08006af7c000c15e8bda3",notes:"每个版型附带可直接复制的 Prompt。\n\n使用流程：\n1. 找到想要的版型\n→ 2. 复制 Prompt\n→ 3. 结合 Project Brief md file 调整内容文案（Claude / ChatGPT）\n→ 4. 用 Gemini 生成图片"},
     {q:"如何创建 Project md file？怎么用 Context + Prompt 生成不同 Outcome？",sop:"Project md file 创建与应用",who:"Mok",tags:["project brief","md file","ai","prompt","context","outcome","广告图","文案","landing page","reminder","内容生成","倒推","hero section"],sopLink:"https://www.notion.so/Project-md-file-341736afa2e0803199b7e7122a6f5291",notes:"公式：Context + Prompt = Outcome\n\n每个 Project 都可以做成一个 Project Brief（md file），套入 Prompt 生成不同 Outcome：\n• 广告图\n• 广告文案\n• Landing Page Hero Section\n• Webinar Reminder 消息\n• 其他内容产出\n\n同时收录市面上优质 Outcome 倒推成 Prompt 的方法。\n点击上方教学链接查看完整 SOP。"},
   ]},
+  {category:"Org Matrix",icon:"📊",items:[],isOrgMatrix:true},
 ];
+
+const ORG_COLORS={Louis:"#3B82F6","Chin Ni":"#6366F1",Niysha:"#EC4899",Jeremy:"#22C55E",Kayson:"#F59E0B",Kyle:"#F97316",Aggie:"#A855F7",CY:"#EF4444"};
+const ORG_PERF_MODULES=[
+  {name:"Performance PIC",detail:"P&L + Weekly Data + Agency Mgmt + L3 Data",owners:["Louis"],tasks:["每日 12pm Ads Tracking 监督","Weekly SPRA 数据审核 + P&L 监督","确认广告投放预算","评估整体 ROAS（Front End + Back End）","分析数据判断 Project 业绩导向 + Strategic","可增删/调整 Webinar/课程日期（需 Speaker Mgmt 负责人跟讲师 Align 时间可行性）"]},
+  {name:"Speaker Conversions / Marketing",detail:"Ads / Funnel / GHL / Agency Mgmt",owners:["Louis","Chin Ni"],tasks:["广告素材创意支援 + 审核","管理 Marketing Agency 配合度","Daily Data Monitor（CPL / Leads / LP Conv Rate）","GHL Funnel 流程操作 + 优化","确保 Traffic → Conversion 步骤顺畅","A/B Test 素材 + LP 版本"]},
+  {name:"Strive Reminder QC",detail:"提醒信息把关",owners:["Chin Ni"],tasks:["审核 Reminder 文案质量（说服力 > 提醒）","检查发送时间 + 确认 Opt-Out 排除","透过学员资讯（行业/年龄/职位）判断最佳说服方式","WA Community 养群：给 Value / Build Trust / Poll 互动","Lead Magnet + 小型干货 + Testimonial 分享","讲师呼吁视频安排","核心目标：Increase Show Up Rate"]},
+  {name:"CS Closing",detail:"Sales Record + Upsell Strategy + Sales Materials",owners:["Niysha"],tasks:["所有项目的 Closing 话术设计 + 统一化","把关每个 CS 的销售流程","CS 疑虑培训 / SOP 制作","确保所有项目有统一话术 + 素材","Upsell Strategy 设计 + Sales Kit 准备","不只管 Clinixero，跨项目负责"]},
+];
+const ORG_OPS_MODULES=[
+  {name:"Coordination",detail:"Webinar Operations / Payments",owners:["Aggie"],tasks:["跟 Performance 组对齐后续安排事项","协调整个 Operation Team 的 Arrangement","Payment Link 设置 + 测试","Zoom 链接设置 + Upgrade Max Pax","Recording / Transcript / Chat File 归档","生成 Follow Up Potential Leads 名单"]},
+  {name:"Student Onboard",detail:"Survey Form + Upsell Operation",owners:["CY","Aggie"],tasks:["发 Onboarding 课程 Welcome Message","发 Survey Form → 加进课程群","3 天课后关闭学生群回复功能","发上课 Workbook","Google Review 安排","Feedback Form 发送 + 收集"]},
+  {name:"Administration",detail:"Transcript + Testimonials + Compilation",owners:["Kayson","Kyle"],tasks:["Transcript 统一归档（按命名规范）","Testimonial 收集 + 整理","所有素材 Compilation 统一管理","确保需要提取时可马上找到","避免碎片散落在各处"]},
+  {name:"Fulfillment / Event",detail:"线上线下活动 / 物流",owners:["CY","Aggie"],tasks:["Event Checklist 完整执行","采购 + 场地安排","Man Power / Crew 协调","Transportation 安排","Material Printing 等一切 Arrangement"]},
+  {name:"Invoice / CS / Refund",detail:"Customer Service + Refund",owners:["Kayson","Kyle"],tasks:["学生 Invoice 需求收集 → SzeYuan 开单","学生 Request / Inquiry 接洽沟通","Refund 申请处理 + 记录","所有跟学生直接沟通的客服事项"]},
+  {name:"Community / LMS",detail:"Strive for Prominds Leads",owners:["Kayson","Kyle"],tasks:["管理 Prominds 所有 WA Community 列表","CS 发送干货分享 / 节日祝福的群组对接","上传 + 管理 LMS 录影","Assign 学生浏览复课资料","管理 Strive Prominds Leads","特殊活动 invite Prominds Leads 参加 + Blasting"]},
+];
+const ORG_PROJECTS=[
+  {name:"Dr. Andrew",alias:"Clinixero",speaker:"Niysha",perfPIC:"Niysha",opsPIC:"Kayson"},
+  {name:"Savwee",alias:"赢在稳定 MT",speaker:"Louis",perfPIC:"Louis",opsPIC:"Kayson"},
+  {name:"Trisen",alias:"大单 + 增员",speaker:"Aggie",perfPIC:"Louis",opsPIC:"Aggie"},
+  {name:"Dato Keen",alias:"TikTok",speaker:"Kyle",perfPIC:"Louis",opsPIC:"Kyle"},
+  {name:"Hedki",alias:"TYM",speaker:"Kyle",perfPIC:"Louis",opsPIC:"Kyle"},
+  {name:"Vinjo / Joanne",alias:"XHS 小红书",speaker:"Chin Ni",perfPIC:"Chin Ni",opsPIC:"Kyle"},
+  {name:"Mr.J",alias:"千万组织结构",speaker:"Jeremy",perfPIC:"Jeremy",opsPIC:"Aggie"},
+];
+const ORG_FLOW=[
+  {phase:"Phase 1",title:"新项目 Onboard",icon:"🚀",color:"#3B82F6",perfTasks:["确认项目可行性 + 预算","广告策略制定 + Agency 配对","LP / Funnel / GHL 搭建","Slide 初稿 + Pitching Offer 设计"],opsTasks:["Zoom 账号 + 链接设置","WA Community 群建立","Strive 号码 + Automation 设置","Payment Link 配置 + 测试","Google Drive 素材文件夹建立"]},
+  {phase:"Phase 2",title:"跑广告期",icon:"📢",color:"#F59E0B",perfTasks:["每日 12pm Ads Tracking 监督","CPL / LP Conv Rate 分析 + 优化","广告素材审核 + A/B Test","Agency 配合度追踪","Community 养群 + Show Up 策略"],opsTasks:["素材命名规范检查","Lead Sheet 数据确认","Reminder 消息排程（Blasting 时间表）","Webinar 前 Pre-flight Checklist","Zoom 设置检查 + Recording 准备"]},
+  {phase:"Phase 3",title:"Webinar 执行",icon:"🎯",color:"#EF4444",perfTasks:["讲师 Briefing（出席人数 + Slide 确认）","10 分钟 Attendance Tracking","Pitching 节奏把控","Closing 话术执行 + CS 配合"],opsTasks:["Countdown Video 播放","Zoom 操作（Waiting Room / Chat / Notice）","Payment Link 发送 + 确认","成交学生即时记录","Webinar Recording 存档"]},
+  {phase:"Phase 4",title:"课后跟进",icon:"📋",color:"#22C55E",perfTasks:["Post-Webinar Report 数据分析","ROAS / GP 计算 + 评估","下一轮广告策略调整","Testimonial 素材包装","讲师 Debrief + Feedback"],opsTasks:["Follow Up 未成交学生","Student Onboard（加群 / Workbook / Survey）","Invoice 收集 → SzeYuan 开单","Refund 处理","Transcript 归档 + LMS 上传"]},
+];
+
+function OrgBadge(props){
+  var c=ORG_COLORS[props.name]||"#94A3B8";
+  var s=props.size==="lg"?{padding:"3px 12px",fontSize:12,fontWeight:700}:{padding:"2px 8px",fontSize:10,fontWeight:600};
+  return React.createElement("span",{style:Object.assign({},s,{background:c+"20",color:c,border:"1.5px solid "+c+"44",borderRadius:5,display:"inline-block",whiteSpace:"nowrap"})},props.name);
+}
+
+function OrgMatrix(){
+  var _s=React.useState(null),expMod=_s[0],setExpMod=_s[1];
+  var _f=React.useState(null),expFlow=_f[0],setExpFlow=_f[1];
+  var h=React.createElement;
+  var bd={background:"white",borderRadius:10,border:"1.5px solid #E0EAF5",marginBottom:12,overflow:"hidden",boxShadow:"0 1px 4px rgba(31,78,121,0.06)"};
+  var hd=function(title,color,count){return h("div",{style:{background:color+"10",padding:"10px 14px",borderBottom:"1.5px solid "+color+"22",display:"flex",alignItems:"center",justifyContent:"space-between"}},h("span",{style:{fontSize:13,fontWeight:700,color:color,letterSpacing:0.5}},title),h("span",{style:{fontSize:10,color:color,background:color+"15",padding:"2px 8px",borderRadius:4}},count+"人"));};
+  var modCard=function(m,i,prefix){
+    var key=prefix+i;
+    var open=expMod===key;
+    return h("div",{key:key,onClick:function(){setExpMod(open?null:key);},style:{padding:"10px 12px",background:open?"#F8FAFC":"#FAFBFD",borderRadius:8,border:"1px solid "+(open?"#1F4E79":"#E8EFF6"),cursor:"pointer",marginBottom:6,transition:"all 0.15s"}},
+      h("div",{style:{display:"flex",alignItems:"flex-start",justifyContent:"space-between"}},
+        h("div",{style:{flex:1}},
+          h("div",{style:{fontSize:12,fontWeight:700,color:"#1F4E79",marginBottom:2}},m.name),
+          h("div",{style:{fontSize:10,color:"#888"}},m.detail)
+        ),
+        h("div",{style:{display:"flex",gap:4,flexWrap:"wrap",flexShrink:0,alignItems:"center"}},
+          m.owners.map(function(o){return h(OrgBadge,{key:o,name:o});}),
+          h("span",{style:{fontSize:12,color:"#BBB",transform:open?"rotate(180deg)":"none",transition:"transform 0.2s",marginLeft:4}},"▾")
+        )
+      ),
+      open&&h("div",{style:{marginTop:10,paddingTop:10,borderTop:"1px solid #E8EFF6"},onClick:function(e){e.stopPropagation();}},
+        h("div",{style:{fontSize:10,fontWeight:700,color:"#1F4E79",marginBottom:6,letterSpacing:0.5}},"📋 具体任务"),
+        m.tasks.map(function(t,ti){
+          return h("div",{key:ti,style:{fontSize:11,color:"#444",padding:"3px 0 3px 12px",borderLeft:"2px solid #D6E4F0",marginBottom:4,lineHeight:1.5}},t);
+        })
+      )
+    );
+  };
+  return h("div",null,
+    h("div",{style:{textAlign:"center",marginBottom:14}},
+      h("div",{style:{fontSize:18,fontWeight:800,color:"#1F4E79"}},"Prominds Org Matrix"),
+      h("div",{style:{fontSize:11,color:"#888",marginTop:4}},"Performance Team + Operation Team — 跨项目职能分工")
+    ),
+    h("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}},
+      h("div",{style:bd},
+        hd("PERFORMANCE TEAM","#3B82F6","4"),
+        h("div",{style:{padding:"10px 12px"}},
+          h("div",{style:{display:"flex",gap:6,flexWrap:"wrap",marginBottom:10}},["Louis","Chin Ni","Niysha","Jeremy"].map(function(n){return h(OrgBadge,{key:n,name:n,size:"lg"});})),
+          ORG_PERF_MODULES.map(function(m,i){return modCard(m,i,"p");})
+        )
+      ),
+      h("div",{style:bd},
+        hd("OPERATION TEAM","#10B981","4"),
+        h("div",{style:{padding:"10px 12px"}},
+          h("div",{style:{display:"flex",gap:6,flexWrap:"wrap",marginBottom:10}},["Kayson","Kyle","Aggie","CY"].map(function(n){return h(OrgBadge,{key:n,name:n,size:"lg"});})),
+          ORG_OPS_MODULES.map(function(m,i){return modCard(m,i,"o");})
+        )
+      )
+    ),
+    h("div",{style:bd},
+      h("div",{style:{padding:"10px 14px",borderBottom:"1.5px solid #E8EFF6",display:"flex",alignItems:"center",justifyContent:"space-between"}},
+        h("span",{style:{fontSize:13,fontWeight:700,color:"#D97706",letterSpacing:0.5}},"PROJECT ASSIGNMENT MATRIX"),
+        h("span",{style:{fontSize:10,color:"#888"}},ORG_PROJECTS.length+" 项目")
+      ),
+      h("div",{style:{display:"grid",gridTemplateColumns:"170px 1fr 1fr 1fr",padding:"8px 14px",background:"#F8FAFC",borderBottom:"1px solid #E8EFF6",gap:8}},
+        h("div",{style:{fontSize:10,fontWeight:700,color:"#64748B",letterSpacing:0.5}},"PROJECT"),
+        h("div",{style:{fontSize:10,fontWeight:700,color:"#D97706",letterSpacing:0.5}},"🎤 SPEAKER MGMT"),
+        h("div",{style:{fontSize:10,fontWeight:700,color:"#3B82F6",letterSpacing:0.5}},"📊 PERFORMANCE"),
+        h("div",{style:{fontSize:10,fontWeight:700,color:"#10B981",letterSpacing:0.5}},"⚙️ OPERATION")
+      ),
+      ORG_PROJECTS.map(function(p,i){
+        return h("div",{key:i,style:{display:"grid",gridTemplateColumns:"170px 1fr 1fr 1fr",padding:"10px 14px",borderBottom:i<ORG_PROJECTS.length-1?"1px solid #F0F4F8":"none",gap:8,alignItems:"center"}},
+          h("div",null,h("div",{style:{fontSize:12,fontWeight:700,color:"#1F4E79"}},p.name),h("div",{style:{fontSize:9,color:"#999",marginTop:1}},p.alias)),
+          h("div",null,h(OrgBadge,{name:p.speaker,size:"lg"})),
+          h("div",null,h(OrgBadge,{name:p.perfPIC,size:"lg"})),
+          h("div",null,h(OrgBadge,{name:p.opsPIC,size:"lg"}))
+        );
+      })
+    ),
+    h("div",{style:{background:"#F4F7FB",borderRadius:8,padding:"8px 12px",marginBottom:14,display:"flex",gap:16,fontSize:10,color:"#888"}},
+      h("span",null,"横向读 = 每个项目的负责链"),
+      h("span",{style:{color:"#D6E4F0"}},"|"),
+      h("span",null,"纵向读 = 每个人跨项目负责了什么")
+    ),
+    h("div",{style:Object.assign({},bd,{marginBottom:14})},
+      h("div",{style:{padding:"10px 14px",borderBottom:"1.5px solid #E8EFF6"}},
+        h("span",{style:{fontSize:13,fontWeight:700,color:"#7C3AED",letterSpacing:0.5}},"PROJECT FLOW"),
+        h("span",{style:{fontSize:10,color:"#888",marginLeft:8}},"项目从开始到结束的完整流程")
+      ),
+      ORG_FLOW.map(function(f,i){
+        var open=expFlow===i;
+        return h("div",{key:i,onClick:function(){setExpFlow(open?null:i);},style:{padding:"10px 14px",borderBottom:i<ORG_FLOW.length-1?"1px solid #F0F4F8":"none",cursor:"pointer",background:open?"#F8FAFC":"white",transition:"background 0.15s"}},
+          h("div",{style:{display:"flex",alignItems:"center",justifyContent:"space-between"}},
+            h("div",{style:{display:"flex",alignItems:"center",gap:8}},
+              h("span",{style:{fontSize:18}},f.icon),
+              h("div",null,
+                h("span",{style:{fontSize:10,fontWeight:700,color:f.color,letterSpacing:0.5}},f.phase),
+                h("span",{style:{fontSize:12,fontWeight:700,color:"#1F4E79",marginLeft:8}},f.title)
+              )
+            ),
+            h("span",{style:{fontSize:12,color:"#BBB",transform:open?"rotate(180deg)":"none",transition:"transform 0.2s"}},"▾")
+          ),
+          open&&h("div",{style:{marginTop:10,display:"grid",gridTemplateColumns:"1fr 1fr",gap:10},onClick:function(e){e.stopPropagation();}},
+            h("div",{style:{background:"#EFF6FF",borderRadius:8,padding:"10px 12px",border:"1px solid #BFDBFE"}},
+              h("div",{style:{fontSize:10,fontWeight:700,color:"#3B82F6",marginBottom:6}},"📊 PERFORMANCE 负责"),
+              f.perfTasks.map(function(t,ti){return h("div",{key:ti,style:{fontSize:11,color:"#1E40AF",padding:"2px 0 2px 10px",borderLeft:"2px solid #93C5FD",marginBottom:3,lineHeight:1.4}},t);})
+            ),
+            h("div",{style:{background:"#ECFDF5",borderRadius:8,padding:"10px 12px",border:"1px solid #A7F3D0"}},
+              h("div",{style:{fontSize:10,fontWeight:700,color:"#10B981",marginBottom:6}},"⚙️ OPERATION 负责"),
+              f.opsTasks.map(function(t,ti){return h("div",{key:ti,style:{fontSize:11,color:"#065F46",padding:"2px 0 2px 10px",borderLeft:"2px solid #6EE7B7",marginBottom:3,lineHeight:1.4}},t);})
+            )
+          )
+        );
+      })
+    )
+  );
+}
 
 const STEPS=[{icon:"🔍",title:"查 SOP",desc:"打开 Internal Master 搜索关键词"},{icon:"🤝",title:"问同事",desc:"找同级别 PC 或同事确认"},{icon:"💡",title:"带方案升级",desc:'我遇到X，查了Y，我建议Z'}];
 
@@ -520,7 +666,7 @@ function App(){
   const EL={red:"🔴 升级上级",yellow:"🟡 升级 Louis/Wenji"};
 
   return React.createElement("div",{style:{minHeight:"100vh",background:"#F4F7FB",paddingBottom:40}},
-    React.createElement("div",{style:{maxWidth:520,margin:"0 auto",padding:"0 16px"}},
+    React.createElement("div",{style:{maxWidth:cat==="Org Matrix"?820:520,margin:"0 auto",padding:"0 16px",transition:"max-width 0.3s"}},
       React.createElement("div",{style:{textAlign:"center",padding:"28px 0 16px"}},
         React.createElement("div",{style:{fontSize:11,fontWeight:700,letterSpacing:2,color:"#1F4E79",textTransform:"uppercase",opacity:0.5,marginBottom:6}},"PROMINDS INTERNAL"),
         React.createElement("div",{style:{fontSize:26,fontWeight:800,color:"#1F4E79"}},"Prominds 资料库"),
@@ -548,7 +694,8 @@ function App(){
           return React.createElement("button",{key:c.category,onClick:function(){setCat(cat===c.category?null:c.category);setExp(null);},style:{padding:"6px 13px",borderRadius:20,border:cat===c.category?"2px solid #1F4E79":"1.5px solid #D6E4F0",background:cat===c.category?"#1F4E79":"white",color:cat===c.category?"white":"#555",fontSize:12,fontWeight:600,cursor:"pointer",boxShadow:"0 1px 3px rgba(0,0,0,0.05)"}},c.icon+" "+c.category);
         })
       ),
-      results&&results.length>0&&React.createElement("div",null,
+      cat==="Org Matrix"&&!query&&React.createElement(OrgMatrix),
+      cat!=="Org Matrix"&&results&&results.length>0&&React.createElement("div",null,
         React.createElement("div",{style:{fontSize:12,color:"#999",marginBottom:10,paddingLeft:2}},"找到 ",React.createElement("strong",{style:{color:"#1F4E79"}},results.length)," 个相关结果"),
         results.map(function(item,idx){
           var open=exp===idx;
@@ -600,12 +747,12 @@ function App(){
           );
         })
       ),
-      results&&results.length===0&&React.createElement("div",{style:{textAlign:"center",padding:"48px 20px",color:"#AAA"}},
+      cat!=="Org Matrix"&&results&&results.length===0&&React.createElement("div",{style:{textAlign:"center",padding:"48px 20px",color:"#AAA"}},
         React.createElement("div",{style:{fontSize:36,marginBottom:10}},"🤔"),
         React.createElement("div",{style:{fontSize:14,fontWeight:700,color:"#666"}},"没有找到相关结果"),
         React.createElement("div",{style:{fontSize:12,marginTop:6,lineHeight:1.7}},"试试其他关键词，或直接找同事确认。",React.createElement("br"),"如果这个问题应该在这里，请告知 Wenji 补充。")
       ),
-      !results&&React.createElement("div",{style:{textAlign:"center",padding:"36px 20px",color:"#BBB"}},
+      !results&&cat!=="Org Matrix"&&React.createElement("div",{style:{textAlign:"center",padding:"36px 20px",color:"#BBB"}},
         React.createElement("div",{style:{fontSize:36,marginBottom:10}},"👆"),
         React.createElement("div",{style:{fontSize:13,color:"#999"}},"输入关键词搜索，或点击上方分类浏览")
       ),
