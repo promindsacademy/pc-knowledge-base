@@ -502,25 +502,24 @@ const ORG_DEPARTMENTS=[
     {name:"Event 执行 + 出账",detail:"场地 / 物流 / Event 出账",owners:["Kayson"],tasks:["Event Checklist 完整执行","采购 + 场地安排","Event 出账"]},
     {name:"Fulfillment 支持",detail:"物流 / 交付",owners:["Kyle"],tasks:["Man Power / Crew 协调","Transportation 安排","Material Printing 等一切 Arrangement"]},
   ]},
-  {id:"backend",name:"⑤ General Management",color:"#7C3AED",scope:"系统 · 财务 · 平台技术（横跨全部五个部门，不是第六个部门）",modules:[
+  {id:"backend",name:"⑤ General Management",color:"#7C3AED",scope:"系统 · 财务 · 平台技术",modules:[
     {name:"Operation",detail:"General Management",owners:["Mok"],tasks:["💰 钱：收款 / P&L / 对账 / payout","👥 人：招聘 / Onboarding / 流程","📄 资料：CRM / Lark / 系统","讲师合约仲裁（分佣最终裁决权）","系统权限开通","对外谈判"]},
     {name:"Finance",detail:"SY 2026-07-27 离职后接手",owners:["Matilda"],tasks:["入账","收款核对","现金流报表","多银行户口","Supplier Payment","月度三方对账"]},
     {name:"LMS & Tech",detail:"平台技术负责人",owners:["Carrot"],tasks:["Promindsapp 前台开发","唯一 coder，报 Nicsman"]},
   ]},
 ];
-// Project Assignment：Internal(自营) vs External(交给Agency)。External 项目交给 Agency 后，我方只负责 Back End = PC & Course Planning。
-// 2026-08-18 按 Mok 提供的最新分配表重建；?/-> 保留原样表示 Mok 自己也未定案，不替他下判断
+// Project Assignment：Internal = 前端和/或后端有 Prominds 人插手；External = 前后端 Prominds 完全没插手（Mok 2026-08-18 定义）
 const ORG_PROJECTS=[
-  {name:"Savwee",alias:"赢在稳定 MT (003-WWC)",type:"internal",frontEnd:"Prominds 自营",backEnd:"Louis & Kayson"},
-  {name:"Nicsman ABGS",alias:"AI 企业增长系统 (029-ABGS)",type:"internal",frontEnd:"Prominds 自营",backEnd:"Ka Hung + Kyle"},
-  {name:"Trisen",alias:"大单 + 增员 (002-CC/LDS)",type:"internal",frontEnd:"Prominds 自营",backEnd:"Phin CY + Lee"},
-  {name:"陈皓",alias:"股权增长系统",type:"internal",frontEnd:"Prominds 自营 + R&R 支援 funnel/CS/sales",backEnd:"Kayson"},
+  {name:"Savwee",alias:"赢在稳定 MT (003-WWC)",type:"internal",frontEnd:"Ong Lai",backEnd:"Louis & Kayson"},
+  {name:"Nicsman ABGS",alias:"AI 企业增长系统 (029-ABGS)",type:"internal",frontEnd:"R&R",backEnd:"Ka Hung + Kyle"},
+  {name:"Trisen",alias:"大单 + 增员 (002-CC/LDS)",type:"internal",frontEnd:"SolvedPros",backEnd:"Phin CY + Lee"},
+  {name:"陈皓",alias:"股权增长系统",type:"internal",frontEnd:"R&R",backEnd:"Kayson"},
   {name:"陈疆同",alias:"商业模式盈利 (E006-CJT)",type:"internal",frontEnd:"Prominds 自营",backEnd:"Kayson"},
+  {name:"Hedki",alias:"TYM (010-MYTHAS)",type:"internal",frontEnd:"R&R",backEnd:"Kyle"},
+  {name:"Dato Keen",alias:"TikTok (004-TT)",type:"internal",frontEnd:"R&R",backEnd:"Kyle"},
+  {name:"Mr.J",alias:"千万组织结构",type:"internal",frontEnd:"SolvedPros",backEnd:"Kayson"},
+  {name:"Steven",alias:"企业股权传承 (031-SBC)",type:"internal",frontEnd:"SolvedPros",backEnd:"Niysha + Kyle"},
   {name:"Vinjo / Joanne",alias:"XHS 小红书 (028-VZZ) ⏸️已暂停(2026-08-13)",type:"external",frontEnd:"R&R",backEnd:"—"},
-  {name:"Hedki",alias:"TYM (010-MYTHAS)",type:"external",frontEnd:"R&R",backEnd:"Kyle"},
-  {name:"Dato Keen",alias:"TikTok (004-TT)",type:"external",frontEnd:"R&R",backEnd:"Kyle"},
-  {name:"Mr.J",alias:"千万组织结构",type:"external",frontEnd:"SolvedPros",backEnd:"Kayson"},
-  {name:"Steven",alias:"企业股权传承 (031-SBC)",type:"external",frontEnd:"SolvedPros",backEnd:"Niysha + Kyle"},
   {name:"Lance",alias:"TabbyHouse",type:"external",frontEnd:"CG",backEnd:"CG"},
   {name:"Ariel Lee",alias:"Fast English (016-FE)",type:"external",frontEnd:"CG",backEnd:"CG"},
   {name:"Nickson",alias:"紫微商道 (015-ZW) ⏸️Onhold",type:"external",frontEnd:"CG",backEnd:"CG"},
