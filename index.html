@@ -487,39 +487,45 @@ const ORG_DEPARTMENTS=[
   {id:"performance",name:"① Performance",color:"#3B82F6",scope:"广告 · 投放 · Lead · 自动化 · Agency",modules:[
     {name:"Performance Team Lead",detail:"广告与 Agency 管理 + 团队总协调",owners:["Louis"],tasks:["广告与 Agency 管理","前端 / 后端统一归 Performance Team（2026-07-28 起）","Agency 线 Partner Success（2026-08-12 定）","季度绩效数据","Performance Team 请假需 Louis 批准"]},
     {name:"广告 / 投放 / 课程运营",detail:"Ads / Funnel / GHL",owners:["Chin Ni"],tasks:["广告素材创意支援 + 审核","Daily Data Monitor（CPL / Leads / LP Conv Rate）","GHL Funnel 流程操作 + 优化","课程运营支援"]},
-    {name:"系统自动化",detail:"支付自动化 + Project Checklist",owners:["Kahung"],tasks:["Zapier → WA → Xero → Invoice 自动化维护","Auto Invoice / ABC Salesbot / 会员 APP 维护","每 Project Checklist 执行","正式并入 Louis 汇报线（2026-07-28）"],flag:"🔴 当前任务：修 Stripe Zap + 金额 mapping（F257）"},
+    {name:"系统自动化",detail:"支付自动化 + Project Checklist",owners:["Kahung"],tasks:["Zapier → WA → Xero → Invoice 自动化维护","Auto Invoice / ABC Salesbot / 会员 APP 维护","每 Project Checklist 执行","正式并入 Louis 汇报线（2026-07-28）"]},
   ]},
   {id:"sales",name:"② Sales & Relationship",color:"#10B981",scope:"成交 · 客户关系 · Cross Sell · 私域",modules:[
-    {name:"CS / 客户关系主力",detail:"Cross Sell + Student Deck",owners:["Bowie"],tasks:["客户关系维护（累计接触 2,000–3,000 个客户）","Cross Sell / Upsell 执行","Student Deck 制作","佣金 Tier：1%（底线）/ 2%（主动解决+汇报Louis）/ 3%（能落地Upsell）"],flag:"🔴 当前：Lead Magnet + Sales Kit（Wei Yi + Onn Yee 支援）· 会员注册表单跑起来（F252）"},
-    {name:"Cross Sell",detail:"跨项目 Upsell 支援（从 Performance Team 转来）",owners:["Niysha"],tasks:["Clinixero 全项目支援（除广告）","跨项目 Cross Sell 策略设计","会员注册表单（F252）"]},
+    {name:"CS / 客户关系主力",detail:"Cross Sell + Student Deck",owners:["Bowie"],tasks:["客户关系维护（累计接触 2,000–3,000 个客户）","Cross Sell / Upsell 执行","Student Deck 制作","佣金 Tier：1%（底线）/ 2%（主动解决+汇报Louis）/ 3%（能落地Upsell）"]},
+    {name:"Cross Sell",detail:"跨项目 Upsell 支援（从 Performance Team 转来）",owners:["Niysha"],tasks:["Clinixero 全项目支援（除广告）","跨项目 Cross Sell 策略设计"]},
     {name:"客户关系 / 后端支持",detail:"从 Performance Team 转来（2026-08-17 官方架构调整）",owners:["Phin CY"],tasks:["Student Onboard + Survey Form","Admin + Transcript + Sales Kit","Webinar Ops 支援"]},
   ]},
   {id:"product",name:"③ Product & Solution",color:"#F59E0B",scope:"会员制 · Partnership · AI 商务方案",modules:[
-    {name:"Membership & Partnership",detail:"讲师合约谈判 + 制图 / Branding",owners:["Onn Yee","Wei Yi"],tasks:["Partnership 线 Partner Success（2026-08-12 定）","讲师合约与分佣谈判（⚠️ 裁决权在 Mok，Onn Yee 只谈判）","Partnership vs Non-Partnership 分类","制图 / Branding 设计 + GHL 销售页配置（Wei Yi）"],flag:"⚠️ Onn Yee 三顶帽子（Partnership AM + Partner Success + 谈判），量能要留意"},
-    {name:"AI Solution",detail:"Bizminds + AI 商务",owners:["Song Ming"],tasks:["Bizminds Lead + AI 商务（Proposal / TechPartner 对接）","课程 Day-1 Onboarding","Signature Group 专案（F253/F254）","HRDF Claim 流程"],flag:"⚠️ 只做 AI 商务，不碰 Finance / Lark 技术选型"},
+    {name:"Membership & Partnership",detail:"讲师合约谈判 + 制图 / Branding",owners:["Onn Yee","Wei Yi"],tasks:["Partnership 线 Partner Success（2026-08-12 定）","讲师合约与分佣谈判（⚠️ 裁决权在 Mok，Onn Yee 只谈判）","Partnership vs Non-Partnership 分类","制图 / Branding 设计 + GHL 销售页配置（Wei Yi）"]},
+    {name:"AI Solution",detail:"Bizminds + AI 商务",owners:["Song Ming"],tasks:["Bizminds Lead + AI 商务（Proposal / TechPartner 对接）","课程 Day-1 Onboarding","HRDF Claim 流程"]},
   ]},
   {id:"event",name:"④ Event & Fulfillment",color:"#EF4444",scope:"场次执行 · 交付 · 出账",modules:[
-    {name:"Event 执行 + 出账",detail:"场地 / 物流 / Event 出账",owners:["Kayson"],tasks:["Event Checklist 完整执行","采购 + 场地安排","Event 出账（F240）"]},
+    {name:"Event 执行 + 出账",detail:"场地 / 物流 / Event 出账",owners:["Kayson"],tasks:["Event Checklist 完整执行","采购 + 场地安排","Event 出账"]},
     {name:"Fulfillment 支持",detail:"物流 / 交付",owners:["Kyle"],tasks:["Man Power / Crew 协调","Transportation 安排","Material Printing 等一切 Arrangement"]},
   ]},
-  {id:"backend",name:"⑤ Company Back End",color:"#7C3AED",scope:"系统 · 财务 · 平台技术",modules:[
-    {name:"Operation（General Management）",detail:"横跨全部五个部门，不是第六个部门",owners:["Mok"],tasks:["💰 钱：收款 / P&L / 对账 / payout","👥 人：招聘 / Onboarding / 流程","📄 资料：CRM / Lark / 系统","讲师合约仲裁（分佣最终裁决权）","系统权限开通","对外谈判"]},
-    {name:"Finance",detail:"SY 2026-07-27 离职后接手",owners:["Matilda"],tasks:["入账","收款核对","现金流报表","多银行户口","Supplier Payment","月度三方对账（9 月起固定动作）"]},
-    {name:"LMS & Tech",detail:"平台技术负责人",owners:["Carrot"],tasks:["Promindsapp 前台开发","唯一 coder，报 Nicsman"],flag:"⚠️ promindsms.com 核心 repo 修复无 owner，Carrot 新定位待厘清"},
+  {id:"backend",name:"⑤ General Management",color:"#7C3AED",scope:"系统 · 财务 · 平台技术（横跨全部五个部门，不是第六个部门）",modules:[
+    {name:"Operation",detail:"General Management",owners:["Mok"],tasks:["💰 钱：收款 / P&L / 对账 / payout","👥 人：招聘 / Onboarding / 流程","📄 资料：CRM / Lark / 系统","讲师合约仲裁（分佣最终裁决权）","系统权限开通","对外谈判"]},
+    {name:"Finance",detail:"SY 2026-07-27 离职后接手",owners:["Matilda"],tasks:["入账","收款核对","现金流报表","多银行户口","Supplier Payment","月度三方对账"]},
+    {name:"LMS & Tech",detail:"平台技术负责人",owners:["Carrot"],tasks:["Promindsapp 前台开发","唯一 coder，报 Nicsman"]},
   ]},
 ];
-// Project Assignment：讲师 + 当前负责 PIC（原 perfPIC/opsPIC 双栏随组织重组已失去意义，2026-08-18 简化为单一 PIC；Mr.J / Annabel MTS / Miraá / Nicsman PCS / Julio EOI 已确认结束，移出矩阵）
+// Project Assignment：Internal(自营) vs External(交给Agency)。External 项目交给 Agency 后，我方只负责 Back End = PC & Course Planning。
+// 2026-08-18 按 Mok 提供的最新分配表重建；?/-> 保留原样表示 Mok 自己也未定案，不替他下判断
 const ORG_PROJECTS=[
-  {name:"Dr. Andrew",alias:"Clinixero (001-CX)",speaker:"Dr. Andrew",PIC:"Niysha"},
-  {name:"Savwee",alias:"赢在稳定 MT (003-WWC)",speaker:"Meng Teck",PIC:"Kayson"},
-  {name:"Trisen",alias:"大单 + 增员 (002-CC/LDS)",speaker:"Trisen Tan",PIC:"Phin CY"},
-  {name:"Dato Keen",alias:"TikTok (004-TT)",speaker:"Dato Keen",PIC:"Kyle"},
-  {name:"Hedki",alias:"TYM (010-MYTHAS)",speaker:"Hedki",PIC:"Kyle"},
-  {name:"Vinjo / Joanne",alias:"XHS 小红书 (028-VZZ) ⏸️已暂停(2026-08-13)",speaker:"Joanne",PIC:"Chin Ni"},
-  {name:"Nicsman ABGS",alias:"AI 企业增长系统 (029-ABGS)",speaker:"Nicsman",PIC:"Kahung"},
-  {name:"Nickson",alias:"紫微商道 (015-ZW) ⏸️Onhold",speaker:"Nickson",PIC:"CG (Agency)"},
-  {name:"Ariel Lee",alias:"Fast English (016-FE)",speaker:"Ariel Lee",PIC:"CG (Agency)"},
-  {name:"陈疆同",alias:"商业模式盈利 (E006-CJT)",speaker:"陈疆同",PIC:"Louis"},
+  {name:"Savwee",alias:"赢在稳定 MT (003-WWC)",type:"internal",frontEnd:"Prominds 自营",backEnd:"Louis & Kayson"},
+  {name:"Nicsman ABGS",alias:"AI 企业增长系统 (029-ABGS)",type:"internal",frontEnd:"Prominds 自营",backEnd:"Ka Hung + Kyle"},
+  {name:"Trisen",alias:"大单 + 增员 (002-CC/LDS)",type:"internal",frontEnd:"Prominds 自营",backEnd:"Phin CY + Lee"},
+  {name:"陈皓",alias:"股权增长系统",type:"internal",frontEnd:"Prominds 自营 + R&R 支援 funnel/CS/sales",backEnd:"Kayson"},
+  {name:"陈疆同",alias:"商业模式盈利 (E006-CJT)",type:"internal",frontEnd:"Prominds 自营",backEnd:"Kayson"},
+  {name:"Vinjo / Joanne",alias:"XHS 小红书 (028-VZZ) ⏸️已暂停(2026-08-13)",type:"external",frontEnd:"R&R",backEnd:"—"},
+  {name:"Hedki",alias:"TYM (010-MYTHAS)",type:"external",frontEnd:"R&R",backEnd:"Kyle"},
+  {name:"Dato Keen",alias:"TikTok (004-TT)",type:"external",frontEnd:"R&R",backEnd:"Kyle"},
+  {name:"Mr.J",alias:"千万组织结构",type:"external",frontEnd:"SolvedPros",backEnd:"Kayson"},
+  {name:"Steven",alias:"企业股权传承 (031-SBC)",type:"external",frontEnd:"SolvedPros",backEnd:"Niysha + Kyle"},
+  {name:"Lance",alias:"TabbyHouse",type:"external",frontEnd:"CG",backEnd:"CG"},
+  {name:"Ariel Lee",alias:"Fast English (016-FE)",type:"external",frontEnd:"CG",backEnd:"CG"},
+  {name:"Nickson",alias:"紫微商道 (015-ZW) ⏸️Onhold",type:"external",frontEnd:"CG",backEnd:"CG"},
+  {name:"Florence",alias:"HK Property",type:"external",frontEnd:"Leo",backEnd:"Leo"},
+  {name:"Dr. Andrew",alias:"Clinixero (001-CX)",type:"external",frontEnd:"Peggy",backEnd:"—"},
 ];
 const ORG_FLOW=[
   {phase:"Phase 1",title:"新项目 Onboard",icon:"🚀",color:"#3B82F6",perfTasks:["确认项目可行性 + 预算","广告策略制定 + Agency 配对","LP / Funnel / GHL 搭建","Slide 初稿 + Pitching Offer 设计"],opsTasks:["Zoom 账号 + 链接设置","WA Community 群建立","Strive 号码 + Automation 设置","Payment Link 配置 + 测试","Google Drive 素材文件夹建立"]},
@@ -575,10 +581,7 @@ function OrgMatrix(){
     ),
     h("div",{style:Object.assign({},bd,{marginBottom:10,padding:"10px 14px",display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"})},
       h(OrgBadge,{name:"Nicsman",size:"lg"}),
-      h("div",{style:{fontSize:11,color:"#444"}},"创办人 / CEO — 产品与战略、Membership 产品设计、讲师招募、付款唯一 Approver"),
-      h("div",{style:{flex:1}}),
-      h(OrgBadge,{name:"Mok",size:"lg"}),
-      h("div",{style:{fontSize:11,color:"#444"}},"General Management — 横跨全部五个部门，不是第六个部门（\"Operation 不是一个部门\" — Mok）")
+      h("div",{style:{fontSize:11,color:"#444"}},"创办人 / CEO — 产品与战略、Membership 产品设计、讲师招募、付款唯一 Approver")
     ),
     h("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}},
       ORG_DEPARTMENTS.map(function(dept){
@@ -593,28 +596,29 @@ function OrgMatrix(){
         );
       })
     ),
-    h("div",{style:bd},
+    h("div",{style:Object.assign({},bd,{marginBottom:14})},
       h("div",{style:{padding:"10px 14px",borderBottom:"1.5px solid #E8EFF6",display:"flex",alignItems:"center",justifyContent:"space-between"}},
         h("span",{style:{fontSize:13,fontWeight:700,color:"#D97706",letterSpacing:0.5}},"PROJECT ASSIGNMENT MATRIX"),
-        h("span",{style:{fontSize:10,color:"#888"}},ORG_PROJECTS.length+" 项目")
+        h("span",{style:{fontSize:10,color:"#888"}},ORG_PROJECTS.length+" 项目 · Front End = 谁跑广告/funnel/sales · Back End = 我方 PC & Course Planning")
       ),
       h("div",{style:{display:"grid",gridTemplateColumns:"170px 1fr 1fr",padding:"8px 14px",background:"#F8FAFC",borderBottom:"1px solid #E8EFF6",gap:8}},
         h("div",{style:{fontSize:10,fontWeight:700,color:"#64748B",letterSpacing:0.5}},"PROJECT"),
-        h("div",{style:{fontSize:10,fontWeight:700,color:"#D97706",letterSpacing:0.5}},"🎤 SPEAKER"),
-        h("div",{style:{fontSize:10,fontWeight:700,color:"#3B82F6",letterSpacing:0.5}},"👤 PIC")
+        h("div",{style:{fontSize:10,fontWeight:700,color:"#D97706",letterSpacing:0.5}},"🎯 FRONT END"),
+        h("div",{style:{fontSize:10,fontWeight:700,color:"#3B82F6",letterSpacing:0.5}},"👤 BACK END（PC & Course Planning）")
       ),
-      ORG_PROJECTS.map(function(p,i){
-        return h("div",{key:i,style:{display:"grid",gridTemplateColumns:"170px 1fr 1fr",padding:"10px 14px",borderBottom:i<ORG_PROJECTS.length-1?"1px solid #F0F4F8":"none",gap:8,alignItems:"center"}},
-          h("div",null,h("div",{style:{fontSize:12,fontWeight:700,color:"#1F4E79"}},p.name),h("div",{style:{fontSize:9,color:"#999",marginTop:1}},p.alias)),
-          h("div",null,h(OrgBadge,{name:p.speaker,size:"lg"})),
-          h("div",null,h(OrgBadge,{name:p.PIC,size:"lg"}))
+      ["internal","external"].map(function(type){
+        var rows=ORG_PROJECTS.filter(function(p){return p.type===type;});
+        return h("div",{key:type},
+          h("div",{style:{padding:"6px 14px",background:type==="internal"?"#ECFDF5":"#FDF2F8",fontSize:10,fontWeight:700,color:type==="internal"?"#059669":"#BE185D",letterSpacing:0.5}},type==="internal"?"INTERNAL（自营）":"EXTERNAL（交给 Agency）"),
+          rows.map(function(p,i){
+            return h("div",{key:i,style:{display:"grid",gridTemplateColumns:"170px 1fr 1fr",padding:"10px 14px",borderBottom:"1px solid #F0F4F8",gap:8,alignItems:"center"}},
+              h("div",null,h("div",{style:{fontSize:12,fontWeight:700,color:"#1F4E79"}},p.name),h("div",{style:{fontSize:9,color:"#999",marginTop:1}},p.alias)),
+              h("div",{style:{fontSize:12,color:"#444"}},p.frontEnd),
+              h("div",{style:{fontSize:12,color:"#444"}},p.backEnd)
+            );
+          })
         );
       })
-    ),
-    h("div",{style:{background:"#F4F7FB",borderRadius:8,padding:"8px 12px",marginBottom:14,display:"flex",gap:16,fontSize:10,color:"#888"}},
-      h("span",null,"横向读 = 每个项目的负责链"),
-      h("span",{style:{color:"#D6E4F0"}},"|"),
-      h("span",null,"纵向读 = 每个人跨项目负责了什么")
     ),
     h("div",{style:Object.assign({},bd,{marginBottom:14})},
       h("div",{style:{padding:"10px 14px",borderBottom:"1.5px solid #E8EFF6"}},
@@ -646,21 +650,6 @@ function OrgMatrix(){
           )
         );
       })
-    ),
-    h("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}},
-      h("div",{style:bd},
-        h("div",{style:{padding:"8px 14px",borderBottom:"1.5px solid #E8EFF6"}},h("span",{style:{fontSize:12,fontWeight:700,color:"#64748B",letterSpacing:0.5}},"外部 / 合作方")),
-        h("div",{style:{padding:"10px 14px",fontSize:11,color:"#444",lineHeight:1.8}},
-          h("div",null,h("b",null,"R&R Agency"),"（Ivan / Rita / RT）— Dato Keen + 陈皓项目 funnel/CS/sales 执行（2026-08 起）"),
-          h("div",null,h("b",null,"SolvedPros"),"（Mervyn）— Trisen 两个 funnel 执行 + Mr.J / Steven 线前端"),
-          h("div",null,h("b",null,"Crayon"),"（Crystal / TK）— Lark reseller"),
-          h("div",null,h("b",null,"陈皓老师团队"),"（Ken）— 《股权增长系统》合作")
-        )
-      ),
-      h("div",{style:bd},
-        h("div",{style:{padding:"8px 14px",borderBottom:"1.5px solid #E8EFF6"}},h("span",{style:{fontSize:12,fontWeight:700,color:"#94A3B8",letterSpacing:0.5}},"已离 / 未入职")),
-        h("div",{style:{padding:"10px 14px",fontSize:11,color:"#888",lineHeight:1.8}},"SY（Finance，实际最后工作日 2026-07-27）· Aggie（不确认转正）· Serene（辞职）· Jeremy Yong（2026-06-24 离职）· Jessica Lai（Trial 失败）· Ng Kah Lok（❌ 未入职）")
-      )
     )
   );
 }
