@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>你的公司是哪一型？</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+  :root {
+    --navy: #1E1B4B;
+    --blue: #4361EE;
+    --blue-soft: #EEF1FF;
+    --amber: #F59E0B;
+    --amber-soft: #FEF3C7;
+    --ink: #1E1B4B;
+    --text: #334155;
+    --muted: #64748B;
+    --line: #E2E8F0;
+    --ground: #F4F5FB;
+    --card: #FFFFFF;
+    --danger: #DC2626;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--ground);
+    color: var(--text);
+    font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .wrap { max-width: 540px; margin: 0 auto; padding-inline: 16px; padding-block: 16px 48px; }
+  [hidden] { display: none !important; }
+
+  /* 顶栏 */
+  .bar { display: flex; align-items: center; gap: 12px; min-height: 40px; }
+  .brand { font-size: 13px; font-weight: 700; color: var(--navy); letter-spacing: .08em; }
+  .count { margin-left: auto; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .track { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 6px; }
+  .fill { height: 100%; width: 0; background: var(--amber); border-radius: 99px; transition: width .3s ease; }
+
+  /* 六样圆圈（跟 deck 一样的图案） */
+  .dots { display: flex; gap: 10px; flex-wrap: wrap; }
+  .dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--navy); color: #fff;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 18px;
+  }
+  .dot.ruler { background: var(--blue); }
+  .dot.big { width: 72px; height: 72px; font-size: 34px; flex: none; }
+
+  /* 开场 */
+  .intro { padding-top: 28px; display: grid; gap: 20px; }
+  .kicker { font-size: 13px; font-weight: 700; color: var(--blue); letter-spacing: .1em; }
+  h1 { margin: 0; font-size: 34px; line-height: 1.25; font-weight: 900; color: var(--ink); text-wrap: balance; }
+  .lead { margin: 0; font-size: 17px; }
+  .note {
+    margin: 0; font-size: 14px; color: var(--muted);
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
+  }
+
+  /* 题目 */
+  .qwrap { padding-top: 24px; display: grid; gap: 18px; }
+  .qtitle { margin: 0; font-size: 21px; line-height: 1.45; font-weight: 700; color: var(--ink); text-wrap: balance; }
+  .opts { display: grid; gap: 10px; }
+  .opt {
+    width: 100%; text-align: left;
+    min-height: 58px; padding: 14px 16px;
+    font: inherit; font-size: 16px; line-height: 1.5; color: var(--text);
+    background: var(--card); border: 1.5px solid var(--line); border-radius: 14px;
+    cursor: pointer; transition: border-color .15s, background .15s;
+    touch-action: manipulation;
+  }
+  .opt:hover { border-color: #B8C2F5; }
+  .opt:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+  .opt.on { border-color: var(--blue); background: var(--blue-soft); color: var(--ink); font-weight: 500; }
+
+  textarea, input[type="tel"] {
+    width: 100%; font: inherit; font-size: 17px; color: var(--ink);
+    background: var(--card); border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 14px 16px;
+  }
+  textarea { min-height: 150px; resize: vertical; }
+  textarea:focus, input:focus { outline: none; border-color: var(--blue); }
+  .hint { margin: 0; font-size: 14px; color: var(--muted); }
+  .err { margin: 0; font-size: 14px; color: var(--danger); }
+
+  /* 按钮 */
+  .btn {
+    display: block; width: 100%; min-height: 56px;
+    font: inherit; font-size: 17px; font-weight: 700;
+    color: #fff; background: var(--blue);
+    border: 0; border-radius: 14px; cursor: pointer;
+    touch-action: manipulation;
+  }
+  .btn:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+  .btn:disabled { background: #A9B6F3; cursor: default; }
+  .btn.navy { background: var(--navy); }
+  .back {
+    align-self: start; justify-self: start;
+    font: inherit; font-size: 15px; color: var(--muted);
+    background: none; border: 0; padding: 8px 0; cursor: pointer;
+  }
+  .back:focus-visible { outline: 3px solid var(--amber); }
+
+  /* 结果 */
+  .result { padding-top: 20px; display: grid; gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: grid; gap: 12px; }
+  .hero { background: var(--navy); border: 0; color: #fff; }
+  .hero-top { display: flex; gap: 16px; align-items: center; }
+  .hero .dot.big { background: var(--amber); color: var(--navy); }
+  .hero small { display: block; font-size: 14px; color: #C7CEFF; }
+  .hero .type { font-size: 30px; font-weight: 900; line-height: 1.2; }
+  .hero p { margin: 0; color: #E0E4FF; }
+  .stage { display: inline-block; font-size: 13px; font-weight: 700; color: var(--navy); background: var(--amber); border-radius: 99px; padding: 3px 12px; }
+  h2 { margin: 0; font-size: 18px; color: var(--ink); }
+  .bars { display: grid; gap: 10px; }
+  .brow { display: grid; grid-template-columns: 28px 1fr 42px; gap: 10px; align-items: center; }
+  .brow b { color: var(--ink); font-size: 16px; }
+  .btrack { height: 10px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .bfill { height: 100%; background: var(--blue); border-radius: 99px; }
+  .brow.root .bfill { background: var(--amber); }
+  .brow span { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+  .legend { margin: 0; font-size: 13px; color: var(--muted); }
+  .root-h { display: flex; gap: 12px; align-items: center; }
+  .root-h .dot { width: 38px; height: 38px; font-size: 16px; flex: none; }
+  .root-h .lbl { font-size: 13px; color: var(--muted); }
+  .root-h .nm { font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .card p { margin: 0; }
+  .sym { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+  .step { background: var(--amber-soft); border-radius: 12px; padding: 12px 14px; }
+  .step b { color: var(--navy); }
+  .mok { background: var(--blue-soft); border: 0; }
+  .mok .q { font-size: 19px; font-weight: 700; color: var(--navy); line-height: 1.5; }
+  .mok .by { font-size: 13px; color: var(--muted); }
+  .status { margin: 0; font-size: 13px; color: var(--muted); text-align: center; }
+
+  /* 最后两题：跟结果分开，一看就知道要填 */
+  .nudge {
+    display: block; width: 100%; text-align: left;
+    font: inherit; font-size: 15px; line-height: 1.5; color: var(--navy);
+    background: var(--amber-soft); border: 1.5px solid var(--amber); border-radius: 14px;
+    padding: 12px 16px; cursor: pointer;
+  }
+  .nudge b { color: #B45309; }
+  .task { border: 2px solid var(--blue); border-radius: 20px; background: var(--card); overflow: hidden; margin-top: 8px; }
+  .task-head { background: var(--blue); color: #fff; padding: 16px 20px; }
+  .task-head .tk { font-size: 19px; font-weight: 900; }
+  .task-head p { margin: 2px 0 0; font-size: 14px; color: #E0E4FF; }
+  .task-body { padding: 18px 16px 20px; display: grid; gap: 22px; }
+  .pick { display: grid; gap: 10px; }
+  .pick h2 { font-size: 17px; line-height: 1.45; }
+  .qn { display: block; font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 2px; }
+  .req { font-size: 12px; font-weight: 700; color: var(--danger); margin-left: 6px; }
+  .pick .opt { display: flex; align-items: center; gap: 12px; }
+  .pick .opt::before {
+    content: ""; flex: none; width: 20px; height: 20px; border-radius: 50%;
+    border: 2px solid #CBD5E1; background: #fff;
+  }
+  .pick .opt.on::before { border-color: var(--blue); background: radial-gradient(circle, var(--blue) 0 42%, #fff 47%); }
+  .btn.dim { background: #A9B6F3; }
+  .thanks { text-align: center; }
+  .thanks .big { font-size: 20px; font-weight: 700; color: var(--ink); }
+  .link { font: inherit; font-size: 14px; color: var(--blue); background: none; border: 0; cursor: pointer; text-decoration: underline; padding: 6px; }
+  .foot { margin: 8px 0 0; text-align: center; font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+  .testtag { font-size: 12px; font-weight: 700; color: var(--danger); border: 1px solid var(--danger); border-radius: 6px; padding: 0 6px; }
+
+  .spin { display: inline-block; width: 16px; height: 16px; border: 2.5px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: sp .7s linear infinite; vertical-align: -3px; margin-right: 8px; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .fill, .opt { transition: none; } .spin { animation-duration: 2s; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <span class="brand">六样运营体检</span>
+    <span class="testtag" id="testTag" hidden>测试</span>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="track" id="track" hidden><div class="fill" id="fill"></div></div>
+  <main id="app"></main>
+</div>
+
+<script>
+/* ============ 内容 ============ */
+var ROLE = ['老板 ／ 创办人', '合伙人 ／ 股东', '主管 ／ 经理', '执行 ／ 员工'];
+var SIZE = ['1–5 人', '6–15 人', '16–50 人', '51 人以上'];
+var O3 = ['自己动手整理', '交给团队去做', '需要有人带着一起建', '还没想好'];
+var O4 = ['想，越快越好', '可以，有时间的话', '暂时不用'];
+var PILLARS = ['人', '货', '财', '客', '档', '时'];
+var TIE = ['人', '财', '客', '货', '档', '时'];
+
+var TYPE = {
+  '人': { name: '救火队长型', desc: '公司在跑，但很多事都要经过你。你在，一切正常；你不在，事情就慢下来。',
+    sym: ['手机停不下来', '同一个问题被问很多次', '想放假但不敢放'],
+    step: '这个星期，把被问最多的 3 个问题写下来，每一个写清楚「这种情况自己决定就好」还是「要找谁」，贴在团队看得到的地方。',
+    mok: '出了问题，不用等老板。规则已经替你决定了。' },
+  '货': { name: '各做各的型', desc: '每个人都很努力，但同一件事每个人做法不一样，出来的结果也不一样。',
+    sym: ['新人要很久才上手', '出错了才发现漏掉步骤', '老员工一走，做法也跟着走'],
+    step: '挑一件每天都在做的工作，请做得最好的那个人把步骤写成一张清单。不用漂亮，能照着做就好。下次别人做，就照清单打勾。',
+    mok: 'SOP 不是限制人，是要方便处理。' },
+  '财': { name: '感觉有赚型', desc: '生意有在做，钱也有进来，但赚了多少、哪里赚、哪里漏，说不太准。',
+    sym: ['月底才知道这个月好不好', '收款要一笔一笔对', '靠户口余额判断生意'],
+    step: '这个月开始，每一笔收款都记在同一个地方：谁付的、买什么、多少钱、哪一天。先不求漂亮，只求一个地方。',
+    mok: '不是谁算错，是没有一套共同的算法。' },
+  '客': { name: '漏水水桶型', desc: '客户有进来，但从询问到成交、再到回来买，中间漏掉很多，而且不知道漏在哪里。',
+    sym: ['询问的人多，成交的少', '没回复的客户就没有下文', '老客户很久没回来'],
+    step: '接下来两个星期，只记四个数字：几个人来问、几个有跟进、几个成交、几个回来买第二次。先知道漏在哪一格，再想办法补。',
+    mok: '我们需要知道：谁记录？谁要看？看什么？' },
+  '档': { name: '资料捉迷藏型', desc: '资料都有，但散在 WhatsApp、Excel、电邮和某些人的手机里，要用的时候得花时间拼起来。',
+    sym: ['找资料要问人', '同一份资料有好几个版本，不知道哪个对', '有人离职，资料就不见'],
+    step: '选一种最常找的资料（例如客户名单），定一个「唯一的地方」，其他地方都以它为准，只能看，不能改。',
+    mok: '一个问题，只有一个地方有答案。' },
+  '时': { name: '慢半拍型', desc: '事情有人在做，但从发生到你知道，中间隔了很久。等你看到，已经来不及调整。',
+    sym: ['月底才知道这个月不好', '问题拖大了才被报上来', '会开很久，结论很少'],
+    step: '挑一个最重要的数字（例如每天的收款或询问人数），请负责的人每天固定时间报一次，一句话就好。',
+    mok: '会议如果没有数字、没有 Deadline、没有负责人——那不叫开会，叫聊天。' }
+};
+
+var STAGE = [
+  { max: 22, name: '救火期', text: '大部分时间在处理眼前的事。好消息是，最难的是开始，而你已经知道从哪里开始。' },
+  { max: 38, name: '整理期', text: '有些地方已经顺了，有些还靠人撑着。把靠人撑的部分变成规矩，就能往上走。' },
+  { max: 54, name: '放手期', text: '大部分已经有规矩在跑。下一步是让数字更快被看见，再让 AI 帮你跑。' }
+];
+
+var QS = {
+  Q1: { p: '人', q: '团队里有人遇到一个没处理过的状况，通常会怎样？', o: [
+    ['马上打电话或 WhatsApp 问老板', 0], ['看是谁遇到，有的人会自己处理，有的人会直接来问', 1],
+    ['先自己想办法，真的搞不定才来问', 2], ['照之前讲好的：小事自己决定，会影响钱或客户的才往上报', 3]] },
+  Q2: { p: '人', q: '交代一件事出去之后，通常怎么知道它做完了没有？', o: [
+    ['到了要用的时候，才知道有没有做', 0], ['记得的话，会再去问一下', 1],
+    ['对方做完会主动来说', 2], ['有一个大家都看得到的地方，做完就会更新', 3]] },
+  Q3: { p: '人', q: '如果老板一个星期完全不看手机，公司会怎样？', o: [
+    ['应该会出事，所以不敢这样做', 0], ['会慢下来，很多事要等老板回来才能继续', 1],
+    ['大部分照常，回来有一些事等着决定', 2], ['照常运作，回来看一下记录就知道发生了什么', 3]] },
+  Q4: { p: '货', q: '同一件工作，交给公司里两个不同的人做，结果会怎样？', o: [
+    ['每次出来的样子都不太一样', 0], ['看人，有的人做得好，有的人要重做', 1],
+    ['大方向一样，细节每个人有自己的做法', 2], ['差不多，因为大家照同一套步骤', 3]] },
+  Q5: { p: '货', q: '一张单做到一半卡住了，通常怎么发现？', o: [
+    ['客户来追，我们才知道', 0], ['开会或对帐的时候才发现', 1],
+    ['负责的人会自己来报告', 2], ['每张单走到哪一步都看得到，卡住一眼就知道', 3]] },
+  Q6: { p: '货', q: '新人进来，要多久才能自己把一件事从头做到尾？', o: [
+    ['很少请新人，因为教一个人太花时间', 0], ['很难说，要看带他的人有没有空', 1],
+    ['一两个月，主要跟着老员工边做边学', 2], ['一两个星期，有现成的步骤可以照着学', 3]] },
+  Q7: { p: '财', q: '上个月公司扣掉成本之后赚了多少，现在答得出来吗？', o: [
+    ['老实说，要看银行户口剩多少来判断', 0], ['知道营业额，但扣完成本剩多少不太确定', 1],
+    ['知道大概，准确数字要等会计做完', 2], ['可以，打开看一下就有', 3]] },
+  Q8: { p: '财', q: '客户说「已经付款了」，公司怎么确认？', o: [
+    ['客户传截图过来，就当作收到了', 0], ['月底对帐的时候再一起核对', 1],
+    ['负责的人去看银行户口，再告诉大家', 2], ['钱一进来就有通知，也会记进同一个地方', 3]] },
+  Q9: { p: '财', q: '每一个产品、服务或项目，哪个最赚钱、哪个其实在亏，清楚吗？', o: [
+    ['所有东西算在一起，分不出来', 0], ['大概有感觉，但没有真的算过', 1],
+    ['有算过，但不是每个月都更新', 2], ['清楚，每一项都分开算', 3]] },
+  Q10: { p: '客', q: '上个月有多少人来询问、几个最后成交，答得出来吗？', o: [
+    ['没有特别算，生意好不好靠感觉', 0], ['成交几个知道，询问几个没有算', 1],
+    ['要花点时间翻记录，才拼得出来', 2], ['两个数字都答得出来', 3]] },
+  Q11: { p: '客', q: '客户问完价钱之后就没回复了，接下来会怎样？', o: [
+    ['就等他，有需要他自己会回来', 0], ['负责的人有空会再跟进', 1],
+    ['看情况，比较重要的客户才会追', 2], ['有固定的时间和做法去跟进，也记得谁跟进过', 3]] },
+  Q12: { p: '客', q: '客户的好评或投诉，最后去了哪里？', o: [
+    ['听过就算了，下次同样的事可能又发生', 0], ['负责的人自己知道，会自己改进', 1],
+    ['大的投诉会报上来，小事就不一定', 2], ['会记下来，定期拿出来看，改进做法', 3]] },
+  Q13: { p: '档', q: '要找一位客户以前的资料（买过什么、付了多少、聊过什么），要多久？', o: [
+    ['有些找得到，有些只在某个人的手机或脑里', 0], ['要翻好几个地方拼起来：WhatsApp、Excel、电邮', 1],
+    ['问负责的同事，他很快就能给', 2], ['一两分钟，都在同一个地方', 3]] },
+  Q14: { p: '档', q: '同一位客户或同一张单的资料，公司里大概被输入几次？', o: [
+    ['不太清楚，每个人都有自己的记法', 0], ['两三次，不同的人各自记一份', 1],
+    ['一次，但常常要复制贴上到别的地方用', 2], ['一次，其他人需要就直接去看', 3]] },
+  Q15: { p: '档', q: '负责某件事的同事突然离职，他手上的资料会怎样？', o: [
+    ['很多在他自己的电脑、手机或脑里，人走了就不见', 0], ['要看他离职前交接得好不好', 1],
+    ['重要的有存下来，细节要重新摸索', 2], ['大部分在公司共用的地方，接手的人看得到', 3]] },
+  Q16: { p: '时', q: '公司收到一笔钱、或接到一张大单，老板多久会知道？', o: [
+    ['月底看数字才知道', 0], ['等到开会或每周报告', 1],
+    ['当天，因为有人会特地 WhatsApp 老板', 2], ['当天，而且不用特别去问', 3]] },
+  Q17: { p: '时', q: '公司开会通常是什么样子？', o: [
+    ['有事才开，一开就好几个小时', 0], ['很少开会，有事在 WhatsApp 群里讲', 1],
+    ['固定有开，但常常在讨论同样的问题', 2], ['时间固定，有人带数字来，开完知道谁负责做什么', 3]] },
+  Q18: { p: '时', q: '你一天的时间，大部分花在哪里？', o: [
+    ['回答问题、处理突发状况', 0], ['做执行的工作，因为自己做比较快', 1],
+    ['一半处理日常，一半想生意的方向', 2], ['大部分在想方向、见重要的人，日常有人顶着', 3]] }
+};
+
+/* 题目交错排列，不会连续三题都是同一样 */
+var QORDER = ['Q1', 'Q4', 'Q7', 'Q10', 'Q13', 'Q16', 'Q2', 'Q5', 'Q8', 'Q11', 'Q14', 'Q17', 'Q3', 'Q6', 'Q9', 'Q12', 'Q15', 'Q18'];
+var STEPS = [{ k: 'role', q: '你在公司的角色是？', o: ROLE }, { k: 'size', q: '公司大概多少人（包括你自己）？', o: SIZE }]
+  .concat(QORDER.map(function (id) { return { k: 'q', id: id }; }))
+  .concat([{ k: 'pain' }, { k: 'phone' }]);
+var TOTAL_STEPS = STEPS.length;
+
+/* ============ 状态 ============ */
+var KEY = 'six-things-quiz-v1';
+var S = load() || fresh();
+var busy = false;
+
+function fresh() {
+  var orders = {};
+  QORDER.forEach(function (id) { orders[id] = shuffle([0, 1, 2, 3]); });
+  return { id: uid(), step: -1, role: '', size: '', ans: {}, orders: orders, pain: '', phone: '',
+           o3: '', o4: '', result: null, submitted: false, test: false };
+}
+function uid() {
+  return Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+}
+function shuffle(a) {
+  for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+function load() {
+  try { var t = localStorage.getItem(KEY); return t ? JSON.parse(t) : null; } catch (e) { return null; }
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+}
+
+/* ============ 计分 ============ */
+function compute() {
+  var scores = {}, zero = {};
+  PILLARS.forEach(function (p) { scores[p] = 0; zero[p] = false; });
+  QORDER.forEach(function (id) {
+    var q = QS[id], i = S.ans[id];
+    var sc = q.o[i][1];
+    scores[q.p] += sc;
+    if (sc === 0) zero[q.p] = true;
+  });
+  var total = PILLARS.reduce(function (s, p) { return s + scores[p]; }, 0);
+  var ranked = PILLARS.slice().sort(function (a, b) {
+    if (scores[a] !== scores[b]) return scores[a] - scores[b];
+    if (zero[a] !== zero[b]) return zero[a] ? -1 : 1;
+    return TIE.indexOf(a) - TIE.indexOf(b);
+  });
+  var stage = STAGE.filter(function (s) { return total <= s.max; })[0];
+  return { scores: scores, total: total, roots: ranked.slice(0, 3), stage: stage.name };
+}
+
+function payload() {
+  var r = S.result;
+  return {
+    id: S.id, test: S.test, phone: S.phone, role: S.role, size: S.size,
+    scores: r.scores, total: r.total, stage: r.stage, type: TYPE[r.roots[0]].name,
+    roots: r.roots.map(function (p) { return p + ' · ' + TYPE[p].name; }),
+    pain: S.pain, o3: S.o3, o4: S.o4,
+    answers: Object.keys(QS).map(function (id) { return QS[id].o[S.ans[id]][0]; })
+  };
+}
+
+/* ============ 送出（失败会自动重试，同一个 ID 不会重复） ============ */
+var API = 'https://script.google.com/macros/s/AKfycbyLqaY9Ta2zFrUABctGcWptTBaHngD-Y8LHigQ0ruSgK2zDK-FIIxc0sWk79ttQmnqz/exec';
+function send(p, ok, fail) {
+  if (window.google && google.script && google.script.run) {
+    google.script.run.withSuccessHandler(ok).withFailureHandler(fail).upsert(p);
+  } else if (/^https:/.test(location.protocol)) {
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(p) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (j && j.ok) ok(); else fail(j); })
+      .catch(fail);
+  } else {
+    console.log('[本机测试，没有真的送出]', p);
+    setTimeout(ok, 500);
+  }
+}
+function sendRetry(p, ok, fail) {
+  var waits = [1000, 3000, 6000], n = 0;
+  (function go() {
+    send(p, ok, function (e) {
+      if (n < waits.length) setTimeout(go, waits[n++]);
+      else fail(e);
+    });
+  })();
+}
+
+/* ============ 画面 ============ */
+var app = document.getElementById('app');
+
+function esc(t) {
+  return String(t).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
+function header(stepIdx) {
+  var track = document.getElementById('track'), count = document.getElementById('count');
+  if (stepIdx >= 0 && stepIdx < TOTAL_STEPS) {
+    track.hidden = false;
+    count.textContent = (stepIdx + 1) + ' / ' + TOTAL_STEPS;
+    document.getElementById('fill').style.width = ((stepIdx) / TOTAL_STEPS * 100) + '%';
+  } else {
+    track.hidden = true;
+    count.textContent = '';
+  }
+  document.getElementById('testTag').hidden = !S.test;
+}
+
+function render() {
+  busy = false;
+  window.scrollTo(0, 0);
+  if (S.step === -1) return renderIntro();
+  if (S.step === 'result') return renderResult();
+  var st = STEPS[S.step];
+  header(S.step);
+  if (st.k === 'role' || st.k === 'size') return renderChoice(st.q, st.o, S[st.k], function (i) { S[st.k] = st.o[i]; });
+  if (st.k === 'q') {
+    var q = QS[st.id], order = S.orders[st.id];
+    var cur = S.ans[st.id];
+    return renderChoice(q.q, order.map(function (i) { return q.o[i][0]; }),
+      cur == null ? '' : q.o[cur][0], function (i) { S.ans[st.id] = order[i]; });
+  }
+  if (st.k === 'pain') return renderPain();
+  if (st.k === 'phone') return renderPhone();
+}
+
+function renderIntro() {
+  header(-1);
+  app.innerHTML =
+    '<section class="intro">' +
+      '<div class="kicker">大约 5 分钟</div>' +
+      '<h1>你的公司是哪一型？</h1>' +
+      '<div class="dots">' + PILLARS.map(function (p, i) {
+        return '<span class="dot' + (i > 3 ? ' ruler' : '') + '">' + p + '</span>';
+      }).join('') + '</div>' +
+      '<p class="lead">20 道情景题，没有标准答案，照公司<b>现在真实的样子</b>选就好。<br>填完马上看到：你公司是哪一型、三个根源，以及第一步可以先做什么。</p>' +
+      '<p class="note">如果公司很小，「团队」就想成你的帮手或伙伴；「一张单」可以是一个订单、一个项目，或一位客户的委托。</p>' +
+      '<button class="btn" id="go">开始</button>' +
+    '</section>';
+  document.getElementById('go').onclick = function () { S.step = 0; save(); render(); };
+}
+
+function renderChoice(title, opts, current, setter) {
+  app.innerHTML =
+    '<section class="qwrap">' +
+      '<h2 class="qtitle">' + esc(title) + '</h2>' +
+      '<div class="opts">' + opts.map(function (t, i) {
+        return '<button class="opt' + (t === current ? ' on' : '') + '" data-i="' + i + '">' + esc(t) + '</button>';
+      }).join('') + '</div>' +
+      (S.step > 0 ? '<button class="back" id="back">← 上一题</button>' : '') +
+    '</section>';
+  Array.prototype.forEach.call(app.querySelectorAll('.opt'), function (b) {
+    b.onclick = function () {
+      if (busy) return;
+      busy = true;
+      Array.prototype.forEach.call(app.querySelectorAll('.opt'), function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      setter(Number(b.getAttribute('data-i')));
+      S.step++;
+      save();
+      setTimeout(render, 260);
+    };
+  });
+  bindBack();
+}
+
+function bindBack() {
+  var bk = document.getElementById('back');
+  if (bk) bk.onclick = function () { if (busy) return; S.step--; save(); render(); };
+}
+
+function renderPain() {
+  app.innerHTML =
+    '<section class="qwrap">' +
+      '<h2 class="qtitle">最近一件让你最头痛的事是什么？</h2>' +
+      '<p class="hint">可以用手机键盘的 🎤 语音输入，讲出来就好。</p>' +
+      '<textarea id="pain" placeholder="例如：交代给员工的事，每次都要追三遍才做完……">' + esc(S.pain) + '</textarea>' +
+      '<p class="err" id="err" hidden>写一两句就好，这是结果里很重要的一部分。</p>' +
+      '<button class="btn" id="next">下一步</button>' +
+      '<button class="back" id="back">← 上一题</button>' +
+    '</section>';
+  var ta = document.getElementById('pain');
+  ta.oninput = function () { S.pain = ta.value; save(); };
+  document.getElementById('next').onclick = function () {
+    S.pain = ta.value.trim();
+    if (S.pain.length < 2) { document.getElementById('err').hidden = false; ta.focus(); return; }
+    S.step++; save(); render();
+  };
+  bindBack();
+}
+
+function normPhone(v) {
+  var d = String(v).replace(/\D/g, '');
+  if (d.charAt(0) === '0') d = '6' + d;
+  return d;
+}
+
+function renderPhone() {
+  app.innerHTML =
+    '<section class="qwrap">' +
+      '<h2 class="qtitle">输入手机号码，看你的结果</h2>' +
+      '<p class="hint">用报名时的号码。结果只给你和这次课程的讲师团队看。</p>' +
+      '<input type="tel" id="phone" inputmode="numeric" autocomplete="tel" placeholder="例如 0123456789" value="' + esc(S.phone) + '">' +
+      '<p class="err" id="err" hidden>号码好像不完整，请再检查一下（例如 0123456789）。</p>' +
+      '<button class="btn navy" id="see">看我的结果</button>' +
+      '<button class="back" id="back">← 上一题</button>' +
+    '</section>';
+  var inp = document.getElementById('phone'), btn = document.getElementById('see');
+  inp.onkeydown = function (e) { if (e.key === 'Enter') btn.click(); };
+  btn.onclick = function () {
+    if (busy) return;
+    var d = normPhone(inp.value);
+    if (d.length < 10 || d.length > 13) { document.getElementById('err').hidden = false; inp.focus(); return; }
+    busy = true;
+    S.phone = d;
+    S.result = compute();
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span>正在分析……';
+    save();
+    sendRetry(payload(), function () { S.saved = true; save(); }, function () {});
+    setTimeout(function () { S.step = 'result'; save(); render(); }, 900);
+  };
+  bindBack();
+}
+
+function rootCard(p, idx) {
+  var t = TYPE[p], full = idx === 0;
+  return '<div class="card">' +
+    '<div class="root-h"><span class="dot' + (PILLARS.indexOf(p) > 3 ? ' ruler' : '') + '">' + p + '</span>' +
+      '<div><div class="lbl">根源' + ['一', '二', '三'][idx] + '</div><div class="nm">' + p + ' · ' + t.name + '</div></div></div>' +
+    (full ? '<p>' + t.desc + '</p>' : '') +
+    '<ul class="sym">' + t.sym.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ul>' +
+    '<div class="step"><b>第一步：</b>' + t.step + '</div>' +
+  '</div>';
+}
+
+function renderResult() {
+  header(-1);
+  var r = S.result, main = TYPE[r.roots[0]];
+  var stage = STAGE.filter(function (s) { return s.name === r.stage; })[0];
+  app.innerHTML =
+    '<section class="result">' +
+      '<div class="card hero">' +
+        '<div class="hero-top"><span class="dot big">' + r.roots[0] + '</span>' +
+          '<div><small>你的公司是</small><div class="type">' + main.name + '</div></div></div>' +
+        '<div><span class="stage">' + stage.name + '</span></div>' +
+        '<p>' + stage.text + '</p>' +
+      '</div>' +
+      (S.submitted ? '' : '<button class="nudge" id="toTail">看完结果后，页面最下面还有 <b>2 题</b>要填，按「提交」才算完成 ↓</button>') +
+
+      '<div class="card"><h2>六样分数</h2><div class="bars">' +
+        PILLARS.map(function (p) {
+          var root = r.roots.indexOf(p) > -1;
+          return '<div class="brow' + (root ? ' root' : '') + '"><b>' + p + '</b>' +
+            '<div class="btrack"><div class="bfill" style="width:' + Math.max(r.scores[p] / 9 * 100, 3) + '%"></div></div>' +
+            '<span>' + r.scores[p] + ' / 9</span></div>';
+        }).join('') +
+      '</div><p class="legend">橙色 = 你的三个根源，分数越低越需要先处理。</p></div>' +
+
+      '<h2 style="margin-top:8px">你的三个根源</h2>' +
+      r.roots.map(rootCard).join('') +
+
+      '<div class="card mok"><div class="q">「' + main.mok + '」</div><div class="by">Mok 的一句话</div></div>' +
+
+      '<div id="tail"></div>' +
+      '<p class="foot">诊断框架：六样运营体检 · Mok</p>' +
+    '</section>';
+  renderTail();
+}
+
+function renderTail() {
+  var tail = document.getElementById('tail');
+  if (S.submitted) {
+    var nd = document.getElementById('toTail');
+    if (nd) nd.hidden = true;
+    tail.innerHTML =
+      '<div class="card thanks">' +
+        '<div class="big">谢谢你的回复！</div>' +
+        '<p>我们会根据你的结果，再看看是否需要跟你一起聊聊。</p>' +
+        '<button class="link" id="again">重新测一次</button>' +
+      '</div>';
+    document.getElementById('again').onclick = function () {
+      var t = S.test;
+      S = fresh(); S.test = t; save(); render();
+    };
+    return;
+  }
+  function group(name, n, title, opts) {
+    return '<div class="pick"><h2><span class="qn">第 ' + n + ' 题<span class="req">必填</span></span>' + title + '</h2>' +
+      '<div class="opts">' + opts.map(function (t, i) {
+        return '<button class="opt' + (S[name] === t ? ' on' : '') + '" data-g="' + name + '" data-i="' + i + '">' + esc(t) + '</button>';
+      }).join('') + '</div></div>';
+  }
+  tail.innerHTML =
+    '<div class="task" id="task">' +
+      '<div class="task-head"><div class="tk">最后一步：还有 2 题</div><p>选好之后按「提交」，才算完成。</p></div>' +
+      '<div class="task-body">' +
+        group('o3', 1, '看完结果，回去之后打算怎么处理？', O3) +
+        group('o4', 2, '这两天想不想跟助教或讲师聊聊你的结果？', O4) +
+        '<p class="err" id="terr" hidden>两题都选一下，就可以提交。</p>' +
+        '<button class="btn" id="submit">提交</button>' +
+        '<p class="status" id="status" hidden></p>' +
+      '</div>' +
+    '</div>';
+  var nudge = document.getElementById('toTail');
+  if (nudge) nudge.onclick = function () {
+    try { document.getElementById('task').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    catch (e) { document.getElementById('task').scrollIntoView(); }
+  };
+  function updBtn() {
+    var b = document.getElementById('submit');
+    if (!b || b.disabled) return;
+    var left = (S.o3 ? 0 : 1) + (S.o4 ? 0 : 1);
+    b.textContent = left ? '提交（还差 ' + left + ' 题）' : '提交';
+    b.classList.toggle('dim', left > 0);
+  }
+  Array.prototype.forEach.call(tail.querySelectorAll('.opt'), function (b) {
+    b.onclick = function () {
+      var g = b.getAttribute('data-g');
+      S[g] = (g === 'o3' ? O3 : O4)[Number(b.getAttribute('data-i'))];
+      Array.prototype.forEach.call(tail.querySelectorAll('.opt[data-g="' + g + '"]'), function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      document.getElementById('terr').hidden = true;
+      save();
+      updBtn();
+    };
+  });
+  var btn = document.getElementById('submit'), status = document.getElementById('status');
+  updBtn();
+  btn.onclick = function () {
+    if (btn.disabled) return;
+    if (!S.o3 || !S.o4) { document.getElementById('terr').hidden = false; return; }
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin"></span>送出中……';
+    status.hidden = true;
+    sendRetry(payload(), function () {
+      S.submitted = true; save(); renderTail();
+    }, function () {
+      btn.disabled = false;
+      btn.textContent = '再送一次';
+      status.hidden = false;
+      status.textContent = '没送出去，可能是网络不稳。确认有网络后，按上面的按钮再送一次。';
+    });
+  };
+}
+
+/* ============ 启动 ============ */
+function start() {
+  if (S.step !== -1 && S.step !== 'result' && (typeof S.step !== 'number' || S.step >= TOTAL_STEPS)) S = fresh();
+  if (S.step === 'result' && !S.result) S = fresh();
+  render();
+}
+if (window.google && google.script && google.script.url) {
+  google.script.url.getLocation(function (loc) {
+    S.test = !!(loc && loc.parameter && loc.parameter.test === '1');
+    save();
+    start();
+  });
+} else {
+  S.test = /[?&]test=1/.test(location.search);
+  start();
+}
+</script>
+</body>
+</html>
