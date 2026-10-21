@@ -1248,24 +1248,32 @@ async function sendMsg() {
   document.getElementById('ai-quick').style.display = 'none';
 
   try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 2048,
-        system: [
-          { type: 'text', text: AI_ROLE },
-          { type: 'text', text: buildKnowledge(), cache_control: { type: 'ephemeral', ttl: '1h' } }
-        ],
-        messages: chatHistory
-      })
+    const body = JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 2048,
+      system: [
+        { type: 'text', text: AI_ROLE },
+        { type: 'text', text: buildKnowledge(), cache_control: { type: 'ephemeral', ttl: '1h' } }
+      ],
+      messages: chatHistory
     });
 
-    const data = await res.json();
-    if (!res.ok) {
+    // Cloudflare 有时会把请求从 Anthropic 不接受的节点（香港）送出，回 "Request not allowed"，
+    // 而且状态码还是 200。这种拒绝不花钱、换一次就好，所以自动重试几次。
+    let data = null, res = null;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body
+      });
+      data = await res.json().catch(() => null);
+      const blocked = data?.error?.type === 'forbidden';
+      if (!blocked) break;
+      await new Promise(r => setTimeout(r, 400 * (attempt + 1)));
+    }
+
+    if (!data || data.error || !res.ok) {
       const errMsg = data?.error?.message || data?.type || res.status;
       throw new Error('API Error ' + res.status + ': ' + errMsg);
     }
@@ -1275,6 +1283,7 @@ async function sendMsg() {
     appendMsg('assistant', reply);
   } catch (err) {
     thinkingRow.remove();
+    if (chatHistory.length && chatHistory[chatHistory.length - 1].role === 'user') chatHistory.pop();
     appendMsg('assistant', '⚠️ 连接出错：' + err.message + '\n\n请检查网络或稍后重试。');
   } finally {
     isLoading = false;
